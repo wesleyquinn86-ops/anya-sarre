@@ -1,4 +1,4 @@
-import { data, esc, button, photo, tvMarquee, mastheads, closingCta, wordmark, arrow, pv, pressEntries, visibleVideos, hasStill, featuredBanner } from "../templates/components.mjs";
+import { data, esc, button, photo, tvMarquee, mastheads, closingCta, wordmark, arrow, pv, pressEntries, visibleVideos, hasStill, featuredBanner, bigStages, markFromFile } from "../templates/components.mjs";
 import { config } from "../config.mjs";
 
 const m = data.images;
@@ -81,6 +81,8 @@ ${tvMarquee()}
   </div>
 </section>
 
+${bigStages({ id: "reach" })}
+
 <section class="work" id="work" aria-labelledby="work-title">
   <div class="wrap">
     <div class="section-head section-head--split">
@@ -121,11 +123,19 @@ ${tvMarquee()}
           <a class="text-link" href="/media/#speaking">Speaking ${arrow}</a>
         </div>
       </article>
-      <article class="work__tile work__tile--ink">
-        <p class="work__cat">On-air expert</p>
-        <h3 class="work__title">KTLA 5 style expert</h3>
-        <p>A frequent fashion and style expert on KTLA 5 in Los Angeles.</p>
-        <p class="work__src">Beverly Hills Courier, 2024</p>
+      <article class="work__tile work__tile--ink work__tile--feature">
+        <div class="feature__media${hasStill("still-ktla-la-unscripted") ? " feature__media--photo" : ""}">
+          ${hasStill("still-ktla-la-unscripted")
+            ? photo({ img: "still-ktla-la-unscripted", ratio: "16 / 9", pos: "50% 30%", scale: 1, alt: "Anya Sarre presenting Style Smart on KTLA 5’s LA Unscripted.", sizes: "(min-width: 900px) 40vw, 94vw", cls: "feature__photo" })
+            : `<div class="feature__marks">${markFromFile({ file: "img/logos/la-unscripted.svg", alt: "LA Unscripted", h: 128 })}${markFromFile({ file: "img/logos/style-smart.svg", alt: "Style Smart", h: 128 })}</div>`}
+        </div>
+        <div class="work__body">
+          <p class="work__cat">On-air expert · KTLA 5</p>
+          <h3 class="work__title">Style Smart on LA Unscripted</h3>
+          <p>Anya is the resident style expert on KTLA 5’s LA Unscripted, the Los Angeles lifestyle show. Her recurring Style Smart segments cover trends, red-carpet prep and beauty finds, including styling KTLA’s own team for the Oscars and Emmys.</p>
+          <p class="work__src">KTLA.com · LA Unscripted</p>
+          <a class="text-link text-link--light" href="/partnerships/#unscripted">Partner on a Style Smart segment ${arrow}</a>
+        </div>
       </article>
     </div>
   </div>

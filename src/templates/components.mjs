@@ -46,6 +46,7 @@ const ICONS = {
   book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5z"/><path d="M8 7h7"/>',
   hanger: '<path d="M12 8a2.2 2.2 0 1 0-2.2-2.2M12 8v3L3.4 17.2a1 1 0 0 0 .6 1.8h16a1 1 0 0 0 .6-1.8L12 11"/>',
   chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>',
+  check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
   globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
   play: '<circle cx="12" cy="12" r="9"/><path d="m10 8.5 5.5 3.5-5.5 3.5z"/>',
   camera: '<rect x="3" y="6" width="14" height="12" rx="2"/><path d="m17 10 4-2.5v9L17 14"/>',
@@ -109,7 +110,7 @@ export function photo({ img, ratio = "4 / 5", pos = "50% 50%", scale = 1, alt = 
     <source type="image/avif" srcset="${srcset(slot, "avif")}" sizes="${esc(sizes)}">
     <source type="image/webp" srcset="${srcset(slot, "webp")}" sizes="${esc(sizes)}">
     <img src="/img/${slot}-${mid}.webp" width="${m.width}" height="${m.height}" alt="${esc(alt)}"${priority ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"'}>
-  </picture>${label ? `<figcaption class="photo__tag">${esc(label)}</figcaption>` : ""}
+  </picture>
 </figure>`;
 }
 
@@ -120,7 +121,6 @@ export function stat({ display, unit = "", label, source, period, status, note =
   <p class="stat__value"><span>${esc(display)}</span>${unit ? `<small>${esc(unit)}</small>` : ""}</p>
   <p class="stat__label">${esc(label)}</p>
   <p class="stat__src">Source: <a href="${esc(source.url)}" rel="noopener noreferrer" target="_blank">${esc(source.name)}<span class="sr-only"> (opens in a new tab)</span></a> · ${esc(period)} · <em>${esc(statusLabel[status] || status)}</em></p>
-  ${note ? `<p class="stat__note">${esc(note)}</p>` : ""}
 </div>`;
 }
 
@@ -237,9 +237,41 @@ export function showCard({ id, logos, title, lead, extra = "" }) {
   <p class="showcard__lead">${lead}</p>
   <ul class="showcard__stats">${p.stats.map((x) => `<li><strong>${esc(x.display)}</strong><span>${esc(x.label)}</span></li>`).join("")}</ul>
   ${extra}
-  <p class="showcard__src">Source: ${sourceLinks(p.sources)} · ${esc(p.period)}.</p>
-  <p class="showcard__note">${esc(p.note)}</p>
 </article>`;
+}
+
+/** "Big stages, big reach": the programme panels, shared by Home and Media. One quiet footnote carries the sources. */
+export function bigStages({ id = "reach" } = {}) {
+  const m = data.metrics.programmes;
+  const et = data.tv.credits.find((c) => c.id === "et");
+  const foot = `Figures as reported by Nexstar Media Group and Paramount. They describe the networks and programmes, not any one segment. Sources: ${sourceLinks([...m.unscripted.sources, ...m.et.sources])}.`;
+  return `<section class="shows" id="${id}" aria-labelledby="${id}-title">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="kicker kicker--pink">Where her segments air</p>
+        <h2 id="${id}-title" class="section-title">Big stages, <em>big reach</em></h2>
+      </div>
+      <p class="section-sub">The programmes behind the credits, with the numbers each publisher reports.</p>
+    </div>
+    <div class="shows__grid">
+      ${showCard({
+        id: "unscripted",
+        logos: unscriptedLogos(),
+        title: "Style Smart on LA Unscripted",
+        lead: "Anya is the resident style expert on KTLA 5’s LA Unscripted, the Los Angeles lifestyle show launched in September 2020 that covers local spots, food and style. Her Style Smart segments cover trends, red-carpet prep and beauty finds. Segments broadcast on KTLA 5, stream live on KTLA.com and play worldwide on the KTLA 5 app.",
+        extra: `<a class="text-link text-link--light" href="/partnerships/#unscripted">Partner on a segment →</a>`,
+      })}
+      ${showCard({
+        id: "et",
+        logos: [{ file: et.logo.file, alt: "Entertainment Tonight", h: 62 }],
+        title: "Entertainment Tonight",
+        lead: "One of the shows Anya has brought fashion to. The publisher calls Entertainment Tonight the number-one entertainment news show on TV, with nine Emmy wins.",
+      })}
+    </div>
+    <p class="shows__foot">${foot}</p>
+  </div>
+</section>`;
 }
 
 export const unscriptedLogos = () => data.metrics.programmes.unscripted.logos;

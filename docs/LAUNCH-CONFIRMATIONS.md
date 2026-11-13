@@ -33,6 +33,7 @@
 15. **Show logos** are used on the site owner's instruction, traced to **single-colour white marks** from the small rasters on Anya's old Watch Anya page (ET shows the older “ET HD” mark; Rachael Ray and VH1 are the roughest traces). Before launch, swap in current official artwork where the networks allow it, and confirm Anya wants Home & Family, VH1 and CBS 2 listed, since the archive gives only their logos (no role or date).
 
 ## Press archive and logos
+12c. **Photo for the Home "Style Smart on LA Unscripted" tile.** ktla.com blocked this environment (HTTP 429), so no image was fetched; the tile shows the LA Unscripted and Style Smart marks. To add a photo: save a licensed image as `assets/private/ktla-la-unscripted.jpg`, run `node scripts/images.mjs`, rebuild (it is a private still: gitignored, private zip only, production needs `STILLS_CLEARED=1`). Confirm KTLA/Nexstar permission for the image.
 12a. **Rights for the press-page scans.** Anya's old Press pages displayed them, but they are copyrighted magazine and web pages: confirm permission to republish (or reduce the archive to what the publishers allow), then set `PRESS_CLEARED=1` for production. 
 12b. **Publication names.** The "As featured in" banner shows 8 major titles as white names (no logos needed; see `docs/LOGOS-NEEDED.md`). Confirm Anya is happy to be listed with each.
 

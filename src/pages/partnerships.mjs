@@ -79,9 +79,8 @@ ${pageHero({
       <div class="btn-row">${button("Enquire about a feature", "/talk-to-anya/?route=brands#enquiry", "solid")}</div>
     </div>
     <div class="unscripted__side">
-      <p class="unscripted__eyebrow">Optional national reach</p>
+      <p class="unscripted__eyebrow">Optional national reach · Nexstar network</p>
       <ul class="unscripted__stats">${data.metrics.programmes.unscripted.stats.map((x) => `<li><strong>${esc(x.display)}</strong><span>${esc(x.label)}</span></li>`).join("")}</ul>
-      <p class="unscripted__note">Nexstar Media Group’s national footprint, from Anya’s partner deck (2026). A segment can be extended across these markets as an add-on; the figures describe the network, not an audience for one segment.</p>
     </div>
   </div>
   <div class="wrap unscripted__inc">
@@ -160,10 +159,10 @@ ${pageHero({
   <div class="wrap">
     <div class="section-head section-head--split">
       <div>
-        <p class="kicker kicker--pink">Audience, sourced</p>
-        <h2 id="audience-title" class="section-title">Three different numbers, <em>kept apart</em></h2>
+        <p class="kicker kicker--pink">Audience</p>
+        <h2 id="audience-title" class="section-title">Numbers you <em>can check</em></h2>
       </div>
-      <p class="section-sub">Followers, single-post views and programme audiences measure different things, so they are never added together.</p>
+      <p class="section-sub">Every figure shows where it comes from and when it was taken.</p>
     </div>
 
     <div class="audience__grid">
@@ -174,7 +173,6 @@ ${pageHero({
 
       <article class="audience__cell audience__cell--reels" aria-labelledby="aud-reels">
         <h3 id="aud-reels" class="audience__label">2 · Selected Reel views</h3>
-        <p class="audience__lead">Individual posts from the last month. These are examples, not averages, and not guaranteed campaign performance.</p>
         <div class="table-wrap" tabindex="0" role="region" aria-label="Selected Reel views table, scrollable">
           <table class="reels">
             <caption class="sr-only">Selected Instagram Reel view counts, October 10 to November 10, 2026</caption>
@@ -189,7 +187,6 @@ ${pageHero({
           </table>
         </div>
         <p class="stat__src">Source: <a href="${esc(metrics.reelsMeta.source.url)}" rel="noopener noreferrer" target="_blank">${esc(metrics.reelsMeta.source.name)}<span class="sr-only"> (opens in a new tab)</span></a> · ${esc(metrics.reelsMeta.period)} · <em>Provisional · third-party</em></p>
-        ${pv(esc(metrics.reelsMeta.discrepancy), "pv-note--tight pv-note--dark")}
       </article>
 
       <article class="audience__cell audience__cell--context" aria-labelledby="aud-context">

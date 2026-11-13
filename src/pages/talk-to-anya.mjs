@@ -1,4 +1,4 @@
-import { data, esc, pv, arrow, button } from "../templates/components.mjs";
+import { data, esc, icon, button } from "../templates/components.mjs";
 import { config } from "../config.mjs";
 import { pageHero } from "./_shared.mjs";
 
@@ -8,22 +8,13 @@ const routes = [
   { id: "styling", title: "Personal styling", who: "Private clients", subject: "Personal styling enquiry", tone: "butter", email: config.emails.styling },
 ];
 
-const routeCard = (r) => `<li class="croute croute--${r.tone}">
-  <h3>${r.title}</h3>
-  <p>${r.who}</p>
-  ${
-    r.email
-      ? `<a class="croute__mail" href="mailto:${esc(r.email)}?subject=${encodeURIComponent(r.subject)}">${esc(r.email)}</a>`
-      : `<p class="croute__pending">Use the form or Instagram.</p>`
-  }
-  <a class="text-link" href="/talk-to-anya/?route=${r.id}#enquiry">Use the form ${arrow}</a>
-</li>`;
-
 const formMarkup = () => `<form class="form" id="enquiry-form" ${config.formEndpoint ? `action="${esc(config.formEndpoint)}" method="post"` : 'action="#"'} novalidate data-endpoint="${esc(config.formEndpoint)}"${config.emails.general ? ` data-fallback-email="${esc(config.emails.general)}"` : ""}>
       <div class="form__live" role="status" aria-live="polite" data-form-status></div>
       <fieldset class="form__routes">
-        <legend>Which route fits?</legend>
-        ${routes.map((r, i) => `<label class="choice"><input type="radio" name="route" value="${r.id}" data-subject="${esc(r.subject)}"${i === 0 ? " checked" : ""}><span>${r.title}</span></label>`).join("")}
+        <legend>Who is this for?</legend>
+        <div class="rpanels">
+          ${routes.map((r, i) => `<label class="rpanel rpanel--${r.tone}"><input type="radio" name="route" value="${r.id}" data-subject="${esc(r.subject)}"${i === 0 ? " checked" : ""}><span class="rpanel__title">${r.title}</span><span class="rpanel__who">${r.who}</span><span class="rpanel__tick" aria-hidden="true">${icon("check")}</span></label>`).join("")}
+        </div>
       </fieldset>
       <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required><p class="field__err" data-err="name" hidden></p></div>
       <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required><p class="field__err" data-err="email" hidden></p></div>
@@ -55,23 +46,16 @@ export default {
 ${pageHero({
   kicker: "Talk to Anya",
   title: "Talk to <em>Anya.</em>",
-  lead: "Choose the route that fits. Each goes to the right conversation.",
+  lead: "Tell Anya what you have in mind, and who it is for. She will take it from there.",
   img: { img: "08-mobile", ratio: "4 / 5", pos: "50% 33%", scale: 1, alt: "Concept portrait of Anya seated in black with an ornate statement necklace against a rose studio wall.", sizes: "(min-width: 900px) 30vw, 80vw", priority: true, cls: "page-hero__photo--narrow" },
 })}
 
-<section class="contact" aria-labelledby="routes-title">
-  <div class="wrap">
-    <div class="section-head"><p class="kicker">Enquiry routes</p><h2 id="routes-title" class="section-title">Pick a route</h2></div>
-    <ul class="croutes">${routes.map(routeCard).join("")}</ul>
-  </div>
-</section>
-
 <section class="enquiry" id="enquiry" aria-labelledby="enquiry-title">
-  <div class="wrap enquiry__grid">
-    <div>
+  <div class="wrap">
+    <div class="enquiry__head">
       <p class="kicker kicker--pink">Send an enquiry</p>
       <h2 id="enquiry-title" class="section-title">Tell Anya <em>what you’re planning</em></h2>
-      <p>Based in ${esc(data.site.location)}. You can also reach Anya on Instagram at <a href="${esc(data.site.instagram.url)}" rel="noopener noreferrer" target="_blank">${esc(data.site.instagram.handle)}<span class="sr-only"> (opens in a new tab)</span></a>.</p>
+      <p>${config.emails.general ? `Prefer email? <a href="mailto:${esc(config.emails.general)}?subject=${encodeURIComponent("Enquiry via anyasarre.com")}">${esc(config.emails.general)}</a>. ` : ""}Based in ${esc(data.site.location)}. Also on Instagram at <a href="${esc(data.site.instagram.url)}" rel="noopener noreferrer" target="_blank">${esc(data.site.instagram.handle)}<span class="sr-only"> (opens in a new tab)</span></a>.</p>
     </div>
     <div class="enquiry__form">${form}</div>
   </div>

@@ -1,4 +1,4 @@
-import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoMark, photo, hasStill, showCard, unscriptedLogos, icon, pressArchive, hasPressArchive } from "../templates/components.mjs";
+import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoMark, photo, hasStill, bigStages, icon, pressArchive, hasPressArchive } from "../templates/components.mjs";
 import { pageHero } from "./_shared.mjs";
 
 const { tv, press, metrics } = data;
@@ -43,6 +43,26 @@ ${pageHero({
     ${pv("Credits come from Anya’s old official-site archive (segment stills and clips, press scans), which mostly dates from about 2008–2017; only KTLA 5 is evidenced as recent. Home &amp; Family, VH1 and CBS 2 are shown from their logos on the old Watch Anya page, which has no segment for them in the archive. Logos are traced to single-colour marks from that page, used on the site owner’s instruction.", "pv-note--tight")}
   </div>
 </section>
+
+${bigStages({ id: "audience" })}
+
+${
+  videos.length
+    ? `<section class="videos" id="videos" aria-labelledby="videos-title">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="kicker">Watch</p>
+        <h2 id="videos-title" class="section-title">Anya <em>on air</em></h2>
+      </div>
+      <p class="section-sub">Four KTLA 5 segments from Anya’s own archive. Nothing loads or plays until you press play.</p>
+    </div>
+    ${videoGrid(videos)}
+    ${pv("These are broadcaster clips from Anya’s old Watch Anya archive. Air dates are not recorded, usage rights from KTLA/CBS are unconfirmed, and there are no captions or transcripts yet. The clips are kept out of the public repository, and a production build hides them until each entry is marked rights: “cleared” in press.json.", "pv-note--tight")}
+  </div>
+</section>`
+    : pv("Selected videos: no clip files are present in this build (they are gitignored broadcaster footage). Add entries to press.json and files to public/video/ and the section renders with click-to-load playback.", "pv-note--page")
+}
 
 ${
   hasStill("still-ktla-morning-news") && hasStill("still-tedx-stage")
@@ -98,24 +118,6 @@ ${
 </section>`
 }
 
-${
-  videos.length
-    ? `<section class="videos" id="videos" aria-labelledby="videos-title">
-  <div class="wrap">
-    <div class="section-head section-head--split">
-      <div>
-        <p class="kicker">Watch</p>
-        <h2 id="videos-title" class="section-title">Anya <em>on air</em></h2>
-      </div>
-      <p class="section-sub">Four KTLA 5 segments from Anya’s own archive. Nothing loads or plays until you press play.</p>
-    </div>
-    ${videoGrid(videos)}
-    ${pv("These are broadcaster clips from Anya’s old Watch Anya archive. Air dates are not recorded, usage rights from KTLA/CBS are unconfirmed, and there are no captions or transcripts yet. The clips are kept out of the public repository, and a production build hides them until each entry is marked rights: “cleared” in press.json.", "pv-note--tight")}
-  </div>
-</section>`
-    : pv("Selected videos: no clip files are present in this build (they are gitignored broadcaster footage). Add entries to press.json and files to public/video/ and the section renders with click-to-load playback.", "pv-note--page")
-}
-
 <section class="coverage" id="coverage" aria-labelledby="coverage-title">
   <div class="wrap">
     <div class="section-head section-head--split">
@@ -129,7 +131,6 @@ ${
       <div>${pressList(entries)}</div>
       <aside class="coverage__aside">
         ${photo({ img: "support-media-oscars-award-season", ratio: "4 / 5", pos: "50% 40%", scale: 1, alt: "Gold Oscar statuette on a blush ledge with ivory ribbon and rose fabric.", sizes: "(min-width: 900px) 24vw, 90vw", cls: "coverage__photo", label: "Illustrative still life" })}
-        <p class="coverage__cap">An illustration of award season. It does not represent an award won by Anya.</p>
       </aside>
     </div>
     ${pv("Print entries are read from page scans on Anya’s official Press page, so they link there rather than to the publishers. The Wall Street Journal was searched for and not found. Several more magazines and websites appear in the same archive but their pages were not read.", "pv-note--tight")}
@@ -137,33 +138,6 @@ ${
 </section>
 
 ${hasPressArchive() ? pressArchive() : ""}
-
-<section class="shows" id="audience" aria-labelledby="shows-title">
-  <div class="wrap">
-    <div class="section-head section-head--split">
-      <div>
-        <p class="kicker kicker--pink">Where her segments air</p>
-        <h2 id="shows-title" class="section-title">Big stages, <em>big reach</em></h2>
-      </div>
-      <p class="section-sub">The programmes behind the credits, with the numbers each publisher reports.</p>
-    </div>
-    <div class="shows__grid">
-      ${showCard({
-        id: "unscripted",
-        logos: unscriptedLogos(),
-        title: "Style Smart on LA Unscripted",
-        lead: "Anya’s Style Smart segments air on KTLA 5’s LA Unscripted, the Los Angeles lifestyle show launched in September 2020 that covers local spots, food and style. Segments broadcast on KTLA 5, stream live on KTLA.com and play worldwide on the KTLA 5 app.",
-        extra: `<a class="text-link text-link--light" href="/partnerships/#unscripted">Partner on a segment ${"→"}</a>`,
-      })}
-      ${showCard({
-        id: "et",
-        logos: [{ file: data.tv.credits.find((c) => c.id === "et").logo.file, alt: "Entertainment Tonight", h: 62 }],
-        title: "Entertainment Tonight",
-        lead: "One of the shows Anya has brought fashion to. The publisher calls Entertainment Tonight the number-one entertainment news show on TV, with nine Emmy wins.",
-      })}
-    </div>
-  </div>
-</section>
 
 ${closingCta({ title: "Booking a <em>style voice?</em>", text: "Tell Anya about the show, the date and the format." })}
 `,
