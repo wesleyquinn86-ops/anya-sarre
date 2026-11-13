@@ -112,6 +112,86 @@
   }
   [].slice.call(document.querySelectorAll("[data-marquee]")).forEach(initTicker);
 
+  /* ---------- Home hero: option switch (preview) + scroll parallax (option 2) ---------- */
+  var hero = document.querySelector(".hero[data-hero]");
+  if (hero) {
+    var picks = [].slice.call(document.querySelectorAll("[data-hero-pick]"));
+    var pill = document.querySelector("[data-hero-pill]"), dlg = document.querySelector("[data-hero-note]");
+    var hint = document.querySelector("[data-hero-hint]"), status = document.querySelector("[data-hero-status]");
+    var store = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) { /* storage may be blocked */ } } };
+    var hintTimer;
+    var showHint = function () {
+      if (!hint) return;
+      hint.hidden = false; clearTimeout(hintTimer);
+      hintTimer = setTimeout(function () { hint.hidden = true; }, 7000);
+    };
+    var setHero = function (n, announce) {
+      hero.setAttribute("data-hero", n);
+      picks.forEach(function (b) { if (pill && pill.contains(b)) b.setAttribute("aria-pressed", String(b.getAttribute("data-hero-pick") === n)); });
+      store.set("anya-hero", n);
+      if (announce && status) status.textContent = "Showing home page banner option " + n + ".";
+      if (hint) { if (n === "2" && announce) showHint(); else hint.hidden = true; }
+      layout(); paint();
+    };
+    if (pill) {
+      pill.hidden = false;
+      picks.forEach(function (b) { b.addEventListener("click", function () { setHero(b.getAttribute("data-hero-pick"), true); if (dlg && dlg.open && b.hasAttribute("data-note-close")) dlg.close(); }); });
+      window.addEventListener("scroll", function () { if (hint && !hint.hidden && window.pageYOffset > 80) hint.hidden = true; }, { passive: true });
+      if (dlg && typeof dlg.showModal === "function") {
+        var openBtn = pill.querySelector("[data-note-open]");
+        if (openBtn) openBtn.addEventListener("click", function () { dlg.showModal(); });
+        dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+        dlg.addEventListener("close", function () { store.set("anya-note-seen", "1"); if (openBtn) openBtn.focus(); });
+        // The note opens once, a moment after the page loads (so the banner is seen first); the Note button reopens it any time.
+        var force = new URLSearchParams(window.location.search).get("note") === "1";
+        if (force || !store.get("anya-note-seen")) setTimeout(function () { if (!dlg.open) dlg.showModal(); }, 1100);
+      } else {
+        var nb = pill.querySelector("[data-note-open]"); if (nb) nb.hidden = true;
+      }
+      var asked = new URLSearchParams(window.location.search).get("hero") || store.get("anya-hero");
+      if (asked === "1" || asked === "2") setHero(asked, false);
+    }
+
+    // Parallax: the three layers move at different paces as the page scrolls; a soft pointer drift sits on top.
+    var stage = hero.querySelector("[data-parallax]");
+    var L = stage ? { bg: stage.querySelector('[data-px="bg"]'), name: stage.querySelector('[data-px="name"]'), anya: stage.querySelector('[data-px="anya"]') } : null;
+    var m = { h: 1, scroll: 0, x: 0, y: 0, tx: 0, ty: 0, raf: 0, on: false };
+    // vertical travel as a fraction of stage height at full scroll (negative = rises faster than the page): distinct paces
+    var PACE = { bg: 0.22, name: -0.35, anya: 0.08 }; // page speed multipliers: backdrop 0.78x, portrait 0.92x, name 1.35x
+    var clamp = function (n, a, b) { return Math.max(a, Math.min(b, n)); };
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function layout() { if (stage) m.h = stage.getBoundingClientRect().height || 1; }
+    function paint() {
+      m.raf = 0;
+      if (!L || reduceMotion.matches || hero.getAttribute("data-hero") !== "2") return;
+      var p = clamp((window.pageYOffset || document.documentElement.scrollTop) / m.h, 0, 1.25); // 0 at the top: the composition rests exactly as supplied
+      m.x += (m.tx - m.x) * 0.085; m.y += (m.ty - m.y) * 0.085;
+      L.bg.style.transform = "translate3d(" + (-m.x * 0.25).toFixed(2) + "px," + (p * PACE.bg * m.h - m.y * 0.25).toFixed(1) + "px,0) scale(1.06)";
+      L.name.style.transform = "translate3d(" + (-m.x * 0.75).toFixed(2) + "px," + (p * PACE.name * m.h - m.y * 0.75).toFixed(1) + "px,0)";
+      L.anya.style.transform = "translate3d(" + (m.x * 0.25).toFixed(2) + "px," + (p * PACE.anya * m.h + m.y * 0.25).toFixed(1) + "px,0) scale(1.04)";
+      if (Math.abs(m.x - m.tx) + Math.abs(m.y - m.ty) > 0.02) m.raf = requestAnimationFrame(paint);
+    }
+    var kick = function () { if (!m.raf && m.on) m.raf = requestAnimationFrame(paint); };
+    if (L) {
+      layout();
+      window.addEventListener("scroll", kick, { passive: true });
+      window.addEventListener("resize", function () { layout(); kick(); });
+      if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { m.on = e[0].isIntersecting; if (m.on) kick(); }).observe(stage); else m.on = true;
+      var fine = window.matchMedia("(hover: hover) and (pointer: fine)");
+      stage.addEventListener("pointermove", function (e) {
+        if (!fine.matches || reduceMotion.matches) return;
+        var r = stage.getBoundingClientRect();
+        m.tx = clamp(((e.clientX - r.left) / r.width - 0.5) * 36, -18, 18); m.ty = clamp(((e.clientY - r.top) / r.height - 0.5) * 28, -14, 14); kick();
+      }, { passive: true });
+      stage.addEventListener("pointerleave", function () { m.tx = m.ty = 0; kick(); });
+      var reset = function () { if (reduceMotion.matches) { L.bg.style.transform = L.name.style.transform = L.anya.style.transform = ""; } else { kick(); } };
+      (reduceMotion.addEventListener ? reduceMotion.addEventListener.bind(reduceMotion, "change", reset) : reduceMotion.addListener.bind(reduceMotion, reset))();
+      // fetch option 2's layers quietly once the page is idle, so switching is instant
+      var warm = function () { [].slice.call(stage.querySelectorAll("img")).forEach(function (i) { i.loading = "eager"; }); };
+      if ("requestIdleCallback" in window) window.addEventListener("load", function () { requestIdleCallback(warm); }); else window.addEventListener("load", function () { setTimeout(warm, 1200); });
+    }
+  }
+
   /* ---------- Click-to-load video: nothing loads or plays until the visitor asks ---------- */
   document.querySelectorAll("[data-video-src]").forEach(function (link) {
     link.addEventListener("click", function (e) {

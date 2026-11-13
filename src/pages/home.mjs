@@ -13,6 +13,38 @@ const heroPicture = `<picture class="hero__picture">
            alt="Black-and-white concept portrait of Anya on a white studio background, holding an iced drink while a team styles her hair and makeup.">
     </picture>`;
 
+// Option 2: three aligned layers (backdrop, wordmark, portrait) moved at different speeds on scroll by src/js/main.js.
+const px = (n) => `/img/parallax/${n}`;
+const parallaxStage = `<div class="hero__stage hero__stage--parallax" data-parallax>
+    <div class="px px--bg" data-px="bg" aria-hidden="true"><picture><source media="(max-width: 767px)" srcset="${px("mobile-background.jpg")}"><img src="${px("desktop-background.jpg")}" width="2400" height="1200" alt="" loading="lazy" decoding="async"></picture></div>
+    <div class="px px--name" data-px="name" aria-hidden="true"><picture><source media="(max-width: 767px)" srcset="${px("mobile-wordmark.svg")}"><img src="${px("desktop-wordmark.svg")}" width="2400" height="1200" alt="" loading="lazy" decoding="async"></picture></div>
+    <div class="px px--anya" data-px="anya"><picture><source media="(max-width: 767px)" srcset="${px("mobile-anya.webp")}"><img src="${px("desktop-anya.webp")}" width="2400" height="1200" alt="Anya Sarre in warm daylight, wearing a black top and a gold statement necklace." loading="lazy" decoding="async"></picture></div>
+  </div>`;
+
+// Preview only: a short personal note in a popup, plus a small switch between the two hero options (production hides both).
+const heroNote = config.preview
+  ? `<dialog class="hero-dialog" id="hero-note" aria-labelledby="hero-note-title" data-hero-note>
+  <form method="dialog" class="hero-dialog__x"><button class="hero-dialog__close" aria-label="Close note">×</button></form>
+  <p class="hero-dialog__kicker">A note from Wes</p>
+  <h2 id="hero-note-title" class="hero-dialog__title">Hey Anya,</h2>
+  <p>Thank you for taking the time to look at this website. I built it unprompted and with a lot of care, to show your style, presence and talent. I hope you don’t mind that I went ahead without being asked.</p>
+  <p>I’ve made two options for the home page banner. Use the switch at the bottom of the screen to compare them, and on Option 2, scroll down slowly to watch the backdrop, your name and you move at different speeds.</p>
+  <p>I hope you like it, and that it helps you showcase your career in the polished but real way it deserves. Many thanks, as always.</p>
+  <p class="hero-dialog__sign">Wes</p>
+  <div class="hero-dialog__actions">
+    <button type="button" class="btn btn--solid" data-hero-pick="2" data-note-close><span>Show me Option 2</span></button>
+    <form method="dialog"><button class="btn btn--ghost-dark"><span>Close</span></button></form>
+  </div>
+</dialog>
+<div class="hero-pill" role="group" aria-label="Home page banner option" data-hero-pill hidden>
+  <span class="hero-pill__label" aria-hidden="true">Banner</span>
+  <button type="button" data-hero-pick="1" aria-pressed="${config.hero === "1"}">Option 1</button><button type="button" data-hero-pick="2" aria-pressed="${config.hero === "2"}">Option 2</button>
+  <button type="button" class="hero-pill__note" data-note-open aria-haspopup="dialog" aria-label="Read the note from Wes">Note</button>
+</div>
+<p class="hero-hint" data-hero-hint hidden>Scroll down slowly to watch the three layers move.</p>
+<p class="sr-only" role="status" aria-live="polite" data-hero-status></p>`
+  : "";
+
 const press = pressEntries().filter((e) => e.featured).sort((a, b) => (b.sort || 0) - (a.sort || 0));
 const hasVideo = visibleVideos().length > 0;
 const followers = data.metrics.followers;
@@ -24,12 +56,15 @@ export default {
   description:
     "Anya Sarre is a Los Angeles celebrity fashion stylist and television style expert. Red-carpet polish, approachable advice. Explore styling, media and hosting, and brand partnerships.",
   body: `
-<section class="hero" aria-label="Introduction">
-  <div class="hero__stage">
+${heroNote}
+<section class="hero" aria-label="Introduction" data-hero="${config.hero}">
+  <h1 class="sr-only">Anya Sarre</h1>
+  <div class="hero__stage hero__stage--studio">
     ${heroPicture}
-    <h1 class="hero__name"><span class="sr-only">Anya Sarre</span>${wordmark("stacked", "hero__mark hero__mark--stacked", { label: false })}${wordmark("compact", "hero__mark hero__mark--compact", { label: false })}</h1>
+    <p class="hero__name" aria-hidden="true">${wordmark("stacked", "hero__mark hero__mark--stacked", { label: false })}${wordmark("compact", "hero__mark hero__mark--compact", { label: false })}</p>
     <p class="hero__tag">Fashion / Beauty / Lifestyle</p>
   </div>
+  ${parallaxStage}
   <div class="wrap hero__copy">
     <p class="kicker">Los Angeles · Celebrity fashion stylist · TV style expert</p>
     <div class="hero__row">

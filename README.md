@@ -37,6 +37,7 @@ All pack imagery is **AI-assisted** (reconstructions with invented scenes; not d
 | `SITE_URL` | Production origin, no trailing slash. Drives canonical, Open Graph, JSON-LD, sitemap. **Required for production** |
 | `FORM_ENDPOINT` | URL that accepts JSON `POST`s. Without it **no form is rendered** (no simulated success) |
 | `CONTACT_EMAIL`, `CONTACT_EMAIL_MEDIA`, `CONTACT_EMAIL_BRANDS`, `CONTACT_EMAIL_STYLING` | Verified addresses; become `mailto:` routes. Production needs `FORM_ENDPOINT` or `CONTACT_EMAIL` |
+| `HERO` | Home banner: `1` studio portrait (default) or `2` three-layer parallax. The preview shows a switch (and a one-time note popup) so Anya can compare; **production has no switch and uses this value**, so set `HERO=2` once she chooses it |
 | `OUT_DIR` | Output directory (default `dist`) |
 | `PREVIEW_NOTES=1` | Show the yellow “Preview note” boxes (hidden by default; they hold the review caveats that also live in `docs/`) |
 
@@ -78,6 +79,10 @@ The four KTLA clips are **broadcaster footage whose rights are unconfirmed**, an
 **Make the repository private** before sharing links (GitHub → Settings → Danger zone → Change visibility).
 
 The press-page scans (105 magazine and web page images) and the two real photographs (KTLA Morning News, TEDx) are handled the same way: `assets/private/` and `public/img/still-*` are gitignored and ship only in the private zip; production needs `STILLS_CLEARED=1` (photos) / `PRESS_CLEARED=1` (press scans). Process scans with `node scripts/press.mjs`.
+
+## Home banner options
+
+Option 1 is the studio portrait. Option 2 is a three-layer parallax built from `public/img/parallax/` (backdrop, wordmark, portrait; separate desktop and mobile compositions; notes in `assets/parallax/`). As the page scrolls the layers move at three different paces (backdrop 0.78x, portrait 0.92x, name 1.35x of the scroll), with a gentle pointer drift on desktop. The backdrop extends above the stage so no edge is ever exposed, the layers rest exactly in place at the top, and reduced-motion visitors get the still composition. In the preview, a note from Wes opens once as a popup, a pill at the bottom of the screen switches between the options (choice remembered; `?hero=2` and `?note=1` force them), and its Note button reopens the message.
 
 ## Tickers (auto-scrolling bands)
 

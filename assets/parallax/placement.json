@@ -1,0 +1,56 @@
+{
+  "brand": {
+    "rose": "#B52B62",
+    "blush": "#F2CED8",
+    "ivory": "#FFF9F6",
+    "plum": "#2B1728"
+  },
+  "layouts": {
+    "desktop": {
+      "w": 2400,
+      "h": 1200,
+      "logo": {
+        "x": 70,
+        "y": 90,
+        "w": 2260
+      },
+      "person": {
+        "h": 1120,
+        "y": 350,
+        "faceX": 1340,
+        "w": 896.3195435092724,
+        "x": 844.7075606276748
+      }
+    },
+    "mobile": {
+      "w": 1080,
+      "h": 1350,
+      "logo": {
+        "x": 30,
+        "y": 100,
+        "w": 1020
+      },
+      "person": {
+        "h": 1370,
+        "y": 210,
+        "faceX": 590,
+        "w": 1096.3908701854493,
+        "x": -15.848787446504957
+      }
+    }
+  },
+  "layerOrder": {
+    "01-background": 0,
+    "02-wordmark": 1,
+    "03-anya-cutout": 2
+  },
+  "motion": {
+    "maxPointerTravelPx": 18,
+    "backgroundFactor": -0.25,
+    "wordmarkFactor": -0.75,
+    "portraitFactor": 0.25,
+    "backgroundScale": 1.06,
+    "portraitScale": 1.04,
+    "maxScrollInputPx": 45
+  }
+}

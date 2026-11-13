@@ -20,6 +20,8 @@ export const config = {
   preview: mode === "preview",
   siteUrl: clean(env.SITE_URL),
   formEndpoint: clean(env.FORM_ENDPOINT),
+  // Home hero: "1" = studio portrait, "2" = three-layer parallax. The preview offers a switch; production has no switch and uses this value.
+  hero: env.HERO === "2" ? "2" : "1",
   // Default: the address from Anya's partner deck (src/data/contact.private.json, not in git). Environment variables override it per route.
   emails: {
     general: clean(env.CONTACT_EMAIL) || siteContact.email || "",

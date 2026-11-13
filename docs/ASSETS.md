@@ -48,6 +48,10 @@ Two photographs of Anya, supplied by the site owner as chat attachments: **on th
 
 The wider Drive archive also holds real event and personal photographs (several above 2000 px, e.g. a red-carpet portrait, a jewelry display, weddings pages). They are **not used yet**: most are small or old, and some belong to a "Sawyer's World" set that appears to involve a child, which should not be used without Anya's explicit approval.
 
+## Parallax hero layers (13 Nov 2026)
+
+`Anya-Sarre-Parallax-Hero-Layers.zip` (supplied by the site owner): three aligned layers (blush wall, the wordmark as SVG, a transparent cutout of Anya from the pack's L.A. daylight portrait), in separate desktop (2400×1200) and mobile (1080×1350) compositions. The web-ready exports are in `public/img/parallax/`; the pack's notes and placement data are in `assets/parallax/`. The cutout and backdrop are AI-generated or AI-processed (like the rest of the pack's imagery) and need Anya's approval; the backdrop was generated at 1774×887 and upscaled, so it carries no extra detail.
+
 ## Supporting photography (13 Nov 2026)
 
 `Anya-Sarre-Supporting-Photos.zip` (Drive): six **AI-generated editorial still lifes** in the blush palette, none showing Anya. Stored as JPEG in `assets/source/support-*.jpg`; the original placement guide is `assets/support/PLACEMENT-GUIDE.md`; alt text follows the guide.

@@ -703,3 +703,39 @@ a:hover > .arrow, .text-link:hover .arrow { transform: translateX(3px); }
 .feature__photo { border-radius: 0; width: 100%; height: 100%; }
 .feature__marks { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.5rem 2.25rem; }
 @media (max-width: 62em) { .work__tile--feature { grid-template-columns: 1fr; } .feature__media { min-height: 12rem; } }
+
+/* ---------- Home hero: two options (studio portrait / three-layer parallax) ---------- */
+.hero[data-hero="1"] .hero__stage--parallax { display: none; }
+.hero[data-hero="2"] .hero__stage--studio { display: none; }
+.hero__stage--parallax { position: relative; aspect-ratio: 2 / 1; overflow: hidden; background: var(--pink-soft); container-type: normal; isolation: isolate; }
+.px { position: absolute; inset: 0; transform-origin: 50% 50%; will-change: transform; pointer-events: none; }
+.px picture, .px img { display: block; width: 100%; height: 100%; }
+.px img { object-fit: fill; }
+.px--bg { z-index: 0; transform: scale(1.06); inset: -30% 0 0 0; } /* extended upward so moving down never exposes an edge */
+.px--bg img { object-fit: cover; }
+.px--name { z-index: 1; }
+.px--anya { z-index: 2; transform: scale(1.04); }
+@media (max-width: 767px) { .hero__stage--parallax { aspect-ratio: 4 / 5; display: block; } .hero[data-hero="2"] .hero__stage--parallax { display: block; } }
+@media (prefers-reduced-motion: reduce) { .px { will-change: auto; transform: none !important; } .px--bg { transform: scale(1.06) !important; } .px--anya { transform: scale(1.04) !important; } }
+
+/* The note (a popup) and the option switch: preview only */
+.hero-dialog { border: 0; padding: clamp(1.4rem, 3vw, 2.2rem); width: min(34rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow: auto; border-radius: 1.5rem; background: var(--cream); color: var(--ink); box-shadow: 0 30px 80px rgba(43,23,40,.45); --focus: var(--ink); }
+.hero-dialog::backdrop { background: rgba(43,23,40,.62); }
+.hero-dialog p { margin-top: .75rem; font-size: 1rem; }
+.hero-dialog__kicker { font: 700 .74rem/1.3 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--rose); margin: 0; }
+.hero-dialog__title { margin-top: .4rem; font-family: var(--display); font-weight: 600; font-size: 1.9rem; line-height: 1.05; font-variation-settings: "opsz" 48; }
+.hero-dialog__sign { font-family: var(--display); font-weight: 600; font-size: 1.3rem; }
+.hero-dialog__actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.25rem; align-items: center; }
+.hero-dialog__actions form { margin: 0; }
+.hero-dialog__x { position: absolute; right: .9rem; top: .9rem; margin: 0; }
+.hero-dialog__close { width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 2px solid var(--ink); background: transparent; color: var(--ink); font: 400 1.5rem/1 var(--sans); cursor: pointer; }
+.hero-dialog__close:hover { background: var(--ink); color: var(--cream); }
+.hero-pill[hidden], .hero-hint[hidden] { display: none; }
+.hero-pill { position: fixed; right: 1rem; bottom: 1rem; z-index: 40; display: flex; align-items: center; gap: .15rem; padding: .3rem; border-radius: 999px; background: var(--ink); box-shadow: 0 8px 24px rgba(43,23,40,.35); --focus: var(--pink-soft); }
+.hero-pill__label { padding: 0 .55rem 0 .8rem; font: 700 .68rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--pink-soft); }
+.hero-pill button { min-height: 2.5rem; padding: .35rem .95rem; border: 0; border-radius: 999px; background: transparent; color: var(--cream); font: 700 .85rem var(--sans); cursor: pointer; }
+.hero-pill button[aria-pressed="true"] { background: var(--rose); }
+.hero-pill .hero-pill__note { border: 1.5px solid rgba(255,249,246,.55); margin-left: .25rem; }
+.hero-pill .hero-pill__note:hover { background: var(--cream); color: var(--ink); }
+.hero-hint { position: fixed; right: 1rem; bottom: 4.6rem; z-index: 40; max-width: 16rem; padding: .6rem .9rem; border-radius: .9rem; background: var(--cream); color: var(--ink); font-size: .88rem; box-shadow: 0 8px 24px rgba(43,23,40,.3); }
+@media (max-width: 40em) { .hero-pill__label { display: none; } .hero-pill { left: 1rem; right: 1rem; justify-content: space-between; } .hero-pill button { padding-inline: .7rem; } .hero-hint { left: 1rem; right: 1rem; max-width: none; } }

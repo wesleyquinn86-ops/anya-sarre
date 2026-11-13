@@ -33,6 +33,10 @@ const BASE = "http://localhost:4181", BASE_FORM = "http://localhost:4182";
 const PAGES = ["/", "/meet-anya/", "/styling/", "/media/", "/partnerships/", "/talk-to-anya/"];
 const WIDTHS = [320, 390, 768, 1024, 1440];
 const browser = await chromium.launch();
+{ // the note popup opens on first visit; tests start with it dismissed unless they say otherwise
+  const orig = browser.newContext.bind(browser);
+  browser.newContext = async (opts = {}) => { const c = await orig(opts); if (!opts.__showNote) await c.addInitScript(() => { try { localStorage.setItem("anya-note-seen", "1"); } catch (e) {} }); return c; };
+}
 
 async function openPage(ctx, url) {
   const page = await ctx.newPage();
@@ -206,6 +210,70 @@ for (const w of [390, 1440, 2560]) {
     note("banner links keep their destination for mouse and touch", /^\/media\/#press-/.test(href || ""), String(href));
   }
   await page.close(); await ctx.close();
+}
+
+// ---- 4c. home hero: option switch + three-layer parallax + the note popup ---------------------------------------------
+{ // the note: opens by itself once, then stays out of the way
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, __showNote: true });
+  const { page } = await openPage(ctx, BASE + "/");
+  note("note popup: nothing covers the banner before it opens (no strip in the page flow)", (await page.locator(".hero-note").count()) === 0 && (await page.evaluate(() => document.querySelector(".hero").getBoundingClientRect().top < 260)));
+  await page.waitForSelector("dialog.hero-dialog[open]", { timeout: 4000 });
+  note("note popup: opens by itself on the first visit, labelled, with the message", (await page.getAttribute("dialog.hero-dialog", "aria-labelledby")) === "hero-note-title" && /Hey Anya/.test(await page.textContent("#hero-note-title")) && /unprompted/.test(await page.textContent("dialog.hero-dialog")));
+  note("note popup: focus moves inside the dialog", await page.evaluate(() => document.querySelector("dialog.hero-dialog").contains(document.activeElement)));
+  await page.keyboard.press("Escape"); await page.waitForTimeout(200);
+  note("note popup: Escape closes it and returns focus to the Note button", (await page.locator("dialog.hero-dialog[open]").count()) === 0 && (await page.evaluate(() => document.activeElement.hasAttribute("data-note-open"))));
+  await page.reload({ waitUntil: "networkidle" }); await page.waitForTimeout(1600);
+  note("note popup: does not reopen on the next visit", (await page.locator("dialog.hero-dialog[open]").count()) === 0);
+  await page.click("[data-note-open]");
+  note("note popup: the Note button reopens it", (await page.locator("dialog.hero-dialog[open]").count()) === 1);
+  await page.click("[data-note-close]"); await page.waitForTimeout(500);
+  note("note popup: “Show me Option 2” switches the banner and closes the popup", (await page.locator("dialog.hero-dialog[open]").count()) === 0 && (await page.locator('.hero[data-hero="2"]').count()) === 1 && !(await page.locator("[data-hero-hint]").isHidden()));
+  await page.close(); await ctx.close();
+}
+for (const [w, h] of [[1440, 900], [390, 844]]) {
+  const ctx = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: "no-preference" });
+  const { page, errors } = await openPage(ctx, BASE + "/");
+  const vis = (sel) => page.evaluate((q) => { const e = document.querySelector(q); return !!e && getComputedStyle(e).display !== "none" && e.getBoundingClientRect().height > 0; }, sel);
+  note(`hero: Option 1 is the default and the switch is always visible @${w}`, (await vis(".hero__stage--studio")) && !(await vis(".hero__stage--parallax")) && (await page.locator('[data-hero-pill] [data-hero-pick="1"]').getAttribute("aria-pressed")) === "true" && (await vis("[data-hero-pill]")));
+  note(`hero: exactly one h1 on the page in both options @${w}`, (await page.locator("h1").count()) === 1);
+  await page.click('[data-hero-pill] [data-hero-pick="2"]'); await page.waitForTimeout(700);
+  note(`hero: Option 2 replaces Option 1 and announces itself @${w}`, (await vis(".hero__stage--parallax")) && !(await vis(".hero__stage--studio")) && /option 2/i.test(await page.textContent("[data-hero-status]")) && (await page.locator('[data-hero-pill] [data-hero-pick="2"]').getAttribute("aria-pressed")) === "true");
+  await page.waitForFunction(() => [...document.querySelectorAll("[data-parallax] img")].every((i) => i.complete && i.naturalWidth > 0), null, { timeout: 8000 });
+  const src = await page.evaluate(() => [...document.querySelectorAll("[data-parallax] img")].map((i) => i.currentSrc.split("/").pop()));
+  note(`hero: Option 2 uses the ${w < 768 ? "mobile" : "desktop"} layers @${w}`, src.every((x) => x.startsWith(w < 768 ? "mobile-" : "desktop-")), src.join(","));
+  const tf = () => page.evaluate(() => Object.fromEntries([...document.querySelectorAll("[data-px]")].map((e) => [e.getAttribute("data-px"), e.style.transform])));
+  const ty = (t) => parseFloat((t.match(/translate3d\([^,]+,\s*(-?[\d.]+)px/) || [0, 0])[1]);
+  const rest = await tf();
+  note(`hero parallax: layers rest exactly in place at the top @${w}`, ty(rest.bg) === 0 && ty(rest.name) === 0 && ty(rest.anya) === 0, JSON.stringify(rest));
+  await page.evaluate(() => scrollTo(0, 500)); await page.waitForTimeout(400);
+  const mv = await tf(), d = { bg: ty(mv.bg), name: ty(mv.name), anya: ty(mv.anya) };
+  note(`hero parallax: the three layers move at three different paces @${w}`, d.bg > 0 && d.anya > 0 && d.name < 0 && Math.abs(d.name) > Math.abs(d.bg) && Math.abs(d.bg) > Math.abs(d.anya), JSON.stringify(d));
+  note(`hero parallax: the backdrop reaches above the stage so moving down never exposes an edge @${w}`, await page.evaluate(() => { const bg = document.querySelector('[data-px="bg"]'); return bg.offsetTop <= -(0.22 * 1.25 * document.querySelector("[data-parallax]").getBoundingClientRect().height) + 1; }));
+  await page.click('[data-hero-pill] [data-hero-pick="1"]'); await page.waitForTimeout(300);
+  note(`hero: the switch is still there to go back to Option 1 @${w}`, (await vis(".hero__stage--studio")) && !(await vis(".hero__stage--parallax")));
+  note(`hero: no console errors @${w}`, errors.length === 0, errors.join("|"));
+  await page.close(); await ctx.close();
+}
+{ // Option 2 at rest: no overflow, no a11y violations, remembered choice
+  for (const w of [390, 1440]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: 900 } });
+    const { page } = await openPage(ctx, BASE + "/?hero=2"); await page.waitForTimeout(700);
+    note(`hero: ?hero=2 opens Option 2 directly @${w}`, (await page.locator('.hero[data-hero="2"]').count()) === 1);
+    const o = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: document.documentElement.clientWidth }));
+    note(`hero: Option 2 has no horizontal overflow @${w}`, o.sw <= o.vw, JSON.stringify(o));
+    await page.addScriptTag({ content: axeSource });
+    const res = await page.evaluate(() => axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"] }, resultTypes: ["violations"] }));
+    note(`hero: Option 2 passes axe @${w}`, res.violations.length === 0, res.violations.map((v) => `${v.id}: ${v.nodes.slice(0, 2).map((n) => n.target.join(" ")).join("; ")}`).join(" || "));
+    await page.reload({ waitUntil: "networkidle" });
+    note(`hero: the choice is remembered on reload @${w}`, (await page.locator('.hero[data-hero="2"]').count()) === 1);
+    await page.close(); await ctx.close();
+  }
+  const rctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: "reduce" });
+  const rp = await openPage(rctx, BASE + "/?hero=2");
+  await rp.page.evaluate(() => scrollTo(0, 500)); await rp.page.waitForTimeout(400);
+  const still = await rp.page.evaluate(() => [...document.querySelectorAll("[data-px]")].map((e) => e.style.transform));
+  note("hero parallax: reduced motion keeps the layers still", still.every((t) => t === ""), JSON.stringify(still));
+  await rp.page.close(); await rctx.close();
 }
 
 // ---- 5. keyboard: skip link + visible focus ----------------------------------------------------------------

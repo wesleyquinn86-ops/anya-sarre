@@ -3,6 +3,7 @@
 `npm run check` on a production build fails until public “to confirm” wording is gone, so this list is enforced, not advisory.
 
 ## Permission and approval
+0. **Anya's choice of home banner** (Option 1 studio portrait or Option 2 parallax). Build the chosen one with `HERO=1` or `HERO=2`; production has no switch or note popup. The popup and switch are preview-only.
 1. Anya's agreement to a website at all, and the production domain (`SITE_URL`).
 2. Approval of the **AI-assisted imagery** (hero 01 and the seven other options used; see `docs/ASSETS.md`): Anya's approval of her likeness, jewellery details and the invented scenes/assistants, permission to use the source photographs (with any photographer credit), and the footer disclosure. Remove any option she dislikes; prefer licensed original photography (option 05's reference is only 279×352).
 3. Approval of the **Sculpted Masthead wordmark**, palette and Bricolage Grotesque/DM Sans pairing, which are a proposed identity, **not an approved rebrand**.
