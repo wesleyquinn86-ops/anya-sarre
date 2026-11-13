@@ -1,5 +1,5 @@
 {
-  "_note": "Rebuilt on 13 Nov 2026 from Anya's old official-site archive (Watch Anya pages, segment stills/clips, press scans) plus third-party sources. Credits with no segment evidence (Extra, STYLE Network from a 2016 profile; Home & Family, VH1, CBS logos on the Watch Anya page) are not shown. 'era' is what the archive supports, not a guaranteed air date.",
+  "_note": "Rebuilt 13 Nov 2026 from Anya's old official-site archive. Logos are the show marks on her own Watch Anya page (small rasters, used on the site owner's instruction). Brand and non-TV logos on that page (ShoeDazzle, BabyLeague) are not television credits and are not shown here. 'era' is what the archive supports, not a guaranteed air date.",
   "credits": [
     {
       "id": "ktla",
@@ -9,6 +9,14 @@
       "currency": "recurring",
       "era": "recent",
       "style": "a",
+      "logo": {
+        "file": "img/logos/ktla-5.png",
+        "width": 228,
+        "height": 90,
+        "alt": "KTLA 5",
+        "plate": "white",
+        "displayHeight": 44
+      },
       "sources": [
         "beverly-hills-courier-2024",
         "local-life-sc",
@@ -24,7 +32,15 @@
       "role": "Fashion expert; credited as head fashion stylist for the show",
       "currency": "historical",
       "era": "c. 2008–2011",
-      "style": "b",
+      "style": "a",
+      "logo": {
+        "file": "img/logos/entertainment-tonight.png",
+        "width": 104,
+        "height": 98,
+        "alt": "Entertainment Tonight",
+        "plate": "white",
+        "displayHeight": 48
+      },
       "sources": [
         "944-magazine",
         "thr-2010",
@@ -39,7 +55,15 @@
       "role": "Fashion expert and stylist; presenter of the “Look For Less” segments",
       "currency": "historical",
       "era": "c. 2009–2010",
-      "style": "c",
+      "style": "a",
+      "logo": {
+        "file": "img/logos/the-insider.png",
+        "width": 240,
+        "height": 55,
+        "alt": "The Insider",
+        "plate": "white",
+        "displayHeight": 30
+      },
       "sources": [
         "life-style-2009",
         "us-weekly-2009",
@@ -52,14 +76,85 @@
       "id": "rachael-ray",
       "show": "The Rachael Ray Show",
       "network": "Syndicated",
-      "role": "Fashion guest",
+      "role": "Guest segments on Anya’s Watch Anya page",
       "currency": "historical",
       "era": "undated archive clips",
       "style": "a",
+      "logo": {
+        "file": "img/logos/the-rachael-ray-show.jpg",
+        "width": 128,
+        "height": 98,
+        "alt": "The Rachael Ray Show",
+        "plate": "white",
+        "displayHeight": 48
+      },
       "sources": [
         "official-watch-anya"
       ],
       "status": "archive-clips-undated"
+    },
+    {
+      "id": "home-family",
+      "show": "Home & Family",
+      "network": "Hallmark Channel",
+      "role": "Listed on Anya’s official Watch Anya page",
+      "currency": "historical",
+      "era": "undated",
+      "style": "a",
+      "logo": {
+        "file": "img/logos/home-and-family.png",
+        "width": 240,
+        "height": 79,
+        "alt": "Home & Family",
+        "plate": "white",
+        "displayHeight": 38
+      },
+      "sources": [
+        "official-watch-anya"
+      ],
+      "status": "logo-on-official-page"
+    },
+    {
+      "id": "vh1",
+      "show": "VH1",
+      "network": "Cable",
+      "role": "Listed on Anya’s official Watch Anya page",
+      "currency": "historical",
+      "era": "undated",
+      "style": "a",
+      "logo": {
+        "file": "img/logos/vh1.png",
+        "width": 240,
+        "height": 162,
+        "alt": "VH1",
+        "plate": "white",
+        "displayHeight": 60
+      },
+      "sources": [
+        "official-watch-anya"
+      ],
+      "status": "logo-on-official-page"
+    },
+    {
+      "id": "cbs2",
+      "show": "CBS 2",
+      "network": "Los Angeles",
+      "role": "Listed on Anya’s official Watch Anya page",
+      "currency": "historical",
+      "era": "undated",
+      "style": "a",
+      "logo": {
+        "file": "img/logos/cbs-2.png",
+        "width": 240,
+        "height": 150,
+        "alt": "CBS 2",
+        "plate": "plum",
+        "displayHeight": 60
+      },
+      "sources": [
+        "official-watch-anya"
+      ],
+      "status": "logo-on-official-page"
     },
     {
       "id": "kcal9",
@@ -68,7 +163,15 @@
       "role": "Fashion guest, Oscar fashion predictions",
       "currency": "historical",
       "era": "undated archive clip",
-      "style": "b",
+      "style": "a",
+      "logo": {
+        "file": "img/logos/kcal-9.png",
+        "width": 240,
+        "height": 150,
+        "alt": "KCAL 9",
+        "plate": "plum",
+        "displayHeight": 60
+      },
       "sources": [
         "official-watch-anya"
       ],
@@ -81,11 +184,40 @@
       "role": "Fashion guest",
       "currency": "historical",
       "era": "April 22, 2016",
-      "style": "c",
+      "style": "a",
+      "logo": {
+        "file": "img/logos/hollywood-today-live.jpg",
+        "width": 240,
+        "height": 108,
+        "alt": "Hollywood Today Live",
+        "plate": "white",
+        "displayHeight": 54
+      },
       "sources": [
         "official-watch-anya"
       ],
       "status": "archive-clip-date-from-filename"
+    },
+    {
+      "id": "thr",
+      "show": "The Hollywood Reporter",
+      "network": "China",
+      "role": "Segment on Anya’s Watch Anya page (“Anya on The Hollywood Reporter in China”)",
+      "currency": "historical",
+      "era": "undated archive clip",
+      "style": "a",
+      "logo": {
+        "file": "img/logos/the-hollywood-reporter.jpg",
+        "width": 127,
+        "height": 95,
+        "alt": "The Hollywood Reporter",
+        "plate": "white",
+        "displayHeight": 46
+      },
+      "sources": [
+        "official-watch-anya"
+      ],
+      "status": "archive-clip-undated"
     }
   ],
   "speaking": [

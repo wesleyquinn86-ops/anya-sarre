@@ -1,4 +1,4 @@
-import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid } from "../templates/components.mjs";
+import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoPlate } from "../templates/components.mjs";
 import { pageHero } from "./_shared.mjs";
 
 const { tv, press, metrics } = data;
@@ -34,7 +34,7 @@ ${pageHero({
       ${credits
         .map(
           (c) => `<li class="tvrow tvrow--${c.currency}">
-        <p class="tvrow__show tv--${c.style}">${esc(c.show)}</p>
+        <p class="tvrow__show">${logoPlate(c.logo)}</p>
         <p class="tvrow__role">${esc(c.role)}</p>
         <p class="tvrow__net">${esc(c.network)}</p>
         <p class="tvrow__cur"><span class="chip chip--${c.currency}">${esc(chipLabel(c))}</span></p>
@@ -42,7 +42,7 @@ ${pageHero({
         )
         .join("")}
     </ul>
-    ${pv("Credits come from Anya’s old official-site archive (segment stills and clips, press scans), which mostly dates from about 2008–2017; only KTLA 5 is evidenced as recent. Home &amp; Family, VH1 and CBS logos on the old Watch Anya page have no segment evidence, so they are not shown. Show names are typeset; authentic show marks were not sourced.", "pv-note--tight")}
+    ${pv("Credits come from Anya’s old official-site archive (segment stills and clips, press scans), which mostly dates from about 2008–2017; only KTLA 5 is evidenced as recent. Home &amp; Family, VH1 and CBS 2 are shown from their logos on the old Watch Anya page, which has no segment for them in the archive. Logos are the small originals from that page, used on the site owner’s instruction.", "pv-note--tight")}
   </div>
 </section>
 

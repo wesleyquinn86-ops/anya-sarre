@@ -27,7 +27,7 @@ Research date: **13 November 2026**. Evidence levels: **Archive scan read** = I 
 
 ## Television
 
-From the archive's *Watch Anya* pages (stills, clips, logos). `src/data/tv.json` holds the structured version.
+From the archive's *Watch Anya* pages (stills, clips and the **row of show logos on that page**). `src/data/tv.json` holds the structured version; the marquee and Media-page ledger show the **official logo** for each show (alt text is the show's name).
 
 | Show | Evidence | Shown as |
 | --- | --- | --- |
@@ -35,10 +35,14 @@ From the archive's *Watch Anya* pages (stills, clips, logos). `src/data/tv.json`
 | Entertainment Tonight | ~30 segment stills/clips (incl. Feb 28, 2011 Oscar trends), 944 Magazine, THR 2010 | Historical, c. 2008–2011 |
 | The Insider | Look For Less stills, Us Weekly/Life & Style/LA Confidential scans | Historical, c. 2009–2010 |
 | The Rachael Ray Show | 2 posters/clips (`rr-3081`, b-roll), undated | Historical, undated |
+| Home & Family | Logo on the Watch Anya page only | Historical, undated, role unknown |
+| VH1 | Logo on the Watch Anya page only | Historical, undated, role unknown |
+| CBS 2 | Logo on the Watch Anya page only | Historical, undated, role unknown |
 | KCAL 9 | “Oscar Fashion Predictions” page and clip, undated | Historical, undated |
 | Hollywood Today Live | Syndicated national clip; file name dated Apr 22, 2016 | Historical, April 22, 2016 |
+| The Hollywood Reporter (China) | “Anya on The Hollywood Reporter in China” page and a 31 s clip | Historical, undated |
 
-**Not shown:** *Extra* and *STYLE Network* (only a 2016 third-party profile mentions them; absent from the official Watch Anya page); *Home & Family*, *VH1* and *CBS* (logos on the old Watch Anya page, no segment evidence); *ShoeDazzle* (a brand tour, not TV); *The Hollywood Reporter in China* (a clip, not a TV credit). **Only KTLA 5 is evidenced as recent**; everything else is historical.
+**Not shown as television:** *Extra* and *STYLE Network* (only a 2016 third-party profile; absent from the official page); *ShoeDazzle* (a brand tour and jewelry collaboration, logo on the page) and *BabyLeague* (a brand). ShoeDazzle is a candidate **brand-partnership example** (web press “Must Haves by Anya Sarre Jewelry for ShoeDazzle”; an ET segment on it). **Only KTLA 5 is evidenced as recent.** The Home & Family, VH1 and CBS 2 entries rest on the logo row alone, so their roles and dates are unknown. Network labels for Home & Family (Hallmark Channel) and CBS 2 (Los Angeles) are general knowledge, not read from the archive.
 
 ## Press (print and web)
 

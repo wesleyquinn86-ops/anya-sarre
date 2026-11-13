@@ -49,7 +49,8 @@ All pack imagery is AI-assisted: **reconstructions from small source photographs
 
 | Needed | Status |
 | --- | --- |
-| Official publication mastheads, TV network/show marks | Not sourced (pack leaves them out on purpose). Outlet and show names are typeset |
+| Official publication mastheads | Not sourced; outlet names are typeset |
+| TV show marks | **Done.** The ten show logos from Anya's old Watch Anya page (`assets/logos/`, copied to `public/img/logos/`) are used in the marquee and Media ledger, with the show name as alt text. They are small originals (≤240 px wide, shown at ≤ half native height to stay sharp), some on white or coloured backgrounds, so each sits on a white or plum plate. The ET mark is the older “ET HD” version. Used on the site owner's instruction; the networks' rights are theirs |
 | Video | Four KTLA clips from the wider Drive archive are on the Media page in the preview only (gitignored, rights unconfirmed, no captions); see `docs/SOURCES.md` |
 | High-resolution original photography | Recommended before launch (option 05's reference is only 279×352) |
 | The pre-existing Styled by Anya seal | Assessed by the pack but not redrawn or included; not used |

@@ -32,7 +32,7 @@ export function button(label, href, variant = "solid", extra = "") {
 
 /** Visible only in the private preview; never shipped in a production build. */
 export const pv = (text, cls = "") =>
-  config.preview ? `<p class="pv-note ${cls}"><strong>Preview note</strong> ${text}</p>` : "";
+  config.preview && process.env.PREVIEW_NOTES !== "0" ? `<p class="pv-note ${cls}"><strong>Preview note</strong> ${text}</p>` : "";
 
 /* ---------- wordmark (approved pack: Direction 01, Sculpted Masthead, genuine vector paths) ---------- */
 const wordmarkCache = {};
@@ -94,24 +94,28 @@ export function stat({ display, unit = "", label, source, period, status, note =
 }
 
 /* ---------- television marquee ---------- */
+export function logoPlate(logo, { alt = true, cls = "" } = {}) {
+  return `<span class="tv__plate tv__plate--${logo.plate} ${cls}"><img class="tv__logo" src="/${esc(logo.file)}" width="${logo.width}" height="${logo.height}" alt="${alt ? esc(logo.alt) : ""}" style="--logo-h:${logo.displayHeight}px" decoding="async"></span>`;
+}
+
 export function tvMarquee() {
-  const item = (c) =>
-    `<li class="tv tv--${c.style}"><span class="tv__name">${esc(c.show)}</span>${c.currency === "recurring" ? `<span class="tv__tag">Recurring expert</span>` : ""}</li>`;
-  const sparkleItem = ""; // separators are drawn with CSS so they are not announced
-  const list = data.tv.credits.map(item).join(sparkleItem);
+  // Official show marks from Anya's Watch Anya page. The second (looping) copy is aria-hidden, so its images carry empty alt text.
+  const item = (c, asCopy) =>
+    `<li class="tv">${logoPlate(c.logo, { alt: !asCopy })}${c.currency === "recurring" ? `<span class="tv__tag">Recurring expert</span>` : ""}</li>`;
+  const list = data.tv.credits.map((c) => item(c, false)).join("");
+  const copy = data.tv.credits.map((c) => item(c, true)).join("");
   return `<section class="marquee" aria-labelledby="tv-title" data-marquee>
   <div class="marquee__head">
     <h2 id="tv-title" class="marquee__title">Seen on television</h2>
-    <p class="marquee__note">Appearances over the years. Not every credit is current.</p>
+    <p class="marquee__note">Appearances over the years.</p>
     <button class="marquee__toggle" type="button" data-marquee-toggle hidden aria-label="Pause scrolling television credits"><span class="marquee__icon" aria-hidden="true"></span><span data-marquee-label>Pause</span></button>
   </div>
   <div class="marquee__viewport">
     <div class="marquee__track" data-marquee-track>
       <ul class="marquee__list" aria-label="Television credits">${list}</ul>
-      <ul class="marquee__list marquee__list--copy" aria-hidden="true">${list}</ul>
+      <ul class="marquee__list marquee__list--copy" aria-hidden="true">${copy}</ul>
     </div>
   </div>
-  ${config.preview ? `<p class="pv-note pv-note--tight"><strong>Preview note</strong> Credit list compiled from third-party sources, with only KTLA 5 recent. Reconcile with Anya’s official list before launch. Typeset names stand in for show marks.</p>` : ""}
 </section>`;
 }
 

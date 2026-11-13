@@ -24,7 +24,7 @@
 12. Official **masthead SVG/PNG** assets from publisher-controlled sources (names are typeset until then), and publisher URLs where the coverage exists online. The archive scans are not publisher links.
 13. Read the remaining archive pages (OK! ~25 pages, Life & Style, Inside Weddings, Genlux, Gladys, Capitol File, Infatuation, TV Guide, web press) before adding more entries or changing types.
 14. **Video rights and suitability.** The four KTLA clips are broadcaster footage; the archive README says Anya's permission does not clear KTLA/CBS rights. Get written clearance, confirm Anya appears in each clip, choose posters that show her, supply **captions and transcripts**, then set `"rights": "cleared"` per clip. Until then production hides them. Also decide whether to host video on Cloudflare (25 MB per-file limit) or a video platform.
-15. Show marks/posters only with accurate titles and verified video destinations (none used).
+15. **Show logos** are used on the site owner's instruction, from the small rasters on Anya's old Watch Anya page (ET shows the older “ET HD” mark). Before launch, swap in current official artwork where the networks allow it, and confirm Anya wants Home & Family, VH1 and CBS 2 listed, since the archive gives only their logos (no role or date).
 
 ## Audience figures
 15. Re-check Fohr's 280K and the four Reel views on launch day (they move). Prefer Anya's own **Instagram Insights / media kit** for followers, reach and demographics.

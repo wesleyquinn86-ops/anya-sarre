@@ -5,6 +5,7 @@ const rows = [
   ["Business", "Styled By Anya Inc. is Anya’s styling business.", "Current", "Beverly Hills Courier, Nov 12, 2024"],
   ["Television", "Frequent fashion and style expert on KTLA 5; host and curator of the special “Countdown to Gold: Getting Carpet Ready with Anya Sarre.”", "Recurring", "Beverly Hills Courier, 2024 · LOCAL Life · KTLA clips in her archive"],
   ["Entertainment Tonight & The Insider", "Fashion expert, credited as head fashion stylist for Entertainment Tonight, The Insider and ET on MTV; presenter of The Insider’s “Look For Less” segments.", "Historical", "944 Magazine (undated) · Life & Style, Jun 15, 2009 · The Hollywood Reporter, Jul 19, 2010"],
+  ["Other television", "The Rachael Ray Show, Home & Family, VH1, CBS 2, KCAL 9, Hollywood Today Live (April 22, 2016) and The Hollywood Reporter (China). Shown from segment clips and the show logos on her old Watch Anya page.", "Historical", "Anya’s official Watch Anya archive"],
   ["Red carpet", "Clients styled for events including the Oscars, Golden Globes, Emmys and Grammys. Variety profiled her award-weekend styling.", "Reported", "Beverly Hills Courier, Nov 12, 2024 · Variety, Oct 24, 2008"],
   ["Speaking", "Speaker at TEDxHiltonHead Women.", "Date to confirm", "LOCAL Life Q+A"],
   ["Education", "University of Southern California (B.A., communications); Parsons School of Design fashion program, described as a graduate degree.", "—", "944 Magazine Q&A · Beverly Hills Courier, Nov 12, 2024"],

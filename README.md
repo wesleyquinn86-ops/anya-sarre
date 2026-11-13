@@ -38,6 +38,7 @@ All pack imagery is **AI-assisted** (reconstructions with invented scenes; not d
 | `FORM_ENDPOINT` | URL that accepts JSON `POST`s. Without it **no form is rendered** (no simulated success) |
 | `CONTACT_EMAIL`, `CONTACT_EMAIL_MEDIA`, `CONTACT_EMAIL_BRANDS`, `CONTACT_EMAIL_STYLING` | Verified addresses; become `mailto:` routes. Production needs `FORM_ENDPOINT` or `CONTACT_EMAIL` |
 | `OUT_DIR` | Output directory (default `dist`) |
+| `PREVIEW_NOTES=0` | Keep the preview build (noindex, banner) but hide the yellow “Preview note” boxes |
 
 Production example:
 
@@ -59,7 +60,7 @@ The production build **refuses to run** without `SITE_URL` and an enquiry route.
 
 | File | Holds |
 | --- | --- |
-| `src/data/tv.json` | Television credits and speaking, with currency and sources |
+| `src/data/tv.json` | Television credits (each with its official logo) and speaking, with currency and sources |
 | `src/data/press.json` | Coverage entries (type, date, URL, evidence) and `videos` (broadcaster clips; see below) |
 | `src/data/metrics.json` | Every displayed figure with label, source, period, status; plus figures recorded but not displayed |
 | `src/data/site.json` | Name, tagline, navigation, education, Instagram |
