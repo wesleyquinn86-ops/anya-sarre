@@ -33,7 +33,7 @@
 
 ## Press archive and logos
 12a. **Rights for the press-page scans.** Anya's old Press pages displayed them, but they are copyrighted magazine and web pages: confirm permission to republish (or reduce the archive to what the publishers allow), then set `PRESS_CLEARED=1` for production. 
-12b. **Publication logos.** The "As featured in" banner has 8 major titles; only The Hollywood Reporter has a white mark and the other 7 show typeset names until official logos are supplied (see `docs/LOGOS-NEEDED.md` and the reference zip).
+12b. **Publication names.** The "As featured in" banner shows 8 major titles as white names (no logos needed; see `docs/LOGOS-NEEDED.md`). Confirm Anya is happy to be listed with each.
 
 ## Audience figures
 14a. **Ask Anya for an Instagram performance report** (Insights: reach, impressions, Reels views, engagement, demographics, sponsored-post results) in the second email once she agrees to go ahead; see `docs/FOLLOW-UP-EMAIL.md`. The site shows no "not yet available" box any more, so these numbers are simply absent until she supplies them.

@@ -1,22 +1,10 @@
-# Publication logos needed (white marks for "As featured in")
+# Publication logos (optional)
 
-The "As featured in" section on the Home page shows each publication's **white mark** where a clean logo exists, and its **name in the site's type** where not. Only The Hollywood Reporter's mark is available so far (traced from Anya's Watch Anya page).
+**Decision (site owner, 13 Nov 2026): the "As featured in" banner shows the publication names in white text. Logos are not required.**
 
-Official masthead artwork could not be sourced from the build environment (publisher sites and logo libraries are unreachable or carry restrictive terms), and the magazine-cover scans only show mastheads over photography or as small thumbnails. **To swap a name for a logo:** send an SVG or a high-resolution PNG with a clean background for the publication, and it will be traced to a white mark (`scripts/logos-to-mono.py`), saved as `public/img/logos/pub-<slug>.svg`, and picked up automatically.
+The banner lists the 8 major titles: Variety, The Hollywood Reporter, Us Weekly, OK!, Life & Style, TV Guide, Los Angeles Confidential and Inside Weddings. The full list of 36 outlets lives in the Press archive on the Media page.
 
-**Scope (decided by the site owner):** only the major, recognisable titles appear, in a slim "As featured in" banner on the Home page. The full publication list lives in the Press archive (Media page). The banner has **8 titles**:
+## If logos are added later
+The banner is built so the set stays consistent: it uses white logos **only if all 8 titles have one**, otherwise all 8 stay as names. To switch, supply an official SVG (or a PNG at least 1500 px wide) for each title, trace it to white with `scripts/logos-to-mono.py`, and save it as `public/img/logos/pub-<slug>.svg` for `variety`, `the-hollywood-reporter`, `us-weekly`, `ok`, `life-and-style`, `tv-guide`, `los-angeles-confidential` and `inside-weddings`. No code change is needed. A white The Hollywood Reporter mark already exists (`assets/logos/mono/the-hollywood-reporter.svg`) from Anya's TV page; it is unused for now so the banner stays uniform.
 
-| Publication | White logo | File to supply |
-| --- | --- | --- |
-| The Hollywood Reporter | **Done** (traced) | n/a |
-| Variety | needed | `pub-variety.svg` |
-| Us Weekly | needed | `pub-us-weekly.svg` |
-| OK! | needed | `pub-ok.svg` |
-| Life & Style | needed | `pub-life-and-style.svg` |
-| TV Guide | needed | `pub-tv-guide.svg` |
-| Los Angeles Confidential | needed | `pub-los-angeles-confidential.svg` |
-| Inside Weddings | needed | `pub-inside-weddings.svg` |
-
-The banner now scrolls slowly as a ticker, so logos are shown about 34 px tall with generous spacing; simple, high-contrast marks work best. `private-deliverables/Anya-Sarre-Publication-Logos-Needed.zip` holds, for each of the 7 needed titles, the clearest archive scan showing its masthead (reference only, **not** logo files) plus a README with the naming and size spec.
-
-The Wall Street Journal was searched for and **not found**, so it is not listed. Any logo shown is used on the site owner's instruction; the publishers' rights are theirs.
+The reference zip `private-deliverables/Anya-Sarre-Publication-Logos-Needed.zip` (page scans plus a spec) can be ignored unless logos are wanted later. Logos are the publishers' property.

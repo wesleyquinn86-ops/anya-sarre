@@ -253,11 +253,15 @@ const OFFSITE = {
 function publicationItems() {
   const byslug = Object.fromEntries(data.pressArchive.outlets.map((o) => [o.slug, o]));
   const archive = hasPressArchive();
+  // Consistency rule: white marks are used only if EVERY title in the banner has one; otherwise all titles are set as white names.
+  // (Drop a full set of public/img/logos/pub-<slug>.svg files in and the banner switches to logos by itself.)
+  const logoPath = (slug) => `img/logos/pub-${slug}.svg`;
+  const allLogos = FEATURED.every((slug) => existsSync(path.join(root, "public", logoPath(slug))));
   return FEATURED.map((slug) => {
     const o = byslug[slug] || OFFSITE[slug];
     if (!o) return "";
-    const logoFile = `img/logos/pub-${slug}.svg`;
-    const hasLogo = existsSync(path.join(root, "public", logoFile));
+    const logoFile = logoPath(slug);
+    const hasLogo = allLogos;
     const label = hasLogo ? logoMark({ file: logoFile, alt: o.name, ...svgDims(logoFile), displayHeight: 34 }) : `<span class="pub__name">${esc(o.name)}</span>`;
     const href = OFFSITE[slug]?.url || (archive && byslug[slug] ? `/media/#press-${slug}` : "");
     const ext = OFFSITE[slug] ? ` rel="noopener noreferrer" target="_blank"` : "";

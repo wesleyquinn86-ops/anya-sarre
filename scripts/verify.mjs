@@ -357,7 +357,7 @@ for (const w of [390, 1440, 2560]) {
     await page.keyboard.press("Escape");
     const hv = await openPage(ctx, BASE + "/");
     const roll = await hv.page.evaluate(() => { const l = document.querySelector(".marquee--banner .marquee__list"); return { n: l.querySelectorAll(".pub").length, linked: l.querySelectorAll("a.pub__link").length, logos: l.querySelectorAll('[role="img"]').length }; });
-    note("As featured in banner: the 8 major titles, all linked, at least one white logo", roll.n === 8 && roll.linked === roll.n && roll.logos >= 1, JSON.stringify(roll));
+    note("As featured in banner: the 8 major titles, all linked, set consistently (names, or logos only if all 8 exist)", roll.n === 8 && roll.linked === roll.n && (roll.logos === 0 || roll.logos === 8), JSON.stringify(roll));
     const target = await hv.page.getAttribute('.marquee--banner .marquee__list:first-of-type a.pub__link[href="/media/#press-variety"]', "href");
     note("Featured in links go to the matching archive section", target === "/media/#press-variety" && (await page.locator("#press-variety").count()) === 1);
     await hv.page.close(); await page.close(); await ctx.close();
