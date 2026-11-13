@@ -77,7 +77,7 @@ The four KTLA clips are **broadcaster footage whose rights are unconfirmed**, an
 
 **Make the repository private** before sharing links (GitHub → Settings → Danger zone → Change visibility).
 
-The two real photographs (KTLA Morning News, TEDx) are handled the same way: `assets/private/` and `public/img/still-*` are gitignored and ship only in the private zip; production needs `STILLS_CLEARED=1`.
+The press-page scans (105 magazine and web page images) and the two real photographs (KTLA Morning News, TEDx) are handled the same way: `assets/private/` and `public/img/still-*` are gitignored and ship only in the private zip; production needs `STILLS_CLEARED=1` (photos) / `PRESS_CLEARED=1` (press scans). Process scans with `node scripts/press.mjs`.
 
 ## Accessibility and motion
 

@@ -61,7 +61,7 @@ for (const w of WIDTHS) {
       return { sw: document.documentElement.scrollWidth, vw, bad };
     });
     note(`no horizontal overflow ${tag}`, over.sw <= over.vw && over.bad.length === 0, JSON.stringify(over));
-    const imgs = await page.evaluate(() => [...document.images].filter((i) => !i.complete || i.naturalWidth === 0).map((i) => i.currentSrc || i.src));
+    const imgs = await page.evaluate(() => [...document.images].filter((i) => !i.closest("details:not([open]), dialog")).filter((i) => !i.complete || i.naturalWidth === 0).map((i) => i.currentSrc || i.src));
     note(`images decode ${tag}`, imgs.length === 0, imgs.join(","));
     // navigation visibility
     const nav = await page.evaluate(() => {
@@ -299,6 +299,35 @@ for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, tru
     const imgs = await page.evaluate(() => [...document.querySelectorAll(".spcard__photo img")].map((i) => ({ alt: i.alt.length, ok: i.complete && i.naturalWidth > 0, w: i.naturalWidth })));
     note("Hosting & speaking shows the KTLA and TEDx photographs with real alt text", imgs.length === 2 && imgs.every((i) => i.alt > 40 && i.ok), JSON.stringify(imgs));
     await page.close(); await ctx.close();
+  }
+}
+
+// ---- 6d. press archive + Featured in (needs local scans) ---------------------------------------------------------
+{
+  const { existsSync } = await import("node:fs");
+  if (!existsSync(path.join(root, "public/press"))) note("press archive: skipped (scans not present)", true);
+  else {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const { page } = await openPage(ctx, BASE + "/media/");
+    const first = page.locator("#press-variety a[data-lightbox]").first();
+    note("archive: every publication has a section and an index link", (await page.locator(".archive__index a").count()) >= 30 && (await page.locator(".outlet").count()) >= 17);
+    await first.scrollIntoViewIfNeeded(); await first.focus(); await page.keyboard.press("Enter");
+    await page.waitForSelector("dialog.lightbox[open]", { timeout: 4000 });
+    await page.waitForFunction(() => { const i = document.querySelector(".lightbox__img"); return i && i.complete && i.naturalWidth > 0; });
+    note("lightbox opens, focuses Close, shows a caption", (await page.evaluate(() => document.activeElement.hasAttribute("data-close"))) && /Variety/.test(await page.textContent(".lightbox__cap")));
+    await page.keyboard.press("Escape"); await page.waitForTimeout(150);
+    note("Esc closes the lightbox and returns focus to the scan", (await page.locator("dialog.lightbox[open]").count()) === 0 && (await page.evaluate(() => document.activeElement.hasAttribute("data-lightbox"))));
+    const ok = page.locator("#press-ok a[data-lightbox]").first();
+    await ok.scrollIntoViewIfNeeded(); await ok.click(); await page.waitForSelector("dialog.lightbox[open]");
+    await page.keyboard.press("ArrowRight"); await page.waitForTimeout(100);
+    note("arrow keys move between pages of the same publication", /2 of \d+/.test(await page.textContent(".lightbox__cap")) && /OK!/.test(await page.textContent(".lightbox__cap")));
+    await page.keyboard.press("Escape");
+    const hv = await openPage(ctx, BASE + "/");
+    const roll = await hv.page.evaluate(() => ({ n: document.querySelectorAll(".roll__item").length, linked: document.querySelectorAll(".roll__link").length, logos: document.querySelectorAll('.roll [role="img"]').length }));
+    note("Featured in lists publication titles (and logos where available), all linked", roll.n >= 25 && roll.linked === roll.n && roll.logos >= 1, JSON.stringify(roll));
+    const target = await hv.page.getAttribute('.roll__link[href="/media/#press-variety"]', "href");
+    note("Featured in links go to the matching archive section", target === "/media/#press-variety" && (await page.locator("#press-variety").count()) === 1);
+    await hv.page.close(); await page.close(); await ctx.close();
   }
 }
 

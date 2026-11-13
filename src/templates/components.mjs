@@ -15,6 +15,8 @@ export const data = {
   bio: readJson("src/data/bio.json"),
   // Gitignored (public repo); absent in public-safe builds.
   contact: process.env.SKIP_VIDEO === "1" ? {} : readJsonIf("src/data/contact.private.json"),
+  pressArchive: readJson("src/data/press-archive.json"),
+  pressDims: readJsonIf("src/data/press-archive.dims.private.json"),
 };
 
 /** Videos render only when their files exist locally (they are gitignored broadcaster footage); production also needs rights "cleared". */
@@ -23,6 +25,9 @@ export const visibleVideos = () =>
 /** Rights-sensitive photographs (slots named still-*): present only in local/private builds; production also needs STILLS_CLEARED=1. */
 export const stillsAllowed = () => process.env.SKIP_VIDEO !== "1" && (config.preview || process.env.STILLS_CLEARED === "1");
 export const hasStill = (slot) => stillsAllowed() && Boolean(data.images[slot]) && existsSync(path.join(root, "public/img", `${slot}-${data.images[slot].widths[0]}.webp`));
+/** Press-page scans (public/press/*, gitignored for rights): shown in preview when present; production needs PRESS_CLEARED=1. */
+export const pressArchiveAllowed = () => process.env.SKIP_VIDEO !== "1" && (config.preview || process.env.PRESS_CLEARED === "1");
+export const hasPressArchive = () => pressArchiveAllowed() && Object.keys(data.pressDims).length > 0;
 export const pressEntries = () => data.press.entries.filter((e) => e.display).slice().sort((a, b) => (b.sort || 0) - (a.sort || 0));
 
 export const esc = (s) =>
@@ -231,3 +236,86 @@ export function showCard({ id, logos, title, lead, extra = "" }) {
 }
 
 export const unscriptedLogos = () => data.metrics.programmes.unscripted.logos;
+
+/* ---------- "Featured in": publication titles only, as white marks where a clean logo exists ---------- */
+const FEATURED = [
+  "variety", "the-hollywood-reporter", "us-weekly", "ok", "life-and-style", "tv-guide", "los-angeles-confidential", "inside-weddings",
+  "genlux", "capitol-file", "infatuation", "944-magazine", "gladys", "beverly-hills-courier", "local-life", "the-costume-designer",
+  "pilates-style", "diamonds-and-stars", "sheknows", "stylelist", "youceleb", "mystyle", "examiner", "marriage-com", "poshglam",
+  "collegefashionista", "okmagazine-com", "toronto-sun",
+];
+const OFFSITE = {
+  "beverly-hills-courier": { name: "Beverly Hills Courier", url: "https://beverlyhillscourier.com/2024/11/12/the-stylists-shaping-beverly-hills" },
+  "local-life": { name: "LOCAL Life", url: "https://www.locallifesc.com/qa-celebrity-connection-anya-sarre/" },
+};
+export function featuredRoll() {
+  const byslug = Object.fromEntries(data.pressArchive.outlets.map((o) => [o.slug, o]));
+  const archive = hasPressArchive();
+  const items = FEATURED.map((slug) => {
+    const o = byslug[slug] || OFFSITE[slug];
+    if (!o) return "";
+    const logoFile = `img/logos/pub-${slug}.svg`;
+    const hasLogo = existsSync(path.join(root, "public", logoFile));
+    const label = hasLogo ? logoMark({ file: logoFile, alt: o.name, ...svgDims(logoFile), displayHeight: 40 }) : `<span class="roll__name">${esc(o.name)}</span>`;
+    const href = OFFSITE[slug]?.url || (archive && byslug[slug] ? `/media/#press-${slug}` : "");
+    const ext = OFFSITE[slug] ? ` rel="noopener noreferrer" target="_blank"` : "";
+    const sr = OFFSITE[slug] ? `<span class="sr-only"> (opens in a new tab)</span>` : "";
+    return `<li class="roll__item">${href ? `<a class="roll__link" href="${esc(href)}"${ext}>${label}${hasLogo ? "" : ""}${sr}</a>` : label}</li>`;
+  });
+  return `<ul class="roll" aria-label="Publications that have featured Anya">${items.join("")}</ul>`;
+}
+
+/* ---------- press archive: scans of Anya's press pages, grouped by publication, with a lightbox ---------- */
+const ARCHIVE_VISIBLE = 6;
+export function pressArchive() {
+  const dims = data.pressDims;
+  const outlets = data.pressArchive.outlets.filter((o) => o.items.some((i) => dims[i.file]));
+  const total = outlets.reduce((n, o) => n + o.items.filter((i) => dims[i.file]).length, 0);
+  const fig = (o, i) => {
+    const d = dims[i.file];
+    const cap = [i.type, i.title].filter(Boolean).join(" · ");
+    const text = `${o.name}${i.dateLabel ? `, ${i.dateLabel}` : ""}${cap ? `. ${cap}` : ""}`;
+    return `<li class="scan"><a class="scan__link" href="/press/${esc(i.file)}-full.webp" data-lightbox data-group="${o.kind === "online" ? "online" : esc(o.slug)}" data-caption="${esc(text)}" data-w="${d.fw}" data-h="${d.fh}">
+      <img src="/press/${esc(i.file)}-thumb.webp" width="${d.tw}" height="${d.th}" alt="Scan of ${esc(o.name)}${i.dateLabel ? `, ${esc(i.dateLabel)}` : ""}${i.title ? `: ${esc(i.title)}` : ""}" loading="lazy" decoding="async">
+      <span class="sr-only"> (opens a larger view)</span></a>
+      <p class="scan__cap">${i.dateLabel ? `<span>${esc(i.dateLabel)}</span>` : ""}${i.title ? ` ${esc(i.title)}` : ""}</p></li>`;
+  };
+  const block = (o) => {
+    const its = o.items.filter((i) => dims[i.file]);
+    const shown = its.slice(0, ARCHIVE_VISIBLE), rest = its.slice(ARCHIVE_VISIBLE);
+    return `<article class="outlet" id="press-${esc(o.slug)}" aria-labelledby="h-${esc(o.slug)}">
+    <header class="outlet__head"><h3 id="h-${esc(o.slug)}" class="outlet__name">${esc(o.name)}</h3><p class="outlet__count">${its.length} ${its.length === 1 ? "page" : "pages"}</p></header>
+    <div class="outlet__body"><ul class="scans">${shown.map((i) => fig(o, i)).join("")}</ul>
+    ${rest.length ? `<details class="outlet__more"><summary>Show ${rest.length} more ${o.name} pages</summary><ul class="scans">${rest.map((i) => fig(o, i)).join("")}</ul></details>` : ""}</div>
+  </article>`;
+  };
+  // Online features are one page each from many small sites, so they sit together in one wall, each captioned with its site name.
+  const onlineBlock = (os) => {
+    const figs = os.flatMap((o) => o.items.filter((i) => dims[i.file]).map((i, n) => ({ o, i, n })));
+    const li = ({ o, i, n }) => fig(o, i).replace('<li class="scan">', `<li class="scan"${n === 0 ? ` id="press-${esc(o.slug)}"` : ""}>`).replace('<p class="scan__cap">', `<p class="scan__cap"><b class="scan__site">${esc(o.name)}</b> `);
+    return `<article class="outlet" id="press-online" aria-labelledby="h-online">
+    <header class="outlet__head"><h3 id="h-online" class="outlet__name">Online features</h3><p class="outlet__count">${figs.length} pages from ${os.length} sites</p></header>
+    <div class="outlet__body"><ul class="scans">${figs.map(li).join("")}</ul></div>
+  </article>`;
+  };
+  const group = (kind, title) => {
+    const os = outlets.filter((o) => o.kind === kind);
+    if (!os.length) return "";
+    return `<div class="archive__group"><h3 class="archive__group-title">${title}</h3>${kind === "online" ? onlineBlock(os) : os.map(block).join("")}</div>`;
+  };
+  const idx = outlets.map((o) => `<li><a href="#press-${esc(o.slug)}">${esc(o.name)}</a></li>`).join("");
+  return `<section class="archive" id="press-archive" aria-labelledby="archive-title">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="kicker">Press archive</p>
+        <h2 id="archive-title" class="section-title">The clippings, <em>in full</em></h2>
+      </div>
+      <p class="section-sub">${total} pages from ${outlets.length} publications, scanned from Anya’s own press pages. Select any page to read it.</p>
+    </div>
+    <nav class="archive__index" aria-label="Jump to a publication"><ul>${idx}</ul></nav>
+    ${group("print", "In print")}
+    ${group("online", "Online")}
+  </div>
+</section>`;
+}

@@ -1,4 +1,4 @@
-import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoMark, photo, hasStill, showCard, unscriptedLogos, icon } from "../templates/components.mjs";
+import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoMark, photo, hasStill, showCard, unscriptedLogos, icon, pressArchive, hasPressArchive, featuredRoll } from "../templates/components.mjs";
 import { pageHero } from "./_shared.mjs";
 
 const { tv, press, metrics } = data;
@@ -135,6 +135,8 @@ ${
     ${pv("Print entries are read from page scans on Anya’s official Press page, so they link there rather than to the publishers. The Wall Street Journal was searched for and not found. Several more magazines and websites appear in the same archive but their pages were not read.", "pv-note--tight")}
   </div>
 </section>
+
+${hasPressArchive() ? pressArchive() : ""}
 
 <section class="shows" id="audience" aria-labelledby="shows-title">
   <div class="wrap">

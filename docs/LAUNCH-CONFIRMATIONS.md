@@ -31,6 +31,10 @@
 14. **Video rights and suitability.** The four KTLA clips are broadcaster footage; the archive README says Anya's permission does not clear KTLA/CBS rights. Get written clearance, confirm Anya appears in each clip, choose posters that show her, supply **captions and transcripts**, then set `"rights": "cleared"` per clip. Until then production hides them. Also decide whether to host video on Cloudflare (25 MB per-file limit) or a video platform.
 15. **Show logos** are used on the site owner's instruction, traced to **single-colour white marks** from the small rasters on Anya's old Watch Anya page (ET shows the older “ET HD” mark; Rachael Ray and VH1 are the roughest traces). Before launch, swap in current official artwork where the networks allow it, and confirm Anya wants Home & Family, VH1 and CBS 2 listed, since the archive gives only their logos (no role or date).
 
+## Press archive and logos
+12a. **Rights for the press-page scans.** Anya's old Press pages displayed them, but they are copyrighted magazine and web pages: confirm permission to republish (or reduce the archive to what the publishers allow), then set `PRESS_CLEARED=1` for production. Choose whether to keep "Gladys", "The Costume Designer" and other minor titles in "As featured in".
+12b. **Publication logos.** Only The Hollywood Reporter has a white mark; the rest show typeset names. Supply official logos (see `docs/LOGOS-NEEDED.md`).
+
 ## Audience figures
 14a. **Ask Anya for an Instagram performance report** (Insights: reach, impressions, Reels views, engagement, demographics, sponsored-post results) in the second email once she agrees to go ahead; see `docs/FOLLOW-UP-EMAIL.md`. The site shows no "not yet available" box any more, so these numbers are simply absent until she supplies them.
 15. Re-check Fohr's 280K and the four Reel views on launch day (they move). Prefer Anya's own **Instagram Insights / media kit** for followers, reach and demographics.

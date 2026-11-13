@@ -10,3 +10,5 @@ assets/private/
 public/img/still-*
 src/data/images.private.json
 src/data/contact.private.json
+public/press/
+src/data/press-archive.dims.private.json

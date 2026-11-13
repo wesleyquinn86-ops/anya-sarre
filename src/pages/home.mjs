@@ -1,4 +1,4 @@
-import { data, esc, button, photo, tvMarquee, mastheads, closingCta, wordmark, arrow, pv, pressEntries, visibleVideos, hasStill } from "../templates/components.mjs";
+import { data, esc, button, photo, tvMarquee, mastheads, closingCta, wordmark, arrow, pv, pressEntries, visibleVideos, hasStill, featuredRoll, hasPressArchive } from "../templates/components.mjs";
 import { config } from "../config.mjs";
 
 const m = data.images;
@@ -148,13 +148,13 @@ ${tvMarquee()}
   <div class="wrap">
     <div class="section-head section-head--split">
       <div>
-        <p class="kicker kicker--pink">In the press</p>
-        <h2 id="featured-title" class="section-title">Featured in</h2>
+        <p class="kicker kicker--pink">As featured in</p>
+        <h2 id="featured-title" class="section-title">Seen in print <em>and online</em></h2>
       </div>
-      <p class="section-sub">From Anya’s press archive. Each entry says what kind of coverage it is: a profile, a mention, expert advice or a promo.</p>
+      <p class="section-sub">Magazines, newspapers and websites that have featured, quoted or profiled Anya.</p>
     </div>
-    ${mastheads(press)}
-    ${pv("Typeset outlet names stand in for official mastheads, which could not be sourced. The older entries are page scans on Anya’s official Press page, mostly 2008–2011, so they are historical. The Wall Street Journal was searched for and not found. See docs/SOURCES.md.", "pv-note--dark")}
+    ${featuredRoll()}
+    ${hasPressArchive() ? `<div class="btn-row">${button("Browse the press archive", "/media/#press-archive", "solid")}</div>` : ""}
   </div>
 </section>
 

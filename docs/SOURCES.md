@@ -84,6 +84,15 @@ Entries link to the scans on Anya's official Press page (publisher URLs are not 
 
 **Mastheads:** authentic publisher masthead SVG/PNG files were not sourced; outlet names are typeset stand-ins.
 
+## Press archive (gallery on the Media page)
+
+All 105 readable scans from the archive's **Press** (62) and **Web Press** (44) folders are shown on `/media/#press-archive`, grouped by publication, with a keyboard-operable lightbox. **16 print publications** (Variety, The Hollywood Reporter, Us Weekly, OK!, Life & Style, TV Guide, Los Angeles Confidential, Inside Weddings, Genlux, Capitol File, Infatuation, 944 Magazine, Gladys, The Costume Designer, Pilates Style, Diamonds & Stars) and **20 online outlets**, plus a "More web features" group whose site names are not legible in the scans (kept in the gallery, left out of "As featured in"). Metadata is in `src/data/press-archive.json`.
+
+* **Names and dates** come from the archive's own file names (`image-index.csv`), which were read from the printed pages. **Headlines** are shown only for the eight I read off the scans; the rest show outlet and date only, because headlines derived from file names lost punctuation. Dates are the issue dates where legible, else a year or season.
+* **What the scans prove:** that Anya (or her work) appears on that page, not the kind of role. Only the scans I read are typed on the Media page's "In the press" list (profile, mention, expert advice, promotion). One scan could not be decoded and was left out (Fairweather Faces).
+* **"As featured in" (Home)** lists publication titles only, per the site owner's request. Each print or online title links to its archive section; Beverly Hills Courier and LOCAL Life link to their articles. Order is by prominence, not date. Not included: The Wall Street Journal (not found).
+* **Rights:** the scans are page images of copyrighted magazines. They live in `assets/private/press/` and `public/press/` (gitignored), ship only in the private zip, and a production build omits them unless `PRESS_CLEARED=1`. The 105-page archive is **not** in the public GitHub repo.
+
 ## Videos
 
 Four KTLA 5 clips from the archive's newest batch (`Live From The Emmys`, `Fashion Strikes: Live from the Oscars`, `Oscars Red Carpet Jewelry Trends`, `Shine Like a Star: Live from the Oscars`), compressed to H.264 (37 s–2:09, 17 MB total). The archive README says these are the best-quality clips and **dates them 2014–2017**; air dates are not recorded per clip. **I could not confirm from sampled frames that Anya is on screen in every clip** (the Emmys clip looks like a sponsored-giveaway segment). **They are broadcaster footage:** the archive README itself warns that Anya's permission does not clear KTLA/CBS rights. They are therefore **not in git** (the GitHub repo is public), have no captions or transcripts, and production hides them unless each is marked `"rights": "cleared"`. The other ~110 clips (old `.mov`s at 424×240, ET/Look For Less/Rachael Ray) are too small for the site.

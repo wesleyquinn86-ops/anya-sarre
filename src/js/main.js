@@ -110,6 +110,48 @@
     });
   });
 
+  /* ---------- Press archive lightbox: links work without JS (they open the full-size image) ---------- */
+  var scans = [].slice.call(document.querySelectorAll("a[data-lightbox]"));
+  if (scans.length && typeof HTMLDialogElement === "function") {
+    var dlg = document.createElement("dialog");
+    dlg.className = "lightbox";
+    dlg.setAttribute("aria-label", "Press page viewer");
+    dlg.innerHTML = '<div class="lightbox__inner"><div class="lightbox__stage"><img class="lightbox__img" alt=""></div><div class="lightbox__bar"><p class="lightbox__cap" aria-live="polite"></p><div class="lightbox__btns"><button type="button" class="lightbox__btn" data-prev aria-label="Previous page">←</button><button type="button" class="lightbox__btn" data-next aria-label="Next page">→</button><button type="button" class="lightbox__btn" data-close>Close</button></div></div></div>';
+    document.body.appendChild(dlg);
+    var limg = dlg.querySelector(".lightbox__img"), lcap = dlg.querySelector(".lightbox__cap");
+    var bprev = dlg.querySelector("[data-prev]"), bnext = dlg.querySelector("[data-next]"), opener = null, group = [], idx = 0;
+    var show = function (i) {
+      idx = i;
+      var a = group[i];
+      limg.src = a.href;
+      limg.alt = (a.querySelector("img") || {}).alt || "";
+      lcap.textContent = a.getAttribute("data-caption") + " (" + (i + 1) + " of " + group.length + ")";
+      bprev.disabled = i === 0;
+      bnext.disabled = i === group.length - 1;
+    };
+    scans.forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+        e.preventDefault();
+        opener = a;
+        var g = a.getAttribute("data-group");
+        group = scans.filter(function (x) { return x.getAttribute("data-group") === g; });
+        dlg.showModal();
+        show(group.indexOf(a));
+        dlg.querySelector("[data-close]").focus();
+      });
+    });
+    bprev.addEventListener("click", function () { if (idx > 0) show(idx - 1); });
+    bnext.addEventListener("click", function () { if (idx < group.length - 1) show(idx + 1); });
+    dlg.querySelector("[data-close]").addEventListener("click", function () { dlg.close(); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg || e.target.classList.contains("lightbox__inner") || e.target.classList.contains("lightbox__stage")) dlg.close(); });
+    dlg.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft" && idx > 0) { show(idx - 1); e.preventDefault(); }
+      if (e.key === "ArrowRight" && idx < group.length - 1) { show(idx + 1); e.preventDefault(); }
+    });
+    dlg.addEventListener("close", function () { limg.removeAttribute("src"); if (opener) opener.focus(); });
+  }
+
   /* ---------- Contact form: real states only ---------- */
   var form = document.getElementById("enquiry-form");
   if (form) {
