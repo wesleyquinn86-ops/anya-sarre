@@ -1,0 +1,62 @@
+{
+  "_note": "Only coverage with a located URL and an evidenced role is listed for display. Candidates in the brief with no evidence found are recorded in docs/SOURCES.md and are not shown.",
+  "entries": [
+    {
+      "id": "beverly-hills-courier-2024",
+      "outlet": "Beverly Hills Courier",
+      "title": "The Stylists Shaping Beverly Hills",
+      "type": "Feature",
+      "typeDetail": "Profiled among local stylists",
+      "date": "2024-11-12",
+      "dateLabel": "November 12, 2024",
+      "url": "https://beverlyhillscourier.com/2024/11/12/the-stylists-shaping-beverly-hills",
+      "mastheadStyle": "courier",
+      "display": true,
+      "evidence": "Located via search; page text not opened from the build environment. Summary read via search result only.",
+      "status": "url-found-content-not-opened"
+    },
+    {
+      "id": "local-life-sc",
+      "outlet": "LOCAL Life",
+      "title": "Q+A Celebrity Connection: Anya Sarre",
+      "type": "Interview",
+      "typeDetail": "Q&A",
+      "date": null,
+      "dateLabel": "Date to be confirmed",
+      "url": "https://www.locallifesc.com/qa-celebrity-connection-anya-sarre/",
+      "mastheadStyle": "locallife",
+      "display": true,
+      "evidence": "Located via search; undated in results.",
+      "status": "url-found-content-not-opened"
+    },
+    {
+      "id": "ella-mila-2016",
+      "outlet": "Ella+Mila",
+      "title": "A Mani With… Anya Sarre",
+      "type": "Brand feature",
+      "typeDetail": "Beauty-brand blog feature",
+      "date": "2016",
+      "dateLabel": "2016",
+      "url": "https://www.ellamila.com/blogs/in-the-news/113492612-a-mani-with-anya-sarre",
+      "mastheadStyle": "ellamila",
+      "display": true,
+      "evidence": "Located via search; the 2016 date and TV list come from the search summary of this page.",
+      "status": "url-found-content-not-opened"
+    },
+    {
+      "id": "ktla-segment",
+      "outlet": "KTLA 5",
+      "title": "Getting red carpet ready with celebrity stylist Anya Sarre",
+      "type": "Television segment",
+      "typeDetail": "On-air style expert",
+      "date": null,
+      "dateLabel": "Date to be confirmed",
+      "url": "https://digital-release.ktla.com/morning-news/getting-red-carpet-ready-with-celebrity-stylist-anya-sarre-sunday",
+      "mastheadStyle": "ktla",
+      "display": true,
+      "evidence": "Located via search. Not confirmed to contain an embeddable video, so no viewing action is offered.",
+      "status": "url-found-video-unconfirmed"
+    }
+  ],
+  "videos": []
+}

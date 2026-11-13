@@ -1,0 +1,27 @@
+{
+  "desktop": {
+    "width": 1774,
+    "height": 887,
+    "aspect": "2:1",
+    "objectPosition": "71% 46%",
+    "textSafeAreaPercent": {
+      "left": 4,
+      "right": 29,
+      "top": 20,
+      "bottom": 74
+    }
+  },
+  "mobile": {
+    "width": 1122,
+    "height": 1402,
+    "aspect": "4:5",
+    "objectPosition": "52% 49%",
+    "textSafeAreaPercent": {
+      "left": 7,
+      "right": 93,
+      "top": 4,
+      "bottom": 12
+    }
+  },
+  "proposedPink": "#F3A3BB"
+}

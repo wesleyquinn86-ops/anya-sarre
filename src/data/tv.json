@@ -1,0 +1,76 @@
+{
+  "_note": "Compiled from third-party sources because anyasarre.com could not be read from the build environment (see docs/SOURCES.md). Reconcile with Anya's official credit list before launch. Years are the year of the source, not the year of appearance.",
+  "credits": [
+    {
+      "id": "ktla",
+      "show": "KTLA 5",
+      "network": "Los Angeles",
+      "role": "Fashion & style expert; host of the special “Countdown to Gold: Getting Carpet Ready with Anya Sarre”",
+      "currency": "recurring",
+      "style": "a",
+      "sources": ["beverly-hills-courier-2024", "local-life-sc", "ktla-segment"],
+      "status": "corroborated-by-two-sources"
+    },
+    {
+      "id": "et",
+      "show": "Entertainment Tonight",
+      "network": "Syndicated",
+      "role": "Fashion & style guest",
+      "currency": "historical",
+      "style": "b",
+      "sources": ["ella-mila-2016"],
+      "status": "single-source-2016"
+    },
+    {
+      "id": "extra",
+      "show": "Extra",
+      "network": "Syndicated",
+      "role": "Fashion & style guest",
+      "currency": "historical",
+      "style": "c",
+      "sources": ["ella-mila-2016"],
+      "status": "single-source-2016"
+    },
+    {
+      "id": "insider",
+      "show": "The Insider",
+      "network": "Syndicated",
+      "role": "Fashion & style guest",
+      "currency": "historical",
+      "style": "a",
+      "sources": ["ella-mila-2016"],
+      "status": "single-source-2016"
+    },
+    {
+      "id": "rachael-ray",
+      "show": "The Rachael Ray Show",
+      "network": "Syndicated",
+      "role": "Fashion & style guest",
+      "currency": "historical",
+      "style": "b",
+      "sources": ["ella-mila-2016"],
+      "status": "single-source-2016"
+    },
+    {
+      "id": "style",
+      "show": "STYLE Network",
+      "network": "Cable",
+      "role": "Fashion & style guest",
+      "currency": "historical",
+      "style": "c",
+      "sources": ["ella-mila-2016"],
+      "status": "single-source-2016"
+    }
+  ],
+  "speaking": [
+    {
+      "id": "tedx-hilton-head-women",
+      "title": "TEDxHiltonHead Women",
+      "role": "Speaker",
+      "date": null,
+      "note": "Described as a career highlight in a LOCAL Life Q+A. Talk title and date to be confirmed.",
+      "sources": ["local-life-sc"],
+      "status": "single-source-undated"
+    }
+  ]
+}

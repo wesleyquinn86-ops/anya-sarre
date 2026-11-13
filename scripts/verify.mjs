@@ -1,0 +1,255 @@
+// Browser verification (Playwright + axe-core). Starts its own static servers; never contacts a real form endpoint.
+// Usage: npm run verify            (expects playwright to be resolvable; see NODE_PATH note in README)
+import { createRequire } from "node:module";
+import { spawn, execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+let playwright;
+for (const base of [root + "/", "/opt/node22/lib/node_modules/", process.env.PLAYWRIGHT_PATH ? process.env.PLAYWRIGHT_PATH + "/" : ""]) {
+  if (!base) continue;
+  try { playwright = createRequire(base)("playwright"); break; } catch { /* try next location */ }
+}
+if (!playwright) { console.error("playwright not found. Install it or set PLAYWRIGHT_PATH to its node_modules parent."); process.exit(2); }
+const { chromium } = playwright;
+const axeSource = readFileSync(path.join(root, "node_modules/axe-core/axe.min.js"), "utf8");
+
+const results = [];
+const note = (area, ok, detail = "") => { results.push({ area, ok, detail }); if (!ok) console.log(`  ✗ ${area} ${detail}`); };
+
+// ---- build the two variants -----------------------------------------------------------
+const run = (env) => execFileSync("node", ["scripts/build.mjs"], { cwd: root, env: { ...process.env, ...env }, stdio: "pipe" });
+run({ OUT_DIR: "dist" });
+const FORM = "https://forms.invalid/enquiry"; // .invalid never resolves; requests are intercepted anyway
+run({ OUT_DIR: "dist-test", FORM_ENDPOINT: FORM, CONTACT_EMAIL: "test@example.invalid" });
+const servers = [];
+const serve = (dist, port) => { const p = spawn("node", ["scripts/serve.mjs"], { cwd: root, env: { ...process.env, DIST: dist, PORT: String(port) }, stdio: "ignore" }); servers.push(p); };
+serve("dist", 4181); serve("dist-test", 4182);
+await new Promise((r) => setTimeout(r, 1200));
+const BASE = "http://localhost:4181", BASE_FORM = "http://localhost:4182";
+
+const PAGES = ["/", "/about/", "/styling/", "/media/", "/partnerships/", "/contact/"];
+const WIDTHS = [320, 390, 768, 1024, 1440];
+const browser = await chromium.launch();
+
+async function openPage(ctx, url) {
+  const page = await ctx.newPage();
+  const errors = [], failed = [];
+  page.on("console", (m) => { if (m.type() === "error" || m.type() === "warning") errors.push(`${m.type()}: ${m.text()}`); });
+  page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
+  page.on("requestfailed", (r) => failed.push(`${r.url()} ${r.failure()?.errorText}`));
+  page.on("response", (r) => { if (r.status() >= 400) failed.push(`${r.url()} ${r.status()}`); });
+  await page.goto(url, { waitUntil: "networkidle" });
+  return { page, errors, failed };
+}
+
+// ---- 1. every page x width: console, overflow, images, nav -----------------------------
+for (const w of WIDTHS) {
+  const ctx = await browser.newContext({ viewport: { width: w, height: w < 600 ? 844 : 900 }, reducedMotion: "no-preference" });
+  for (const p of PAGES) {
+    const { page, errors, failed } = await openPage(ctx, BASE + p);
+    const tag = `${p} @${w}`;
+    await page.evaluate(() => document.querySelectorAll("img[loading=lazy]").forEach((i) => (i.loading = "eager")));
+    await page.waitForTimeout(250);
+    note(`console clean ${tag}`, errors.length === 0, errors.join(" | "));
+    note(`no failed requests ${tag}`, failed.length === 0, failed.join(" | "));
+    const over = await page.evaluate(() => {
+      const vw = document.documentElement.clientWidth;
+      const bad = [...document.querySelectorAll("body *")].filter((el) => { const r = el.getBoundingClientRect(); return r.width && (r.right > vw + 1 || r.left < -1) && !el.closest(".marquee__viewport, .table-wrap, .sr-only, .hp, .badge, .photo"); }).slice(0, 3).map((e) => e.tagName + "." + e.className);
+      return { sw: document.documentElement.scrollWidth, vw, bad };
+    });
+    note(`no horizontal overflow ${tag}`, over.sw <= over.vw && over.bad.length === 0, JSON.stringify(over));
+    const imgs = await page.evaluate(() => [...document.images].filter((i) => !i.complete || i.naturalWidth === 0).map((i) => i.currentSrc || i.src));
+    note(`images decode ${tag}`, imgs.length === 0, imgs.join(","));
+    // navigation visibility
+    const nav = await page.evaluate(() => {
+      const t = document.querySelector("[data-nav-toggle]"), n = document.querySelector("[data-nav]");
+      const vis = (e) => e && getComputedStyle(e).display !== "none" && e.getBoundingClientRect().width > 0;
+      return { toggle: vis(t), nav: vis(n) };
+    });
+    if (w >= 1200) note(`desktop nav inline ${tag}`, nav.nav && !nav.toggle, JSON.stringify(nav));
+    else {
+      note(`mobile nav collapsed + toggle ${tag}`, nav.toggle && !nav.nav, JSON.stringify(nav));
+      await page.click("[data-nav-toggle]");
+      const open = await page.evaluate(() => ({ exp: document.querySelector("[data-nav-toggle]").getAttribute("aria-expanded"), links: [...document.querySelectorAll("[data-nav] a")].filter((a) => a.getBoundingClientRect().height > 0).length }));
+      note(`mobile nav opens ${tag}`, open.exp === "true" && open.links >= 7, JSON.stringify(open));
+      await page.keyboard.press("Escape");
+      const closed = await page.getAttribute("[data-nav-toggle]", "aria-expanded");
+      note(`mobile nav closes on Escape ${tag}`, closed === "false");
+    }
+    await page.close();
+  }
+  await ctx.close();
+}
+
+// ---- 2. accessibility (axe) at phone + desktop --------------------------------------------
+for (const w of [390, 1440]) {
+  const ctx = await browser.newContext({ viewport: { width: w, height: 900 } });
+  for (const p of PAGES) {
+    const { page } = await openPage(ctx, BASE + p);
+    await page.addScriptTag({ content: axeSource });
+    const res = await page.evaluate(() => axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"] }, resultTypes: ["violations"] }));
+    const v = res.violations.map((x) => `${x.id}(${x.nodes.length}): ${x.nodes.slice(0, 2).map((n) => n.target.join(" ")).join("; ")}`);
+    note(`axe ${p} @${w}`, v.length === 0, v.join(" || "));
+    await page.close();
+  }
+  await ctx.close();
+}
+
+// ---- 3. hero art direction + wordmark safe area ----------------------------------------------
+for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, true], [390, true]]) {
+  const ctx = await browser.newContext({ viewport: { width: w, height: 900 } });
+  const { page } = await openPage(ctx, BASE + "/");
+  const m = await page.evaluate(() => {
+    const img = document.querySelector(".hero__photo"), stage = document.querySelector(".hero__stage"), h1 = document.querySelector(".hero__name");
+    const s = stage.getBoundingClientRect(), r = h1.getBoundingClientRect(), i = img.getBoundingClientRect();
+    return { src: img.currentSrc, ratio: i.width / i.height, l: (r.left - s.left) / s.width, rt: (r.right - s.left) / s.width, t: (r.top - s.top) / s.height, b: (r.bottom - s.top) / s.height, pos: getComputedStyle(img).objectPosition };
+  });
+  note(`hero uses ${mobile ? "mobile" : "desktop"} master @${w}`, mobile ? /hero-mobile/.test(m.src) : /hero-desktop/.test(m.src), m.src);
+  note(`hero ratio ${mobile ? "4:5" : "2:1"} @${w}`, mobile ? Math.abs(m.ratio - 0.8) < 0.02 : Math.abs(m.ratio - 2) < 0.02, String(m.ratio));
+  if (mobile) note(`wordmark in top band, inside 7–93% @${w}`, m.l >= 0.065 && m.rt <= 0.935 && m.t >= 0.03 && m.b <= 0.2, JSON.stringify(m));
+  else note(`wordmark inside left safe area (clear of face) @${w}`, m.l >= 0.035 && m.rt <= 0.34 && m.t >= 0.18 && m.b <= 0.78, JSON.stringify(m));
+  await page.close(); await ctx.close();
+}
+
+// ---- 4. marquee behaviour --------------------------------------------------------------------------
+{
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
+  const { page } = await openPage(ctx, BASE + "/");
+  const state = () => page.evaluate(() => { const t = document.querySelector("[data-marquee-track]"); const cs = getComputedStyle(t); return { name: cs.animationName, play: cs.animationPlayState, label: document.querySelector("[data-marquee-label]").textContent, st: document.querySelector("[data-marquee]").dataset.state }; });
+  let s = await state();
+  note("marquee animates by default", s.name === "marquee" && s.play === "running", JSON.stringify(s));
+  note("marquee sits directly after hero", await page.evaluate(() => document.querySelector(".hero").nextElementSibling === document.querySelector("[data-marquee]")));
+  note("marquee has visible pause control", await page.isVisible("[data-marquee-toggle]"));
+  await page.click("[data-marquee-toggle]"); // mouse is hovering the control here
+  s = await state(); note("pause button pauses (while hovered)", s.play === "paused" && s.label === "Resume", JSON.stringify(s));
+  await page.mouse.move(5, 5); await page.waitForTimeout(100);
+  s = await state(); note("manual pause persists after pointer leaves", s.play === "paused" && s.label === "Resume", JSON.stringify(s));
+  await page.click("[data-marquee-toggle]"); s = await state();
+  note("resume button resumes even while hovered", s.play === "running" && s.label === "Pause", JSON.stringify(s));
+  await page.mouse.move(5, 5); await page.waitForTimeout(100);
+  await page.hover(".marquee__viewport"); await page.waitForTimeout(100);
+  s = await state(); note("hover pauses", s.play === "paused", JSON.stringify(s));
+  await page.mouse.move(5, 5); await page.waitForTimeout(100);
+  s = await state(); note("leaving hover resumes", s.play === "running", JSON.stringify(s));
+  // keyboard focus pauses
+  await page.focus("[data-marquee-toggle]");
+  await page.keyboard.press("Shift+Tab"); await page.keyboard.press("Tab"); await page.waitForTimeout(100);
+  s = await state(); note("keyboard focus pauses", s.play === "paused", JSON.stringify(s));
+  await page.keyboard.press("Enter"); await page.waitForTimeout(100);
+  s = await state(); note("Enter on focused Pause keeps it paused (label Resume)", s.play === "paused" && s.label === "Resume", JSON.stringify(s));
+  await page.keyboard.press("Enter"); await page.waitForTimeout(100);
+  s = await state(); note("Enter on focused Resume runs despite focus", s.play === "running" && s.label === "Pause", JSON.stringify(s));
+  // no duplicate announcements / keyboard stops
+  const a11y = await page.evaluate(() => {
+    const copy = document.querySelector(".marquee__list--copy");
+    const track = document.querySelector("[data-marquee-track]");
+    const focusables = track.querySelectorAll("a, button, input, select, textarea, [tabindex]");
+    return { copyHidden: copy.getAttribute("aria-hidden") === "true", focusables: focusables.length, readable: [...document.querySelectorAll(".marquee__list:not([aria-hidden]) li")].length, total: document.querySelectorAll(".marquee li").length };
+  });
+  note("duplicate list hidden from assistive tech", a11y.copyHidden && a11y.readable * 2 === a11y.total, JSON.stringify(a11y));
+  note("no keyboard stops inside scrolling track", a11y.focusables === 0, String(a11y.focusables));
+  // loop is seamless: two equal lists
+  const eq = await page.evaluate(() => { const [a, b] = document.querySelectorAll(".marquee__list"); return Math.abs(a.getBoundingClientRect().width - b.getBoundingClientRect().width) < 1; });
+  note("loop lists are equal width (seamless)", eq);
+  await page.close(); await ctx.close();
+
+  const rctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: "reduce" });
+  const rp = await openPage(rctx, BASE + "/");
+  const rm = await rp.page.evaluate(() => {
+    const t = document.querySelector("[data-marquee-track]"), cs = getComputedStyle(t);
+    const copy = getComputedStyle(document.querySelector(".marquee__list--copy")).display;
+    const list = document.querySelector(".marquee__list");
+    return { anim: cs.animationName, copy, btn: getComputedStyle(document.querySelector("[data-marquee-toggle]")).display, wrap: getComputedStyle(list).flexWrap, items: [...list.querySelectorAll("li")].every((li) => li.getBoundingClientRect().right <= innerWidth), overflow: document.documentElement.scrollWidth <= innerWidth };
+  });
+  note("reduced motion: static, wrapped, readable list", rm.anim === "none" && rm.copy === "none" && rm.btn === "none" && rm.wrap === "wrap" && rm.items && rm.overflow, JSON.stringify(rm));
+  await rp.page.close(); await rctx.close();
+
+  const nctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
+  const np = await nctx.newPage(); await np.goto(BASE + "/", { waitUntil: "load" });
+  const nj = await np.evaluate(() => null).catch(() => null);
+  const njState = await np.$eval("[data-marquee-track]", (t) => getComputedStyle(t).animationName);
+  note("no-JS: marquee does not animate (no uncontrollable motion)", njState === "none", njState);
+  await np.close(); await nctx.close();
+}
+
+// ---- 5. keyboard: skip link + visible focus ----------------------------------------------------------------
+{
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const { page } = await openPage(ctx, BASE + "/");
+  await page.keyboard.press("Tab"); await page.waitForTimeout(300);
+  const first = await page.evaluate(() => { const a = document.activeElement, r = a.getBoundingClientRect(); return { cls: a.className, top: r.top, w: r.width }; });
+  note("first Tab stop is a visible skip link", /skip-link/.test(first.cls) && first.top >= 0, JSON.stringify(first));
+  await page.keyboard.press("Enter");
+  note("skip link moves focus to main", await page.evaluate(() => document.activeElement.id === "main"));
+  let bad = 0, stops = 0;
+  await page.focus("body");
+  for (let i = 0; i < 40; i++) {
+    await page.keyboard.press("Tab"); stops++;
+    const vis = await page.evaluate(() => { const a = document.activeElement; if (!a || a === document.body) return true; const cs = getComputedStyle(a); return cs.outlineStyle !== "none" && parseFloat(cs.outlineWidth) >= 2; });
+    if (!vis) bad++;
+  }
+  note("focus indicator visible on first 40 tab stops", bad === 0, `${bad}/${stops} without outline`);
+  await page.close(); await ctx.close();
+}
+
+// ---- 6. contact form: truthful states (endpoint mocked in-browser) ------------------------------------------------
+{
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 900 } });
+  const off = await openPage(await browser.newContext({ viewport: { width: 1440, height: 900 } }), BASE + "/contact/");
+  note("no endpoint: no form rendered, no fake submit", (await off.page.$("form")) === null && (await off.page.textContent("#enquiry")).includes("isn’t connected"));
+  await off.page.close();
+
+  const { page } = await openPage(ctx, BASE_FORM + "/contact/?route=brands");
+  let posts = 0, mode = "ok", lastBody = null;
+  await page.route(FORM, async (route) => {
+    const req = route.request();
+    if (req.method() === "OPTIONS") return route.fulfill({ status: 204, headers: { "access-control-allow-origin": "*", "access-control-allow-headers": "*", "access-control-allow-methods": "POST" } });
+    posts++; lastBody = req.postData();
+    if (mode === "abort") return route.abort("failed");
+    return route.fulfill({ status: mode === "ok" ? 200 : 500, headers: { "access-control-allow-origin": "*", "content-type": "application/json" }, body: "{}" });
+  });
+  note("route preselected from ?route=brands", await page.isChecked('input[name="route"][value="brands"]'));
+  await page.click("[data-submit]");
+  note("empty submit: errors shown, nothing sent", posts === 0 && (await page.locator(".field__err:visible").count()) === 3 && (await page.getAttribute("#f-name", "aria-invalid")) === "true");
+  await page.fill("#f-name", "Test Person"); await page.fill("#f-email", "not-an-email"); await page.fill("#f-msg", "Short");
+  await page.click("[data-submit]");
+  note("invalid email/short message blocked", posts === 0 && (await page.textContent('[data-err="email"]')).includes("valid"));
+  await page.fill("#f-email", "tester@example.invalid"); await page.fill("#f-msg", "This is an automated test message with enough characters.");
+  mode = "500"; await page.click("[data-submit]"); await page.waitForTimeout(300);
+  let live = await page.textContent("[data-form-status]");
+  note("server error shows error state, form data kept", posts === 1 && /not sent/i.test(live) && (await page.inputValue("#f-name")) === "Test Person", live);
+  note("error state offers fallback email", /test@example\.invalid/.test(live));
+  mode = "abort"; await page.click("[data-submit]"); await page.waitForTimeout(300);
+  live = await page.textContent("[data-form-status]"); note("network failure shows error state", posts === 2 && /not sent/i.test(live), live);
+  mode = "ok"; await page.click("[data-submit]"); await page.waitForTimeout(300);
+  live = await page.textContent("[data-form-status]");
+  const body = JSON.parse(lastBody || "{}");
+  note("success only after 2xx response", posts === 3 && /has been sent/i.test(live) && body.route === "brands" && body.email === "tester@example.invalid" && !("company_website" in body), live + " " + lastBody);
+  note("form resets after success", (await page.inputValue("#f-name")) === "");
+  await page.evaluate(() => { document.querySelector('[name="company_website"]').value = "spam"; });
+  await page.fill("#f-name", "Bot"); await page.fill("#f-email", "bot@example.invalid"); await page.fill("#f-msg", "x".repeat(30));
+  const before = posts; await page.click("[data-submit]"); await page.waitForTimeout(200);
+  note("honeypot submission dropped", posts === before);
+  await page.close(); await ctx.close();
+}
+
+// ---- 7. external links + a11y of names -------------------------------------------------------------------------------
+{
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  for (const p of PAGES) {
+    const { page } = await openPage(ctx, BASE + p);
+    const bad = await page.evaluate(() => [...document.querySelectorAll("a[target=_blank]")].filter((a) => !/noopener/.test(a.rel) || !/opens in a new tab/i.test(a.textContent)).map((a) => a.href));
+    note(`external links safe + announced ${p}`, bad.length === 0, bad.join(","));
+    await page.close();
+  }
+  await ctx.close();
+}
+
+await browser.close();
+servers.forEach((s) => s.kill());
+const failed = results.filter((r) => !r.ok);
+console.log(`\n${results.length - failed.length}/${results.length} browser checks passed`);
+if (failed.length) { console.log("Failures:"); failed.forEach((f) => console.log(` - ${f.area}: ${f.detail}`)); process.exit(1); }

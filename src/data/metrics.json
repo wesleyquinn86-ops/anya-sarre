@@ -1,0 +1,47 @@
+{
+  "_note": "Every displayed number lives here with label, source, measurement period and status. Different measures are never summed or averaged. Third-party social figures are provisional.",
+  "checked": "2026-11-13",
+  "followers": {
+    "id": "ig-followers",
+    "kind": "followers",
+    "label": "Instagram followers",
+    "value": 280000,
+    "display": "280K",
+    "platform": "Instagram @anyasarre",
+    "source": { "name": "Fohr creator profile", "url": "https://app.fohr.co/creators/anyasarre" },
+    "period": "As listed on 13 November 2026",
+    "status": "provisional",
+    "note": "Fohr lists 280.0K. Third-party figure; confirm with Instagram Insights."
+  },
+  "reels": [
+    { "id": "reel-2026-11-10", "kind": "post_views", "label": "Instagram Reel", "date": "2026-11-10", "dateLabel": "Nov 10, 2026", "views": 16629, "display": "16.6K", "url": "https://www.instagram.com/reel/DfjRr5BB1zL/", "topic": "Beauty product Reel" },
+    { "id": "reel-2026-11-02", "kind": "post_views", "label": "Instagram Reel", "date": "2026-11-02", "dateLabel": "Nov 2, 2026", "views": 56031, "display": "56.0K", "url": "https://www.instagram.com/reel/DfPlHFlO-ox/", "topic": "Lifestyle Reel" },
+    { "id": "reel-2026-10-15", "kind": "post_views", "label": "Instagram Reel", "date": "2026-10-15", "dateLabel": "Oct 15, 2026", "views": 16640, "display": "16.6K", "url": "https://www.instagram.com/reel/Dehm9JBPEqi/", "topic": "Lifestyle Reel" },
+    { "id": "reel-2026-10-10", "kind": "post_views", "label": "Instagram Reel", "date": "2026-10-10", "dateLabel": "Oct 10, 2026", "views": 17510, "display": "17.5K", "url": "https://www.instagram.com/reel/DeUpRGYtSt2/", "topic": "Lifestyle Reel" }
+  ],
+  "reelsMeta": {
+    "source": { "name": "Fohr creator profile", "url": "https://app.fohr.co/creators/anyasarre" },
+    "period": "Reels published October 10 – November 10, 2026, as listed on 13 November 2026",
+    "status": "provisional",
+    "discrepancy": "The research brief recorded roughly 16,600–42,100 views. The live Fohr page on 13 Nov 2026 lists 16,629–56,031 for Reels in that window; the displayed figures follow the live page. 42.1K does not appear in the page. Other Reels on the page (June 2 and July 20, 2026) show 33,006 and 37,732 views."
+  },
+  "programme": {
+    "id": "et-programme",
+    "kind": "programme_context",
+    "label": "Entertainment Tonight, programme-wide",
+    "value": 2850000,
+    "display": "2.85M",
+    "unit": "viewers",
+    "source": { "name": "Paramount Press Express release", "url": "https://www.paramountpressexpress.com/cbs-media-ventures/shows/entertainment-tonight/releases/?view=111239-entertainment-tonights-oscar-coverage-grows-year-to-year-across-the-country" },
+    "period": "Release dated March 14, 2025",
+    "status": "verified-as-reported-by-publisher",
+    "note": "The release states ET “continues to lead the entertainment newsmagazine genre with 2.85 million viewers”. The sentence does not give a measurement basis. This is the whole programme, not an audience for any segment featuring Anya."
+  },
+  "recordedNotDisplayed": [
+    { "label": "Fohr “viewership” 6.0% and “engagement” 12.9%", "reason": "Definitions and method are not stated on the page, so they could be misread." },
+    { "label": "Fohr audience demographics (gender, country, city, interests)", "reason": "Present in the page payload, but could not confirm they belong to Anya rather than the similar-creators list, so they are not displayed." },
+    { "label": "Fohr reach figures", "reason": "Listed as 0 for every post; treated as unavailable." },
+    { "label": "Segment ratings for any Anya television appearance", "reason": "Not found in any source." },
+    { "label": "Unique reach / impressions, campaign results", "reason": "Not publicly available; Anya's own Insights or media kit required." }
+  ]
+}
