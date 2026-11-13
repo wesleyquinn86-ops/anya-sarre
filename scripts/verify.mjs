@@ -30,7 +30,7 @@ serve("dist", 4181); serve("dist-test", 4182);
 await new Promise((r) => setTimeout(r, 1200));
 const BASE = "http://localhost:4181", BASE_FORM = "http://localhost:4182";
 
-const PAGES = ["/", "/meet-anya/", "/styling/", "/media/", "/partnerships/", "/contact/"];
+const PAGES = ["/", "/meet-anya/", "/styling/", "/media/", "/partnerships/", "/talk-to-anya/"];
 const WIDTHS = [320, 390, 768, 1024, 1440];
 const browser = await chromium.launch();
 
@@ -198,11 +198,20 @@ for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, tru
 // ---- 6. contact form: truthful states (endpoint mocked in-browser) ------------------------------------------------
 {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 900 } });
-  const off = await openPage(await browser.newContext({ viewport: { width: 1440, height: 900 } }), BASE + "/contact/");
-  note("no endpoint: no form rendered, no fake submit; verified email and text links offered", (await off.page.$("form")) === null && (await off.page.locator('.form-off a[href^="mailto:"]').count()) === 1 && (await off.page.locator('.form-off a[href^="sms:"]').count()) === 1);
+  // Preview with no endpoint: the form exists and validates, but must never claim to send anything.
+  const off = await openPage(await browser.newContext({ viewport: { width: 1440, height: 900 } }), BASE + "/talk-to-anya/");
+  const reqs = []; off.page.on("request", (r) => { if (!r.url().startsWith(BASE)) reqs.push(r.url()); });
+  note("not-live form is present and no number or sms link anywhere on the page", (await off.page.locator("form#enquiry-form").count()) === 1 && (await off.page.locator('a[href^="sms:"], a[href^="tel:"]').count()) === 0 && !/\b310[.\s-]?867/.test(await off.page.content()));
+  await off.page.click("[data-submit]");
+  note("not-live form: empty submit shows validation errors", (await off.page.locator(".field__err:visible").count()) === 3);
+  await off.page.fill("#f-name", "Test Person"); await off.page.fill("#f-email", "tester@example.invalid"); await off.page.fill("#f-msg", "This is an automated test message with enough characters.");
+  await off.page.click("[data-submit]"); await off.page.waitForTimeout(250);
+  const nl = await off.page.textContent("[data-form-status]");
+  note("not-live form: says it isn't live, never claims success, sends nothing", /isn.t live/i.test(nl) && !/thank you|your enquiry has been sent/i.test(nl) && reqs.length === 0, nl + " | " + reqs.join(","));
+  note("not-live form: offers a pre-filled mailto", (await off.page.locator('[data-form-status] a[href^="mailto:"]').count()) === 1);
   await off.page.close();
 
-  const { page } = await openPage(ctx, BASE_FORM + "/contact/?route=brands");
+  const { page } = await openPage(ctx, BASE_FORM + "/talk-to-anya/?route=brands");
   let posts = 0, mode = "ok", lastBody = null;
   await page.route(FORM, async (route) => {
     const req = route.request();

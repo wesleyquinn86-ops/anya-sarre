@@ -42,7 +42,7 @@ await writeFile(path.join(dist, "assets/styles.css"), css);
 await writeFile(path.join(dist, "assets/main.js"), js);
 const ctx = { cssHash: hash(css), jsHash: hash(js) };
 
-const pageNames = ["home", "meet-anya", "styling", "media", "partnerships", "contact"];
+const pageNames = ["home", "meet-anya", "styling", "media", "partnerships", "talk-to-anya"];
 const pages = [];
 for (const name of pageNames) {
   const mod = await import(pathToFileURL(path.join(root, `src/pages/${name}.mjs`)));
@@ -61,7 +61,7 @@ const notFound = {
   active: "",
   title: "Page not found",
   description: "That page could not be found. Head back to the homepage or get in touch with Anya Sarre.",
-  body: `<section class="page-hero"><div class="wrap"><p class="kicker kicker--pink">404</p><h1 class="page-hero__title">That look <em>didn’t make the cut.</em></h1><p class="page-hero__lead">The page you’re after doesn’t exist. Try the <a href="/">homepage</a> or <a href="/contact/">get in touch</a>.</p></div></section>`,
+  body: `<section class="page-hero"><div class="wrap"><p class="kicker kicker--pink">404</p><h1 class="page-hero__title">That look <em>didn’t make the cut.</em></h1><p class="page-hero__lead">The page you’re after doesn’t exist. Try the <a href="/">homepage</a> or <a href="/talk-to-anya/">talk to Anya</a>.</p></div></section>`,
 };
 await writeFile(path.join(dist, "404.html"), layout({ page: notFound, ctx }));
 

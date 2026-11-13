@@ -3,7 +3,7 @@
 > **Status: unsolicited proposal, not published.**
 > Prepared by **Built By Wes** (Wesley Quinn) as an independent concept for cold outreach to Anya Sarre. It is **not commissioned, not approved or endorsed by Anya Sarre, and not live.** The preview is `noindex`. Publishing is a separate instruction.
 
-Six-page editorial site: **Home, Meet Anya, Styling, Media & Press, Brand Partnerships, Contact** (`/about/` redirects to `/meet-anya/` via `public/_redirects`). Static HTML/CSS/JS with no runtime framework, built for Cloudflare Pages.
+Six-page editorial site: **Home, Meet Anya, Styling, Media & Press, Brand Partnerships, Talk to Anya** (`/about/` → `/meet-anya/` and `/contact/` → `/talk-to-anya/` via `public/_redirects`). Static HTML/CSS/JS with no runtime framework, built for Cloudflare Pages.
 
 ## Quick start
 

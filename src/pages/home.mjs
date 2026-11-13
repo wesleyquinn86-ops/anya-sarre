@@ -36,7 +36,7 @@ export default {
       <p class="hero__lead">Hollywood polish. <em>Human warmth.</em></p>
       <div class="hero__aside">
         <p>Anya styles for award season, explains fashion on air, and makes great clothes feel doable. Producers, brands and private clients are all welcome.</p>
-        <div class="btn-row">${button("Work with Anya", "/contact/", "solid")}<a class="btn btn--ghost" href="${hasVideo ? "/media/#videos" : "#work"}"><span>${hasVideo ? "Watch Anya on air" : "See the work"}</span>${arrow}</a></div>
+        <div class="btn-row">${button("Work with Anya", "/talk-to-anya/", "solid")}<a class="btn btn--ghost" href="${hasVideo ? "/media/#videos" : "#work"}"><span>${hasVideo ? "Watch Anya on air" : "See the work"}</span>${arrow}</a></div>
       </div>
     </div>
   </div>

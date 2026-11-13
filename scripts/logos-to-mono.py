@@ -25,7 +25,10 @@ def smooth(x, lo, hi):
 
 def load(path):
     im = Image.open(path).convert("RGBA")
-    im = im.resize((im.width * SCALE, im.height * SCALE), Image.LANCZOS)
+    global SCALE
+    SCALE = 1 if im.width >= 1200 else 6  # already high-resolution sources are traced as they are
+    if SCALE > 1:
+        im = im.resize((im.width * SCALE, im.height * SCALE), Image.LANCZOS)
     a = np.asarray(im).astype(np.float32) / 255.0
     rgb, alpha = a[..., :3], a[..., 3]
     return rgb, alpha
@@ -57,6 +60,10 @@ def rule_dark_on_light(rgb, alpha):  # black type on a transparent / white groun
 
 def rule_non_white(rgb, alpha):  # coloured/black mark on white, white details knocked out
     return smooth(non_white(rgb, alpha), 0.12, 0.25)
+
+
+def rule_alpha(rgb, alpha):  # white-on-transparent artwork: the alpha channel is the shape
+    return smooth(alpha, 0.4, 0.6)
 
 
 def rule_glossy_on_white(rgb, alpha):  # glossy mark with a faint reflection/streaks on white: ignore the haze
@@ -94,7 +101,7 @@ LOGOS = {
     "ktla-5": ("ktla-5.png", rule_light_on_dark(0.55, 0.75)),
     "entertainment-tonight": ("entertainment-tonight.png", rule_alpha_bright(0.5, 0.7)),
     "the-insider": ("the-insider.png", rule_dark_on_light),
-    "the-rachael-ray-show": ("the-rachael-ray-show.jpg", rule_glossy_on_white),
+    "the-rachael-ray-show": ("the-rachael-ray-show.png", rule_alpha),
     "home-and-family": ("home-and-family.png", rule_saturated),
     "vh1": ("vh1.png", rule_non_white),
     "cbs-2": ("cbs-2.png", rule_silhouette_knockout(0.92, 0.98)),
@@ -114,7 +121,7 @@ def trace(ink):
     pad = SCALE * 2
     y0, y1, x0, x1 = max(ys.min() - pad, 0), min(ys.max() + pad, bm.shape[0]), max(xs.min() - pad, 0), min(xs.max() + pad, bm.shape[1])
     bm = bm[y0:y1, x0:x1]
-    path = potrace.Bitmap(~bm).trace(turdsize=SCALE * SCALE, alphamax=1.0, opticurve=True, opttolerance=0.5)
+    path = potrace.Bitmap(~bm).trace(turdsize=max(4, SCALE * SCALE), alphamax=1.0, opticurve=True, opttolerance=0.5)
     d = []
     for curve in path:
         sp = curve.start_point

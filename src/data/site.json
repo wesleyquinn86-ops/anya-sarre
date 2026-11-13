@@ -36,14 +36,14 @@
       "href": "/partnerships/"
     },
     {
-      "id": "contact",
-      "label": "Contact",
-      "href": "/contact/"
+      "id": "talk",
+      "label": "Talk to Anya",
+      "href": "/talk-to-anya/"
     }
   ],
   "cta": {
     "label": "Work with Anya",
-    "href": "/contact/"
+    "href": "/talk-to-anya/"
   },
   "education": [
     {

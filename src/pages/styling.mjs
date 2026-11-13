@@ -118,7 +118,7 @@ ${pageHero({
       <li>How you want to feel when you walk in</li>
       <li>Anything you already love, or never want to see again</li>
     </ul>
-    <div class="btn-row">${button("Enquire about styling", "/contact/?route=styling#enquiry", "dark")}</div>
+    <div class="btn-row">${button("Enquire about styling", "/talk-to-anya/?route=styling#enquiry", "dark")}</div>
   </div>
 </section>
 

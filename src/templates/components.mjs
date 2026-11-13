@@ -181,8 +181,8 @@ export function closingCta({ kicker = "Ready when you are", title = "Let’s mak
       <p class="closing__text">${esc(text)}</p>
     </div>
     <div class="closing__actions">
-      ${button("Work with Anya", "/contact/", "dark")}
-      ${routeLinks ? `<ul class="closing__routes"><li><a href="/contact/?route=media#enquiry">Media &amp; hosting</a></li><li><a href="/contact/?route=brands#enquiry">Brand partnerships</a></li><li><a href="/contact/?route=styling#enquiry">Personal styling</a></li></ul>` : ""}
+      ${button("Work with Anya", "/talk-to-anya/", "dark")}
+      ${routeLinks ? `<ul class="closing__routes"><li><a href="/talk-to-anya/?route=media#enquiry">Media &amp; hosting</a></li><li><a href="/talk-to-anya/?route=brands#enquiry">Brand partnerships</a></li><li><a href="/talk-to-anya/?route=styling#enquiry">Personal styling</a></li></ul>` : ""}
     </div>
   </div>
 </section>`;

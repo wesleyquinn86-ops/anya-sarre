@@ -24,7 +24,7 @@
 
 ## Press, logos and video
 11b. **LA Unscripted claims.** The 115+ / 265 / 132 / 80% figures come from Anya's deck (Nexstar footprint, optional national add-on); confirm they are current and that she is happy to publish them. Get a current KTLA/Nexstar ratings figure if a "most-watched" claim is wanted. Confirm the hosts, schedule and "Style Smart" branding, and whether the logos of KTLA 5, LA Unscripted, Style Smart and Nexstar may be shown (they are traced from the deck).
-11c. **Contact details.** The email address and text number from Anya's deck live in the gitignored `src/data/contact.private.json` (the repo is public). Confirm she wants both published on the site, then ship them via that file or `CONTACT_EMAIL`. A production build needs one of those or `FORM_ENDPOINT`. No form endpoint is configured.
+11c. **Contact.** The email address from Anya's deck lives in the gitignored `src/data/contact.private.json` (the repo is public); confirm she wants it published. **Her phone number is private and is not used.** The Talk to Anya form is built but not live: to switch it on, set `FORM_ENDPOINT` to a service that accepts JSON POSTs from the production origin (with spam protection), then retest.
 11a. **Photo rights for the two real photographs** (KTLA 5 Morning News frame; TEDx stage still): who owns them, whether KTLA/TEDx permit this use, and any credit line. They are gitignored and ship only in the private zip; set `STILLS_CLEARED=1` for a production build once cleared.
 12. Official **masthead SVG/PNG** assets from publisher-controlled sources (names are typeset until then), and publisher URLs where the coverage exists online. The archive scans are not publisher links.
 13. Read the remaining archive pages (OK! ~25 pages, Life & Style, Inside Weddings, Genlux, Gladys, Capitol File, Infatuation, TV Guide, web press) before adding more entries or changing types.
@@ -32,6 +32,7 @@
 15. **Show logos** are used on the site owner's instruction, traced to **single-colour white marks** from the small rasters on Anya's old Watch Anya page (ET shows the older “ET HD” mark; Rachael Ray and VH1 are the roughest traces). Before launch, swap in current official artwork where the networks allow it, and confirm Anya wants Home & Family, VH1 and CBS 2 listed, since the archive gives only their logos (no role or date).
 
 ## Audience figures
+14a. **Ask Anya for an Instagram performance report** (Insights: reach, impressions, Reels views, engagement, demographics, sponsored-post results) in the second email once she agrees to go ahead; see `docs/FOLLOW-UP-EMAIL.md`. The site shows no "not yet available" box any more, so these numbers are simply absent until she supplies them.
 15. Re-check Fohr's 280K and the four Reel views on launch day (they move). Prefer Anya's own **Instagram Insights / media kit** for followers, reach and demographics.
 16. Decide whether to keep the Entertainment Tonight programme-context figure, and confirm the date and nature of Anya's ET appearances (a 2016 source is the only evidence).
 

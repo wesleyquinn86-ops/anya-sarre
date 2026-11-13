@@ -154,6 +154,15 @@
       e.preventDefault();
       if (form.elements.company_website && form.elements.company_website.value) return; // honeypot: silently drop
       if (!validate()) { say("error", "Please fix the highlighted fields and try again."); return; }
+      if (!endpoint) {
+        // Preview: the form is built but not connected. Nothing is sent; offer a pre-filled email instead.
+        var f = new FormData(form), sel = form.querySelector('input[name="route"]:checked');
+        var body = "Name: " + (f.get("name") || "") + "\nEmail: " + (f.get("email") || "") + "\nCompany or show: " + (f.get("organisation") || "") + "\n\n" + (f.get("message") || "");
+        var link = fallback ? " <a href=\"mailto:" + fallback + "?subject=" + encodeURIComponent(sel ? sel.getAttribute("data-subject") : "Enquiry") + "&body=" + encodeURIComponent(body) + "\">Open a pre-filled email to " + fallback + "</a>." : "";
+        say("info", "<strong>This form isn’t live yet, so nothing has been sent.</strong> You can email Anya directly instead." + link);
+        statusBox.focus();
+        return;
+      }
       var payload = {};
       new FormData(form).forEach(function (v, k) { if (k !== "company_website") payload[k] = v; });
       submit.disabled = true;

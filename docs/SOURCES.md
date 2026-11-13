@@ -113,7 +113,7 @@ A five-page 2026 partner deck from Anya (a seasonal sponsored-segment package on
 | "Style Smart" segments on KTLA 5's LA Unscripted; KTLA 5 primetime broadcast, KTLA.com livestream, worldwide viewing on the KTLA 5 app, HD segment copy, social amplification, premium production | Pages 1–2, 4 | Anya's own deck |
 | **115+ markets, 265 stations, 132 U.S. DMAs, 80% of U.S. TV households** (Nexstar Media Group footprint; national distribution is an optional add-on) | Page 5 | Anya's deck, citing Nexstar; **not independently verified**; shown as the network footprint, never as an audience for one segment |
 | "We partner with you to create your segment": brand chooses segment type, representative and key points | Page 4 | Anya's deck |
-| **Contact: an email address and a text number** | Footer of pages 2–5 | **Verified from Anya's own deck**; resolves the earlier "no verified contact" gap. The values are deliberately **not in git** (public repo): they live in the gitignored `src/data/contact.private.json` |
+| **Contact: an email address** | Footer of pages 2–5 | **Verified from Anya's own deck.** Stored in the gitignored `src/data/contact.private.json`, not in git (public repo). **Her phone number is private: it is not stored or shown anywhere** |
 
 **LA Unscripted itself:** KTLA's weeknight lifestyle show, launched September 2020, covering local spots, restaurants and style, streamed on KTLA.com and the KTLA 5 app ([Nexstar, "KTLA to launch LA Unscripted"](https://nexstar.tv/ktla-to-launch-la-unscripted-fall-2020); search-read). Current schedule and hosts were not confirmed.
 
@@ -123,4 +123,4 @@ A five-page 2026 partner deck from Anya (a seasonal sponsored-segment package on
 
 ## Contact
 
-An email address and a text number, both from Anya's partner deck, stored in the gitignored `src/data/contact.private.json` (ignored by public-safe builds); `CONTACT_EMAIL` overrides. A fresh checkout therefore builds without them until that file or `CONTACT_EMAIL` is provided. No form endpoint exists yet.
+An email address from Anya's partner deck, stored in the gitignored `src/data/contact.private.json` (ignored by public-safe builds); `CONTACT_EMAIL` overrides. **No phone number is used.** The Talk to Anya page has a form that is built but **not live**: with no `FORM_ENDPOINT` it validates, then states that nothing was sent and offers a pre-filled email. A production build without an endpoint shows an email panel instead of the form.

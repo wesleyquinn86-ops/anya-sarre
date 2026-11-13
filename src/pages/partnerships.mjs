@@ -1,15 +1,57 @@
-import { data, esc, closingCta, pv, stat, arrow, photo, icon, button, markFromFile, unscriptedLogos } from "../templates/components.mjs";
+import { data, esc, closingCta, pv, stat, arrow, photo, icon, button, markFromFile, unscriptedLogos, hasStill } from "../templates/components.mjs";
 import { pageHero } from "./_shared.mjs";
 
 const { metrics } = data;
 const fmt = new Intl.NumberFormat("en-US");
 
+const reasons = [
+  { icon: "tv", title: "A trusted face on air", text: "KTLA 5 style expert, with Style Smart segments on LA Unscripted and a record on Entertainment Tonight and The Insider." },
+  { icon: "star", title: "Red-carpet credibility", text: "Dresses clients for the Oscars, Golden Globes and Emmys, so a brand borrows real award-season authority." },
+  { icon: "tag", title: "Brand-side know-how", text: "Has worked inside brands as Chief Accessories Stylist for ShoeDazzle and Fashion Director for YouCeleb." },
+  { icon: "mic", title: "Comfortable with a room", text: "TEDx speaker who has hosted events for Diane von Furstenberg. She can front a launch, not just post about it." },
+];
+
+const stills = (slot) => hasStill(slot);
 const formats = [
-  { t: "Social content", d: "Reels and posts in Anya’s voice, for fashion, beauty and lifestyle products.", e: "Instagram @anyasarre", tone: "pink" },
-  { t: "Television &amp; hosting integrations", d: "A recognizable on-air style expert for segments, specials and sponsored moments.", e: "KTLA 5 · Countdown to Gold", tone: "lilac" },
-  { t: "Events &amp; appearances", d: "Hosting, panels and talks with a stylist who can hold a room.", e: "TEDxHiltonHead Women", tone: "mint" },
-  { t: "Styling collaborations", d: "Wardrobe and red-carpet styling tied to a launch, campaign or event.", e: "Styled By Anya Inc.", tone: "butter" },
-  { t: "Expert commentary &amp; features", d: "Quotes, Q&amp;As and trend perspective for editorial and brand storytelling.", e: "LOCAL Life · Beverly Hills Courier", tone: "peach" },
+  {
+    icon: "chat", tone: "pink", title: "Social content",
+    pitch: "Reels and posts that sound like Anya, not like an ad.",
+    get: "Product-led Reels, styling tips and shopping edits for fashion, beauty and lifestyle brands.",
+    proof: "Instagram @anyasarre",
+    img: { img: "support-partnerships-makeup-beauty", ratio: "16 / 10", pos: "50% 45%", alt: "Rose makeup compact, powder brush, lipstick and neutral eyeshadow in soft sunlight.", label: "Illustrative still life" },
+  },
+  {
+    icon: "tv", tone: "lilac", title: "Television & hosting",
+    pitch: "Your product, explained by a face Los Angeles already trusts.",
+    get: "Sponsored segments, specials and on-air integrations, including Style Smart on KTLA 5’s LA Unscripted.",
+    proof: "KTLA 5 · LA Unscripted · Countdown to Gold",
+    img: stills("still-ktla-morning-news")
+      ? { img: "still-ktla-morning-news", ratio: "16 / 10", pos: "52% 28%", alt: "Anya Sarre on the KTLA 5 Morning News set, smiling in a sequined top and crystal earrings." }
+      : { img: "support-media-television-hosting", ratio: "16 / 10", pos: "50% 55%", alt: "Broadcast microphone resting on a rose folio in a softly lit studio.", label: "Illustrative still life" },
+  },
+  {
+    icon: "mic", tone: "blush", title: "Events & appearances",
+    pitch: "A host who can hold a room and fill a feed.",
+    get: "Hosting, panels, talks and in-store or launch appearances.",
+    proof: "TEDx speaker · hosted events for Diane von Furstenberg",
+    img: stills("still-tedx-stage")
+      ? { img: "still-tedx-stage", ratio: "16 / 10", pos: "72% 40%", alt: "Anya Sarre speaking on a TEDx stage in a black top and gold pleated skirt, with large red TEDx letters behind her." }
+      : null,
+  },
+  {
+    icon: "hanger", tone: "peach", title: "Styling collaborations",
+    pitch: "Put the product on the carpet.",
+    get: "Wardrobe and red-carpet styling tied to a launch, a campaign or an event, with accessories a specialty.",
+    proof: "Styled By Anya Inc. · ShoeDazzle accessories",
+    img: { img: "support-styling-evening-accessories", ratio: "16 / 10", pos: "50% 50%", alt: "Blush evening clutch, satin sandals and silver earrings with lilac silk.", label: "Illustrative still life" },
+  },
+  {
+    icon: "pen", tone: "lilac", title: "Expert commentary & features",
+    pitch: "Trend talk that editors and audiences quote.",
+    get: "Quotes, Q&As and trend perspective for editorial and brand storytelling.",
+    proof: "Variety · Life & Style · OK! · Us Weekly",
+    img: { img: "support-partnerships-fragrance-skincare", ratio: "16 / 10", pos: "50% 45%", alt: "Clear perfume bottle and ivory skincare jar beside a lilac glass dish.", label: "Illustrative still life" },
+  },
 ];
 
 export default {
@@ -34,7 +76,7 @@ ${pageHero({
       <h2 id="unscripted-title" class="section-title">Style Smart on <em>LA Unscripted</em></h2>
       <p class="unscripted__lead">Put your brand in front of Los Angeles on KTLA 5, presented the way only Anya can. Style Smart segments air on KTLA 5’s LA Unscripted, and can travel to markets across the country.</p>
       <p>We partner with you to create your segment. You choose the segment type, whether to feature a brand representative, and the key products, points and offers to highlight.</p>
-      <div class="btn-row">${button("Enquire about a feature", "/contact/?route=brands#enquiry", "solid")}</div>
+      <div class="btn-row">${button("Enquire about a feature", "/talk-to-anya/?route=brands#enquiry", "solid")}</div>
     </div>
     <div class="unscripted__side">
       <p class="unscripted__eyebrow">Optional national reach</p>
@@ -55,17 +97,44 @@ ${pageHero({
   </div>
 </section>
 
+<section class="why" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="kicker">Why Anya</p>
+        <h2 id="why-title" class="section-title">Four reasons brands <em>book her</em></h2>
+      </div>
+      <p class="section-sub">Television credibility, red-carpet access, brand experience and stage presence in one person.</p>
+    </div>
+    <ul class="why__grid">
+      ${reasons.map((r) => `<li class="why__item"><span class="why__icon">${icon(r.icon)}</span><h3>${esc(r.title)}</h3><p>${esc(r.text)}</p></li>`).join("")}
+    </ul>
+  </div>
+</section>
+
 <section class="formats" aria-labelledby="formats-title">
   <div class="wrap">
     <div class="section-head section-head--split">
       <div>
         <p class="kicker">Ways to collaborate</p>
-        <h2 id="formats-title" class="section-title">Five formats, <em>one voice</em></h2>
+        <h2 id="formats-title" class="section-title">Five ways to work <em>with Anya</em></h2>
       </div>
-      <p class="section-sub">Each format points to public work it builds on.</p>
+      <p class="section-sub">Pick one, or combine them into a campaign. Each is built on work she has already done in public.</p>
     </div>
     <ul class="formats__grid">
-      ${formats.map((f, i) => `<li class="format format--${f.tone}"><p class="format__n" aria-hidden="true">0${i + 1}</p><h3>${f.t}</h3><p>${f.d}</p><p class="format__e">Builds on: ${f.e}</p></li>`).join("")}
+      ${formats
+        .map(
+          (f) => `<li class="format format--${f.tone}${f.img ? "" : " format--noimg"}">
+        ${f.img ? `<div class="format__media">${photo({ ...f.img, sizes: "(min-width: 900px) 30vw, 94vw", cls: "format__photo" })}<span class="format__badge">${icon(f.icon)}</span></div>` : `<div class="format__media format__media--icon"><span class="format__badge format__badge--big">${icon(f.icon)}</span></div>`}
+        <div class="format__body">
+          <h3>${esc(f.title)}</h3>
+          <p class="format__pitch">${esc(f.pitch)}</p>
+          <p class="format__get"><strong>You get</strong> ${esc(f.get)}</p>
+          <p class="format__e"><strong>Built on</strong> ${esc(f.proof)}</p>
+        </div>
+      </li>`
+        )
+        .join("")}
     </ul>
     ${pv("Formats are proposals drawn from Anya’s public work, not a confirmed rate card. No past clients, prices or campaign results are shown because none were verified.", "pv-note--tight")}
   </div>
@@ -87,26 +156,12 @@ ${pageHero({
     ${pv("Both titles come from Anya’s bio; the archive shows the work (a jewelry collection, weekly columns) but not the titles. Confirm titles, dates and whether the roles are current.", "pv-note--tight")}
   </div>
 </section>
-
-<section class="categories" aria-labelledby="categories-title">
-  <div class="wrap categories__grid">
-    <div class="categories__text">
-      <p class="kicker">Where it fits</p>
-      <h2 id="categories-title" class="section-title">Beauty, fashion &amp; <em>lifestyle</em></h2>
-      <p>Beauty, skincare and fashion are where Anya’s public work already lives: on-air beauty and red-carpet segments, Reels, and styling. A collaboration can sit in any of those lanes.</p>
-      <p class="categories__cap">These are illustrative still lifes of the kinds of products a collaboration could cover. They are not real or sponsored products.</p>
-    </div>
-    ${photo({ img: "support-partnerships-makeup-beauty", ratio: "1 / 1", pos: "50% 50%", scale: 1, alt: "Rose makeup compact, powder brush, lipstick and neutral eyeshadow in soft sunlight.", sizes: "(min-width: 900px) 28vw, 90vw", cls: "categories__photo", label: "Illustrative still life" })}
-    ${photo({ img: "support-partnerships-fragrance-skincare", ratio: "4 / 5", pos: "50% 50%", scale: 1, alt: "Clear perfume bottle and ivory skincare jar beside a lilac glass dish.", sizes: "(min-width: 900px) 24vw, 90vw", cls: "categories__photo categories__photo--tall", label: "Illustrative still life" })}
-  </div>
-</section>
-
 <section class="audience" id="audience" aria-labelledby="audience-title">
   <div class="wrap">
     <div class="section-head section-head--split">
       <div>
         <p class="kicker kicker--pink">Audience, sourced</p>
-        <h2 id="audience-title" class="section-title">Four different numbers, <em>kept apart</em></h2>
+        <h2 id="audience-title" class="section-title">Three different numbers, <em>kept apart</em></h2>
       </div>
       <p class="section-sub">Followers, single-post views and programme audiences measure different things, so they are never added together.</p>
     </div>
@@ -140,18 +195,6 @@ ${pageHero({
       <article class="audience__cell audience__cell--context" aria-labelledby="aud-context">
         <h3 id="aud-context" class="audience__label">3 · Programme context</h3>
         ${stat({ ...metrics.programme })}
-        <p class="context__caveat"><strong>Not Anya’s audience.</strong> It describes a whole television programme. It is shown because Entertainment Tonight appears among Anya’s television credits, with the date of that credit still to be confirmed.</p>
-      </article>
-
-      <article class="audience__cell audience__cell--missing" aria-labelledby="aud-missing">
-        <h3 id="aud-missing" class="audience__label">4 · Not yet available</h3>
-        <ul class="missing">
-          <li>Ratings for any individual television segment</li>
-          <li>Verified unique reach and impressions</li>
-          <li>Audience demographics confirmed as Anya’s own</li>
-          <li>Campaign results</li>
-        </ul>
-        <p class="audience__lead">A current media kit with Instagram Insights is the right source. Request it through the enquiry form.</p>
       </article>
     </div>
   </div>
