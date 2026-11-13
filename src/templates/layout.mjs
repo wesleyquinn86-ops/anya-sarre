@@ -50,7 +50,7 @@ function footer() {
   return `<footer class="site-footer">
   <div class="wrap">
     <div class="site-footer__top">
-      <a class="site-footer__brand" href="/" aria-label="Anya Sarre — home">${wordmark("stacked")}</a>
+      <a class="site-footer__brand" href="/" aria-label="Anya Sarre — home">${wordmark("inline")}</a>
       <p class="site-footer__line">${esc(site.tagline)}<br>${esc(site.location)}</p>
       <nav aria-label="Footer"><ul class="site-footer__nav">${nav}</ul></nav>
       <ul class="site-footer__social"><li><a href="${esc(site.instagram.url)}" rel="noopener noreferrer" target="_blank">Instagram ${esc(site.instagram.handle)}<span class="sr-only"> (opens in a new tab)</span></a></li></ul>

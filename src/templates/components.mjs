@@ -33,7 +33,8 @@ export const pv = (text, cls = "") =>
 const wordmarkCache = {};
 export function wordmark(kind = "inline", cls = "") {
   if (!wordmarkCache[kind]) {
-    const svg = readFileSync(path.join(root, `assets/brand/wordmark-study-${kind}.svg`), "utf8");
+    // Supplied logo files (assets/brand/anya-sarre-primary-light.svg is the recolourable master).
+    const svg = readFileSync(path.join(root, "assets/brand/anya-sarre-primary-light.svg"), "utf8").replace(/<title>[\s\S]*?<\/title>/, "");
     const viewBox = svg.match(/viewBox="([^"]+)"/)[1];
     const inner = svg.replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
     wordmarkCache[kind] = { viewBox, inner };

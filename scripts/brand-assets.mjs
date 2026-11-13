@@ -10,8 +10,8 @@ const PINK = "#F3A3BB";
 const INK = "#0B0B0C";
 
 // Favicon: pink disc with the dark monogram "A" glyph taken from the supplied wordmark study.
-const stacked = await readFile(path.join(root, "assets/brand/wordmark-study-stacked.svg"), "utf8");
-const firstPath = stacked.match(/<path[^>]*transform="translate\(0,0\)"[^>]*d="([^"]+)"/)[1];
+const stacked = await readFile(path.join(root, "assets/brand/anya-sarre-primary-light.svg"), "utf8");
+const firstPath = stacked.match(/<path[^>]*d="([^"]+)"/)[1];
 const fav = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="${INK}"/><g transform="translate(14 49) scale(0.0475 -0.0475)" fill="${PINK}"><path d="${firstPath}"/></g></svg>`;
 await writeFile(path.join(root, "public/favicon.svg"), fav);
 await sharp(Buffer.from(fav)).resize(32, 32).png().toFile(path.join(root, "public/favicon-32.png"));
@@ -24,14 +24,14 @@ const top = Math.round((hero.info.height - H) * 0.5); // 600 tall -> keep full f
 let base = sharp(hero.data);
 if (hero.info.height < H) base = sharp(path.join(root, "assets/source/anya-sarre-hero-desktop.png")).resize({ width: W, height: H, fit: "cover", position: "right" });
 else base = base.extract({ left: 0, top, width: W, height: H });
-const wm = await readFile(path.join(root, "assets/brand/wordmark-study-stacked.svg"), "utf8");
+const wm = (await readFile(path.join(root, "assets/brand/anya-sarre-primary-light.svg"), "utf8")).replace(/fill="#[0-9A-Fa-f]{6}"/, `fill="${PINK}"`);
 const vb = wm.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
 const ratio = Number(vb[2]) / Number(vb[1]);
-const wmW = 330;
-const wmSvg = Buffer.from(wm.replace("<svg ", `<svg width="${wmW}" height="${Math.round(wmW * ratio)}" `));
+const wmW = 300;
+const wmSvg = Buffer.from(wm.replace(/ width="[^"]*" height="[^"]*"/, "").replace("<svg ", `<svg width="${wmW}" height="${Math.round(wmW * ratio)}" `));
 const wmPng = await sharp(wmSvg).png().toBuffer();
 await base
-  .composite([{ input: wmPng, left: 48, top: Math.round((H - wmW * ratio) / 2) }])
+  .composite([{ input: wmPng, left: 56, top: Math.round((H - wmW * ratio) / 2) }])
   .png({ compressionLevel: 9 })
   .toFile(path.join(root, "public/og.png"));
 console.log("brand assets written");

@@ -23,7 +23,7 @@ npm run verify       # browser checks (needs Playwright, see below)
 | --- | --- |
 | Dark monochrome hero, desktop 2:1 and dedicated mobile 4:5 | Home hero (art-directed `<picture>`, switches at 767px), plus CSS-only crops on every inner page |
 | Proposed pink `#F3A3BB`, cream `#F6F1EE`, dark `#0B0B0C` | Colour tokens in `src/css/styles.css` |
-| Wordmark vector studies (inline + stacked) | Header and footer wordmarks, favicon, social image. The hero name is live text in a matching Didone (Bodoni Moda) in the pack's safe area |
+| Wordmark vector studies (superseded) and the later five supplied logo SVGs | Header/footer wordmark, favicon and social image use the supplied logo SVGs. The hero name is still live uppercase Bodoni Moda (earlier study direction), to be re-cut to the new lettering |
 | Focal points and safe areas (`assets/brand/crop-settings.json`) | Hero `object-position` and wordmark placement, asserted by `npm run verify` |
 
 Photographs are never edited, recoloured or stretched; cropping is CSS (`object-position` + scale). See [`docs/ASSETS.md`](docs/ASSETS.md) for the inventory and what is still missing.

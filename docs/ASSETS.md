@@ -22,7 +22,7 @@ The pack states the **scene around Anya was extended/recomposed with AI** and th
 
 | Needed | Status | Temporary treatment |
 | --- | --- | --- |
-| Approved logo and variations | Only wordmark studies supplied | Studies used as the wordmark |
+| Approved logo and variations | **Received later (13 Nov, five SVGs):** `anya-sarre-primary-{dark,light}.svg`, `anya-sarre-compact-{dark,light,pink}.svg` in `assets/brand/`. Mixed-case “Anya Sarre”, plain paths, fills `#291C2A` dark, `#ED7BA5` pink, `#FFF8F2` light. Now used for the header and footer wordmark (recoloured via `currentColor`), favicon glyph and social image. **Not yet applied:** the large hero name is still live uppercase Bodoni Moda from the earlier study direction and **no longer matches** this lettering; the site palette still uses the earlier proposed pink `#F3A3BB`/dark `#0B0B0C` rather than `#ED7BA5`/`#291C2A`/`#FFF8F2`. Waiting on the guidelines and the fourth colour before re-toning. No stacked version was supplied, so a stacked hero lockup would need to be cut from the supplied paths or supplied |
 | Brand guide and typography guidance | Only three hex values and crop notes | **Bodoni Moda** (display, matches the Didone wordmark) + **DM Sans** (body), both SIL OFL, self-hosted in `public/fonts/` |
 | Supporting editorial graphics | None supplied | CSS shapes (rounded blocks, arch crop, hard shadows, rotating “Styled By Anya Inc.” badge, sparkles) |
 | Additional photography (work, TV stills, red-carpet) | None supplied. Note: the chat message displayed light-background and studio variants of the hero, but only the dark desktop and mobile files were in the zip | Inner pages reuse CSS crops of the two supplied masters (different regions/scales) |
