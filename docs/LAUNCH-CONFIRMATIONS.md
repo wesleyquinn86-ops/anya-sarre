@@ -9,6 +9,7 @@
 4. Whether Styled By Anya Inc. branding and the name “Styled By Anya” may be used as shown.
 
 ## Facts to verify with Anya
+4a. **The supplied bio** is used as written. Confirm against Anya the claims the archive does not support: the **ShoeDazzle (Chief Accessories Stylist) and YouCeleb (Fashion Director) titles**, the **“Best Fashion Stylist for TV” POSHGLAM award** (and its year), **FIDM teaching and USC guest lectures**, that she has **written for Us Weekly and OK!**, the DVF events, and that she is **currently** on **Entertainment Tonight and Extra**. **Extra** has no logo yet, so it is in the Media list as text and not in the logo marquee: supply an official mark, or approve fetching one.
 5. **What is current.** Her credits are evidenced mostly to 2008–2017 (old official-site archive). Only KTLA 5 is evidenced as recent. Confirm current shows, roles and clients, and whether the historical credits should stay in the marquee.
 6. The **current official bio, awards and qualifications**. The live site could not be read; “L.A.'s Best Personal Stylist” and similar awards are deliberately omitted.
 7. Date/title of the **TEDxHiltonHead Women** talk and the **Countdown to Gold** broadcast.
@@ -24,7 +25,7 @@
 12. Official **masthead SVG/PNG** assets from publisher-controlled sources (names are typeset until then), and publisher URLs where the coverage exists online. The archive scans are not publisher links.
 13. Read the remaining archive pages (OK! ~25 pages, Life & Style, Inside Weddings, Genlux, Gladys, Capitol File, Infatuation, TV Guide, web press) before adding more entries or changing types.
 14. **Video rights and suitability.** The four KTLA clips are broadcaster footage; the archive README says Anya's permission does not clear KTLA/CBS rights. Get written clearance, confirm Anya appears in each clip, choose posters that show her, supply **captions and transcripts**, then set `"rights": "cleared"` per clip. Until then production hides them. Also decide whether to host video on Cloudflare (25 MB per-file limit) or a video platform.
-15. **Show logos** are used on the site owner's instruction, from the small rasters on Anya's old Watch Anya page (ET shows the older “ET HD” mark). Before launch, swap in current official artwork where the networks allow it, and confirm Anya wants Home & Family, VH1 and CBS 2 listed, since the archive gives only their logos (no role or date).
+15. **Show logos** are used on the site owner's instruction, traced to **single-colour white marks** from the small rasters on Anya's old Watch Anya page (ET shows the older “ET HD” mark; Rachael Ray and VH1 are the roughest traces). Before launch, swap in current official artwork where the networks allow it, and confirm Anya wants Home & Family, VH1 and CBS 2 listed, since the archive gives only their logos (no role or date).
 
 ## Audience figures
 15. Re-check Fohr's 280K and the four Reel views on launch day (they move). Prefer Anya's own **Instagram Insights / media kit** for followers, reach and demographics.

@@ -173,5 +173,65 @@
       480,
       647
     ]
+  },
+  "support-media-oscars-award-season": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      480,
+      720,
+      960,
+      1122
+    ]
+  },
+  "support-media-television-hosting": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      480,
+      720,
+      960,
+      1254
+    ]
+  },
+  "support-partnerships-fragrance-skincare": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      480,
+      720,
+      960,
+      1122
+    ]
+  },
+  "support-partnerships-makeup-beauty": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      480,
+      720,
+      960,
+      1254
+    ]
+  },
+  "support-styling-evening-accessories": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      480,
+      720,
+      960,
+      1254
+    ]
+  },
+  "support-styling-wardrobe-edit": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      480,
+      720,
+      960,
+      1122
+    ]
   }
 }

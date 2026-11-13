@@ -1,4 +1,4 @@
-import { data, esc, closingCta, pv, stat, arrow } from "../templates/components.mjs";
+import { data, esc, closingCta, pv, stat, arrow, photo } from "../templates/components.mjs";
 import { pageHero } from "./_shared.mjs";
 
 const { metrics } = data;
@@ -39,6 +39,36 @@ ${pageHero({
       ${formats.map((f, i) => `<li class="format format--${f.tone}"><p class="format__n" aria-hidden="true">0${i + 1}</p><h3>${f.t}</h3><p>${f.d}</p><p class="format__e">Builds on: ${f.e}</p></li>`).join("")}
     </ul>
     ${pv("Formats are proposals drawn from Anya’s public work, not a confirmed rate card. No past clients, prices or campaign results are shown because none were verified.", "pv-note--tight")}
+  </div>
+</section>
+
+<section class="roles" aria-labelledby="roles-title">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="kicker">Brand experience</p>
+        <h2 id="roles-title" class="section-title">Roles on <em>the brand side</em></h2>
+      </div>
+      <p class="section-sub">Anya has worked inside brands as well as alongside them, according to her bio.</p>
+    </div>
+    <ul class="roles__list">
+      <li><h3>ShoeDazzle</h3><p class="roles__title">Chief Accessories Stylist</p><p class="roles__src">Anya’s bio · archive: “Must Haves by Anya Sarre Jewelry for ShoeDazzle” and an Entertainment Tonight segment on the brand (c. 2011)</p></li>
+      <li><h3>YouCeleb</h3><p class="roles__title">Fashion Director</p><p class="roles__src">Anya’s bio · archive: her “Makeover Monday” columns on YouCeleb.com (2011)</p></li>
+    </ul>
+    ${pv("Both titles come from Anya’s bio; the archive shows the work (a jewelry collection, weekly columns) but not the titles. Confirm titles, dates and whether the roles are current.", "pv-note--tight")}
+  </div>
+</section>
+
+<section class="categories" aria-labelledby="categories-title">
+  <div class="wrap categories__grid">
+    <div class="categories__text">
+      <p class="kicker">Where it fits</p>
+      <h2 id="categories-title" class="section-title">Beauty, fashion &amp; <em>lifestyle</em></h2>
+      <p>Beauty, skincare and fashion are where Anya’s public work already lives: on-air beauty and red-carpet segments, Reels, and styling. A collaboration can sit in any of those lanes.</p>
+      <p class="categories__cap">These are illustrative still lifes of the kinds of products a collaboration could cover. They are not real or sponsored products.</p>
+    </div>
+    ${photo({ img: "support-partnerships-makeup-beauty", ratio: "1 / 1", pos: "50% 50%", scale: 1, alt: "Rose makeup compact, powder brush, lipstick and neutral eyeshadow in soft sunlight.", sizes: "(min-width: 900px) 28vw, 90vw", cls: "categories__photo", label: "Illustrative still life" })}
+    ${photo({ img: "support-partnerships-fragrance-skincare", ratio: "4 / 5", pos: "50% 50%", scale: 1, alt: "Clear perfume bottle and ivory skincare jar beside a lilac glass dish.", sizes: "(min-width: 900px) 24vw, 90vw", cls: "categories__photo categories__photo--tall", label: "Illustrative still life" })}
   </div>
 </section>
 

@@ -11,6 +11,7 @@ export const data = {
   press: readJson("src/data/press.json"),
   metrics: readJson("src/data/metrics.json"),
   images: readJson("src/data/images.json"),
+  bio: readJson("src/data/bio.json"),
 };
 
 /** Videos render only when their files exist locally (they are gitignored broadcaster footage); production also needs rights "cleared". */
@@ -68,7 +69,7 @@ function srcset(slot, ext) {
  * Cropping is CSS-only (object-position + scale) so the supplied compositions are never altered.
  */
 export function photo({ img, ratio = "4 / 5", pos = "50% 50%", scale = 1, alt = "", sizes = "100vw", cls = "", priority = false, label = "" }) {
-  const slot = `hero-${img}`;
+  const slot = img.startsWith("support-") ? img : `hero-${img}`;
   const m = data.images[slot];
   if (!m) throw new Error(`Unknown image slot: ${slot}`);
   const mid = m.widths.includes(1280) ? 1280 : m.widths[m.widths.length - 1];
@@ -94,16 +95,19 @@ export function stat({ display, unit = "", label, source, period, status, note =
 }
 
 /* ---------- television marquee ---------- */
-export function logoPlate(logo, { alt = true, cls = "" } = {}) {
-  return `<span class="tv__plate tv__plate--${logo.plate} ${cls}"><img class="tv__logo" src="/${esc(logo.file)}" width="${logo.width}" height="${logo.height}" alt="${alt ? esc(logo.alt) : ""}" style="--logo-h:${logo.displayHeight}px" decoding="async"></span>`;
+/** Single-colour show mark, painted in the surrounding text colour through a CSS mask. The name is the accessible name. */
+export function logoMark(logo, { named = true } = {}) {
+  const a11y = named ? `role="img" aria-label="${esc(logo.alt)}"` : "";
+  return `<span class="tv__logo" ${a11y} style="--logo:url(/${esc(logo.file)});--logo-h:${logo.displayHeight}px;--logo-ar:${logo.width}/${logo.height}"></span>`;
 }
 
 export function tvMarquee() {
-  // Official show marks from Anya's Watch Anya page. The second (looping) copy is aria-hidden, so its images carry empty alt text.
+  // Official show marks from Anya's Watch Anya page, as single-colour masks. The looping copy is aria-hidden and unnamed.
   const item = (c, asCopy) =>
-    `<li class="tv">${logoPlate(c.logo, { alt: !asCopy })}${c.currency === "recurring" ? `<span class="tv__tag">Recurring expert</span>` : ""}</li>`;
-  const list = data.tv.credits.map((c) => item(c, false)).join("");
-  const copy = data.tv.credits.map((c) => item(c, true)).join("");
+    `<li class="tv">${logoMark(c.logo, { named: !asCopy })}${c.currency === "recurring" ? `<span class="tv__tag">Recurring expert</span>` : ""}</li>`;
+  const withLogo = data.tv.credits.filter((c) => c.logo); // a typeset stand-in would be the wrong typeface, so credits without an official mark stay out of the marquee
+  const list = withLogo.map((c) => item(c, false)).join("");
+  const copy = withLogo.map((c) => item(c, true)).join("");
   return `<section class="marquee" aria-labelledby="tv-title" data-marquee>
   <div class="marquee__head">
     <h2 id="tv-title" class="marquee__title">Seen on television</h2>

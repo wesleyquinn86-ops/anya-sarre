@@ -40,7 +40,7 @@ await writeFile(path.join(dist, "assets/styles.css"), css);
 await writeFile(path.join(dist, "assets/main.js"), js);
 const ctx = { cssHash: hash(css), jsHash: hash(js) };
 
-const pageNames = ["home", "about", "styling", "media", "partnerships", "contact"];
+const pageNames = ["home", "meet-anya", "styling", "media", "partnerships", "contact"];
 const pages = [];
 for (const name of pageNames) {
   const mod = await import(pathToFileURL(path.join(root, `src/pages/${name}.mjs`)));

@@ -1,5 +1,5 @@
 {
-  "_note": "Rebuilt 13 Nov 2026 from Anya's old official-site archive. Logos are the show marks on her own Watch Anya page (small rasters, used on the site owner's instruction). Brand and non-TV logos on that page (ShoeDazzle, BabyLeague) are not television credits and are not shown here. 'era' is what the archive supports, not a guaranteed air date.",
+  "_note": "Rebuilt 13 Nov 2026 from Anya's old official-site archive. Logos are the show marks from her own Watch Anya page, traced to single-colour SVG (scripts/logos-to-mono.py) and painted in the page colour via CSS; used on the site owner's instruction. Brand and non-TV logos on that page (ShoeDazzle, BabyLeague) are not television credits and are not shown here. 'era' is what the archive supports, not a guaranteed air date. Extra comes from Anya's updated bio only; no logo file is available, so it is listed in the Media ledger and left out of the logo marquee until an official mark is supplied.",
   "credits": [
     {
       "id": "ktla",
@@ -10,12 +10,11 @@
       "era": "recent",
       "style": "a",
       "logo": {
-        "file": "img/logos/ktla-5.png",
-        "width": 228,
-        "height": 90,
+        "file": "img/logos/ktla-5.svg",
+        "width": 1177,
+        "height": 339,
         "alt": "KTLA 5",
-        "plate": "white",
-        "displayHeight": 44
+        "displayHeight": 34
       },
       "sources": [
         "beverly-hills-courier-2024",
@@ -29,17 +28,16 @@
       "id": "et",
       "show": "Entertainment Tonight",
       "network": "CBS · syndicated",
-      "role": "Fashion expert; credited as head fashion stylist for the show",
-      "currency": "historical",
-      "era": "c. 2008–2011",
+      "role": "Red-carpet trend segments, per Anya’s bio; archive segments and press date from about 2008–2011",
+      "currency": "per-bio",
+      "era": "per Anya’s bio",
       "style": "a",
       "logo": {
-        "file": "img/logos/entertainment-tonight.png",
-        "width": 104,
-        "height": 98,
+        "file": "img/logos/entertainment-tonight.svg",
+        "width": 624,
+        "height": 588,
         "alt": "Entertainment Tonight",
-        "plate": "white",
-        "displayHeight": 48
+        "displayHeight": 44
       },
       "sources": [
         "944-magazine",
@@ -47,6 +45,20 @@
         "official-watch-anya"
       ],
       "status": "archive-segments-and-press"
+    },
+    {
+      "id": "extra",
+      "show": "Extra",
+      "network": "Syndicated",
+      "role": "Red-carpet trend segments, per Anya’s bio",
+      "currency": "per-bio",
+      "era": "per Anya’s bio",
+      "style": "a",
+      "logo": null,
+      "sources": [
+        "bio-2026"
+      ],
+      "status": "bio-only-no-logo"
     },
     {
       "id": "insider",
@@ -57,12 +69,11 @@
       "era": "c. 2009–2010",
       "style": "a",
       "logo": {
-        "file": "img/logos/the-insider.png",
-        "width": 240,
-        "height": 55,
+        "file": "img/logos/the-insider.svg",
+        "width": 1424,
+        "height": 330,
         "alt": "The Insider",
-        "plate": "white",
-        "displayHeight": 30
+        "displayHeight": 32
       },
       "sources": [
         "life-style-2009",
@@ -81,12 +92,11 @@
       "era": "undated archive clips",
       "style": "a",
       "logo": {
-        "file": "img/logos/the-rachael-ray-show.jpg",
-        "width": 128,
-        "height": 98,
+        "file": "img/logos/the-rachael-ray-show.svg",
+        "width": 718,
+        "height": 540,
         "alt": "The Rachael Ray Show",
-        "plate": "white",
-        "displayHeight": 48
+        "displayHeight": 44
       },
       "sources": [
         "official-watch-anya"
@@ -102,12 +112,11 @@
       "era": "undated",
       "style": "a",
       "logo": {
-        "file": "img/logos/home-and-family.png",
-        "width": 240,
-        "height": 79,
+        "file": "img/logos/home-and-family.svg",
+        "width": 1425,
+        "height": 257,
         "alt": "Home & Family",
-        "plate": "white",
-        "displayHeight": 38
+        "displayHeight": 27
       },
       "sources": [
         "official-watch-anya"
@@ -123,12 +132,11 @@
       "era": "undated",
       "style": "a",
       "logo": {
-        "file": "img/logos/vh1.png",
-        "width": 240,
-        "height": 162,
+        "file": "img/logos/vh1.svg",
+        "width": 1393,
+        "height": 828,
         "alt": "VH1",
-        "plate": "white",
-        "displayHeight": 60
+        "displayHeight": 40
       },
       "sources": [
         "official-watch-anya"
@@ -144,12 +152,11 @@
       "era": "undated",
       "style": "a",
       "logo": {
-        "file": "img/logos/cbs-2.png",
-        "width": 240,
-        "height": 150,
+        "file": "img/logos/cbs-2.svg",
+        "width": 1259,
+        "height": 742,
         "alt": "CBS 2",
-        "plate": "plum",
-        "displayHeight": 60
+        "displayHeight": 40
       },
       "sources": [
         "official-watch-anya"
@@ -165,12 +172,11 @@
       "era": "undated archive clip",
       "style": "a",
       "logo": {
-        "file": "img/logos/kcal-9.png",
-        "width": 240,
-        "height": 150,
+        "file": "img/logos/kcal-9.svg",
+        "width": 1243,
+        "height": 707,
         "alt": "KCAL 9",
-        "plate": "plum",
-        "displayHeight": 60
+        "displayHeight": 38
       },
       "sources": [
         "official-watch-anya"
@@ -186,12 +192,11 @@
       "era": "April 22, 2016",
       "style": "a",
       "logo": {
-        "file": "img/logos/hollywood-today-live.jpg",
-        "width": 240,
-        "height": 108,
+        "file": "img/logos/hollywood-today-live.svg",
+        "width": 1295,
+        "height": 550,
         "alt": "Hollywood Today Live",
-        "plate": "white",
-        "displayHeight": 54
+        "displayHeight": 42
       },
       "sources": [
         "official-watch-anya"
@@ -207,12 +212,11 @@
       "era": "undated archive clip",
       "style": "a",
       "logo": {
-        "file": "img/logos/the-hollywood-reporter.jpg",
-        "width": 127,
-        "height": 95,
+        "file": "img/logos/the-hollywood-reporter.svg",
+        "width": 592,
+        "height": 472,
         "alt": "The Hollywood Reporter",
-        "plate": "white",
-        "displayHeight": 46
+        "displayHeight": 38
       },
       "sources": [
         "official-watch-anya"

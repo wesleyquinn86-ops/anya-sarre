@@ -30,7 +30,7 @@ serve("dist", 4181); serve("dist-test", 4182);
 await new Promise((r) => setTimeout(r, 1200));
 const BASE = "http://localhost:4181", BASE_FORM = "http://localhost:4182";
 
-const PAGES = ["/", "/about/", "/styling/", "/media/", "/partnerships/", "/contact/"];
+const PAGES = ["/", "/meet-anya/", "/styling/", "/media/", "/partnerships/", "/contact/"];
 const WIDTHS = [320, 390, 768, 1024, 1440];
 const browser = await chromium.launch();
 

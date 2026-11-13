@@ -9,7 +9,7 @@ const services = [
     source: "Beverly Hills Courier, Nov 12, 2024 · Variety feature, Oct 24, 2008",
     status: "confirmed",
     tone: "pink",
-    img: { img: "05-mobile", ratio: "5 / 4", pos: "55% 78%", scale: 1.5, alt: "Detail of a voluminous ivory ruffled skirt from a concept portrait of Anya." },
+    img: { img: "support-styling-evening-accessories", ratio: "5 / 4", pos: "50% 50%", scale: 1, alt: "Blush evening clutch, satin sandals and silver earrings with lilac silk." },
   },
   {
     id: "personal",
@@ -18,7 +18,7 @@ const services = [
     source: "944 Magazine profile (undated) · Styled By Anya Inc.",
     status: "confirmed",
     tone: "lilac",
-    img: { img: "10-desktop", ratio: "4 / 3", pos: "72% 56%", scale: 1, alt: "Pastel fashion still life with a pink satin shoe, lilac cube, blush fabric, silver earrings and makeup brushes." },
+    img: { img: "05-mobile", ratio: "5 / 4", pos: "55% 78%", scale: 1.5, alt: "Detail of a voluminous ivory ruffled skirt from a concept portrait of Anya." },
   },
   {
     id: "weddings-events",
@@ -38,7 +38,7 @@ const services = [
     status: "to-confirm",
     note: "Supported only by article headlines from the old Web Press page, not by a service description. Confirm against Anya.",
     tone: "mint",
-    img: null,
+    img: { img: "support-styling-wardrobe-edit", ratio: "5 / 4", pos: "50% 45%", scale: 1, alt: "Ivory tailoring, blush silk and lilac knitwear on a curated clothes rail." },
   },
   {
     id: "shopping",

@@ -92,7 +92,7 @@ ${tvMarquee()}
     </div>
     <div class="work__grid">
       <article class="work__tile work__tile--big">
-        ${photo({ img: "home-desktop", ratio: "4 / 3", pos: "72% 40%", scale: 1.7, alt: "", sizes: "(min-width: 900px) 50vw, 100vw", cls: "work__photo" })}
+        ${photo({ img: "support-media-oscars-award-season", ratio: "4 / 3", pos: "50% 30%", scale: 1, alt: "Gold Oscar statuette on a blush ledge with ivory ribbon and rose fabric.", sizes: "(min-width: 900px) 50vw, 100vw", cls: "work__photo", label: "Illustrative still life" })}
         <div class="work__body">
           <p class="work__cat">Red-carpet styling</p>
           <h3 class="work__title">Award-season work</h3>
@@ -131,9 +131,9 @@ ${tvMarquee()}
     <div class="bio__text">
       <p class="kicker">The short version</p>
       <h2 id="bio-title" class="section-title">Hollywood training. <em>Human advice.</em></h2>
-      <p>Anya Sarre is a Los Angeles-based celebrity fashion stylist, television fashion, beauty and lifestyle expert, and brand influencer. Her business, Styled By Anya Inc., styles clients for award-season events and beyond.</p>
-      <p>She grew up in the Bay Area, studied at USC, and holds a graduate degree from Parsons School of Design.</p>
-      <div class="btn-row">${button("Read Anya’s story", "/about/", "dark")}</div>
+      <p>Anya Sarre is a Los Angeles-based celebrity fashion stylist, television fashion, beauty and lifestyle expert, and brand influencer. She heads Styled By Anya Inc., dressing stars for the Oscars, Golden Globes and Emmys.</p>
+      <p>She grew up in the Bay Area, moved to Los Angeles for USC, then polished her eye at Parsons School of Design.</p>
+      <div class="btn-row">${button("Meet Anya", "/meet-anya/", "dark")}</div>
     </div>
   </div>
 </section>

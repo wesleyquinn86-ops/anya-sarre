@@ -60,7 +60,7 @@ function footer() {
       ${
         config.preview
           ? `<p>This is a concept website prepared by ${config.proposal.by} as an unsolicited proposal. It is not live, not approved by Anya Sarre, and not indexed by search engines. Statistics are third-party and provisional; each one shows its source and date.</p>
-      <p>Imagery: AI-assisted concept images supplied with the proposal pack. They are reconstructions based on source photographs of Anya, with invented scenes, assistants and details. They are not untouched photographs, documentary stills or evidence of a real shoot, team or client. All imagery needs Anya’s approval before publication.</p>`
+      <p>Imagery: AI-assisted concept images supplied with the proposal pack. They are reconstructions based on source photographs of Anya, with invented scenes, assistants and details. They are not untouched photographs, documentary stills or evidence of a real shoot, team or client. All imagery needs Anya’s approval before publication. The still-life photographs of products, an award statuette and a microphone are AI-generated illustrations, not real or sponsored products and not an award won by Anya.</p>`
           : `<p>Imagery is AI-assisted: reconstructions based on source photographs, with invented scenes and details.</p>`
       }
     </div>
@@ -107,7 +107,7 @@ export function layout({ page, ctx }) {
   <link rel="preload" href="/fonts/DMSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/styles.css?v=${ctx.cssHash}">
   <script>${JS_FLAG}</script>
-  ${pagePath === "/" || pagePath === "/about/" ? `<script type="application/ld+json">${jsonLd(base)}</script>` : ""}
+  ${pagePath === "/" || pagePath === "/meet-anya/" ? `<script type="application/ld+json">${jsonLd(base)}</script>` : ""}
 </head>
 <body class="${bodyClass}" data-page="${esc(active)}">
   <a class="skip-link" href="#main">Skip to content</a>

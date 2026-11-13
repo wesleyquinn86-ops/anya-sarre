@@ -41,6 +41,24 @@ Placement follows the pack's principles: desktop and mobile versions of the same
 
 Plum against the pixels behind the lettering on the chosen home hero: see the figures in `docs/CHECKS.md` (all well above AA for the wordmark and tagline; on mobile the wordmark sits on the ivory page, not on the photograph). Pack palette ratios: plum on ivory 16.0, plum on dusty pink 6.6, ivory on rose 5.8, rose on ivory 5.8. Small text on dusty pink uses plum (not the muted tone) to stay AA; axe checks all pages.
 
+## Supporting photography (13 Nov 2026)
+
+`Anya-Sarre-Supporting-Photos.zip` (Drive): six **AI-generated editorial still lifes** in the blush palette, none showing Anya. Stored as JPEG in `assets/source/support-*.jpg`; the original placement guide is `assets/support/PLACEMENT-GUIDE.md`; alt text follows the guide.
+
+| Photo | Used on |
+| --- | --- |
+| media-oscars-award-season | Home "Award-season work" tile; Media & Press coverage section. Captioned as an illustration |
+| media-television-hosting | Media & Press, Hosting & speaking |
+| partnerships-makeup-beauty, partnerships-fragrance-skincare | Brand Partnerships, "Beauty, fashion & lifestyle" (captioned: not real or sponsored products) |
+| styling-evening-accessories | Styling, Red-carpet & event styling |
+| styling-wardrobe-edit | Styling, Wardrobe & closet edits |
+
+**Caution:** the Oscar image shows a recognisable statuette, which is a registered Academy trademark and design. It is used only as an illustration, with a visible "Illustrative still life" tag, an on-page note that it is not an award won by Anya, and footer disclosure. Consider swapping it for a neutral award-season image before launch.
+
+## Logos in white
+
+The ten show logos were traced to single-colour vector marks with `scripts/logos-to-mono.py` (needs `pip install potracer numpy pillow`): **`assets/logos/mono/*.svg`** (white fill, scalable) and **`assets/logos/mono/png/*.png`** (white on transparent, 1200 px wide). The site paints them in the surrounding text colour (ivory on the rose marquee, plum in the Media list). They are traces of small originals (the Rachael Ray and VH1 marks are the roughest), so replace them with official vector artwork where the networks provide it. The colour originals stay in `assets/logos/`.
+
 ## Disclosure carried into the site
 
 All pack imagery is AI-assisted: **reconstructions from small source photographs, with invented scenes, assistants and details; options 08–10 are newly imagined.** The footer says so, alt text describes pictures without claiming the people shown are Anya's team, and the Instagram/other photography is never mixed in. **Approval of likeness, jewellery detail and permission to use the source photographs are Anya's to give** (pack README), and replacing any option she dislikes with licensed original photography is expected before publication.

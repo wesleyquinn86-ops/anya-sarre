@@ -4,7 +4,7 @@ Run on 13 November 2026 against the final preview build, **re-run after the site
 
 ## Automated (re-runnable)
 
-**`npm run check`: 704 static checks, all passing.** Per page: `lang`, title, meta description, exactly one `h1`, no skipped heading levels, landmarks, skip link, social tags, favicon, `noindex` (preview), every `<img>` has `alt` plus `width`/`height`, every internal link and `#anchor` resolves, every local asset exists, external `_blank` links carry `noopener`, JSON-LD parses, no `undefined`/`NaN` leaking into copy. Plus `_headers`, `og.png`, `favicon.svg`, no sitemap in preview.
+**`npm run check`: 764 static checks, all passing.** Per page: `lang`, title, meta description, exactly one `h1`, no skipped heading levels, landmarks, skip link, social tags, favicon, `noindex` (preview), every `<img>` has `alt` plus `width`/`height`, every internal link and `#anchor` resolves, every local asset exists, external `_blank` links carry `noopener`, JSON-LD parses, no `undefined`/`NaN` leaking into copy. Plus `_headers`, `og.png`, `favicon.svg`, no sitemap in preview.
 
 **`npm run verify`: 266 browser checks (Chromium via Playwright; Chrome for video playback), all passing.**
 * All 6 pages × widths **320, 390, 768, 1024, 1440**: zero console errors/warnings, zero failed or 4xx requests, no horizontal overflow, all images decode, navigation inline ≥1200px; below that a Menu button that opens, lists all links and closes on Escape.

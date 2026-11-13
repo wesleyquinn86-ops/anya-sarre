@@ -8,6 +8,25 @@ Research date: **13 November 2026**. Evidence levels: **Archive scan read** = I 
 * **The old official site's archive was supplied instead** (Drive folder, "renamed and organised" by Built By Wes): 474 images with `image-index.csv` (original URL, source page, how each name was decided) and 160 videos with `video-catalog.csv`. It is the old site, mostly 2008–2017. It replaces most of what the live pages would have confirmed about *history*, but **not** what is current, nor awards or the present bio. Everything below says which it is.
 * Only a sample of the archive's page scans was read: Variety, The Hollywood Reporter, Los Angeles Confidential, Us Weekly (Feb 2, 2009), Life & Style (Jun 15, 2009), OK! (Jan 10, 2011), the Inside Weddings 10-page feature and the 944 Magazine profile. The rest were not opened.
 
+## Anya's updated bio (supplied 13 Nov 2026, used as written)
+
+The Meet Anya page and the home short bio now use the bio the site owner supplied. Each claim, and what the evidence in hand says:
+
+| Claim in the bio | Corroboration found | Status |
+| --- | --- | --- |
+| Bay Area; USC; Parsons | 944 Magazine Q&A (USC B.A., communications; Parsons fashion program); Beverly Hills Courier | Corroborated |
+| Heads Styled By Anya Inc. | Courier 2024 (the business exists); “heads” not stated elsewhere | Business corroborated |
+| Dresses stars for the Oscars, Golden Globes, Emmys | Courier 2024; Variety Oct 24, 2008 profile | Corroborated |
+| Red-carpet trend segments on **KTLA, Entertainment Tonight and Extra** | KTLA: strong (clips, Courier). ET: strong but archive-dated c. 2008–2011. **Extra: none** in the archive (only a 2016 third-party mention) | KTLA, ET corroborated; Extra bio-only. “Today” (present tense) for ET and Extra is the bio's claim |
+| **Chief Accessories Stylist, ShoeDazzle**; **Fashion Director, YouCeleb** | Archive shows the work (“Must Haves by Anya Sarre Jewelry for ShoeDazzle”; ET segment on ShoeDazzle; YouCeleb “Makeover Monday” columns, 2011) but **not the titles** | Work corroborated; titles bio-only |
+| “Best Fashion Stylist for TV”, POSHGLAM Awards | Archive has a PoshGlam web feature on her; the award itself is not shown | Bio-only |
+| Has written for Us Weekly and OK! | Archive has Us Weekly and OK! pages in which she is quoted and credited (expert advice, promo); **authorship** is not shown | Appearances corroborated; “written for” bio-only |
+| Hosted events for Diane von Furstenberg | Archive has a DVF event invitation image | Weakly corroborated |
+| TEDx speaker | LOCAL Life Q+A (TEDxHiltonHead Women) | Corroborated |
+| Teaches styling at FIDM; guest lectures at USC | None | Bio-only |
+
+Structured data (JSON-LD) was **not** extended with the unverified claims (award, titles, teaching); it still carries only name, role, location, schools, Instagram and the business.
+
 ## Biography and credentials
 
 | Claim shown | Source | Level |

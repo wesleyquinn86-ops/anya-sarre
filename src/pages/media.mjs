@@ -1,9 +1,9 @@
-import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoPlate } from "../templates/components.mjs";
+import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoMark, photo } from "../templates/components.mjs";
 import { pageHero } from "./_shared.mjs";
 
 const { tv, press, metrics } = data;
 const credits = tv.credits;
-const chipLabel = (c) => (c.currency === "recurring" ? "Recurring · recent" : `Earlier · ${c.era}`);
+const chipLabel = (c) => (c.currency === "recurring" ? "Recurring · recent" : c.currency === "per-bio" ? "Per Anya’s bio" : `Earlier · ${c.era}`);
 const entries = pressEntries();
 const videos = visibleVideos();
 
@@ -28,13 +28,13 @@ ${pageHero({
         <p class="kicker">Television</p>
         <h2 id="tvlist-title" class="section-title">Credits, <em>dated honestly</em></h2>
       </div>
-      <p class="section-sub">Appearances over the years. Each line says whether it is recent or earlier, and roles come from the sources named on the About page.</p>
+      <p class="section-sub">Appearances over the years. Each line says whether it is recent or earlier, and roles come from the sources named on the Meet Anya page.</p>
     </div>
     <ul class="tvlist__rows">
       ${credits
         .map(
           (c) => `<li class="tvrow tvrow--${c.currency}">
-        <p class="tvrow__show">${logoPlate(c.logo)}</p>
+        <p class="tvrow__show">${c.logo ? logoMark(c.logo) : `<span class="tvrow__name">${esc(c.show)}</span>`}</p>
         <p class="tvrow__role">${esc(c.role)}</p>
         <p class="tvrow__net">${esc(c.network)}</p>
         <p class="tvrow__cur"><span class="chip chip--${c.currency}">${esc(chipLabel(c))}</span></p>
@@ -42,15 +42,16 @@ ${pageHero({
         )
         .join("")}
     </ul>
-    ${pv("Credits come from Anya’s old official-site archive (segment stills and clips, press scans), which mostly dates from about 2008–2017; only KTLA 5 is evidenced as recent. Home &amp; Family, VH1 and CBS 2 are shown from their logos on the old Watch Anya page, which has no segment for them in the archive. Logos are the small originals from that page, used on the site owner’s instruction.", "pv-note--tight")}
+    ${pv("Credits come from Anya’s old official-site archive (segment stills and clips, press scans), which mostly dates from about 2008–2017; only KTLA 5 is evidenced as recent. Home &amp; Family, VH1 and CBS 2 are shown from their logos on the old Watch Anya page, which has no segment for them in the archive. Logos are traced to single-colour marks from that page, used on the site owner’s instruction.", "pv-note--tight")}
   </div>
 </section>
 
 <section class="speaking" id="speaking" aria-labelledby="speaking-title">
   <div class="wrap speaking__grid">
-    <div>
+    <div class="speaking__lead">
       <p class="kicker kicker--pink">Hosting &amp; speaking</p>
       <h2 id="speaking-title" class="section-title">Comfortable with a <em>room.</em></h2>
+      ${photo({ img: "support-media-television-hosting", ratio: "1 / 1", pos: "50% 50%", scale: 1, alt: "Broadcast microphone resting on a rose folio in a softly lit studio.", sizes: "(min-width: 900px) 30vw, 90vw", cls: "speaking__photo", label: "Illustrative still life" })}
     </div>
     <ul class="speaking__list">
       <li>
@@ -94,7 +95,13 @@ ${
       </div>
       <p class="section-sub">The type of coverage is stated for each entry: a feature, an interview, a brand feature or a television segment.</p>
     </div>
-    ${pressList(entries)}
+    <div class="coverage__grid">
+      <div>${pressList(entries)}</div>
+      <aside class="coverage__aside">
+        ${photo({ img: "support-media-oscars-award-season", ratio: "4 / 5", pos: "50% 40%", scale: 1, alt: "Gold Oscar statuette on a blush ledge with ivory ribbon and rose fabric.", sizes: "(min-width: 900px) 24vw, 90vw", cls: "coverage__photo", label: "Illustrative still life" })}
+        <p class="coverage__cap">An illustration of award season. It does not represent an award won by Anya.</p>
+      </aside>
+    </div>
     ${pv("Print entries are read from page scans on Anya’s official Press page, so they link there rather than to the publishers. The Wall Street Journal was searched for and not found. Several more magazines and websites appear in the same archive but their pages were not read.", "pv-note--tight")}
   </div>
 </section>
