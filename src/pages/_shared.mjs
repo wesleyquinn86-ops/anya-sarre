@@ -9,7 +9,7 @@ export function pageHero({ kicker, title, lead, img }) {
   return `<section class="page-hero">
   <div class="wrap page-hero__grid">
     <div class="page-hero__text">
-      <p class="kicker kicker--pink">${esc(kicker)}</p>
+      <p class="kicker">${esc(kicker)}</p>
       <h1 class="page-hero__title">${title}</h1>
       <p class="page-hero__lead">${lead}</p>
     </div>

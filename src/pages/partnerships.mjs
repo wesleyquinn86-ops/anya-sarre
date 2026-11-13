@@ -23,7 +23,7 @@ ${pageHero({
   kicker: "Brand Partnerships",
   title: "Brands that want a <em>point of view.</em>",
   lead: "Fashion, beauty and lifestyle collaborations, led by a stylist with television credibility and a big personality.",
-  img: { src: "mobile", ratio: "4 / 3", pos: "52% 50%", scale: 1, alt: "", sizes: "(min-width: 900px) 44vw, 90vw", priority: true },
+  img: { img: "02-desktop", ratio: "4 / 3", pos: "76% 28%", scale: 1, alt: "Anya in pink holding statement jewellery in both raised hands against a pink studio background.", sizes: "(min-width: 900px) 44vw, 90vw", priority: true },
 })}
 
 <section class="formats" aria-labelledby="formats-title">

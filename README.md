@@ -17,16 +17,17 @@ npm run verify       # browser checks (needs Playwright, see below)
 
 `npm run verify` builds a second copy with a *mocked* form endpoint (a `.invalid` host intercepted inside the browser), so no real enquiry is ever sent. It looks for Playwright in `node_modules`, `/opt/node22/lib/node_modules`, or `PLAYWRIGHT_PATH`.
 
-## What the supplied graphics pack drives
+## What the approved identity pack drives
 
 | From the pack | Where it is used |
 | --- | --- |
-| Dark monochrome hero, desktop 2:1 and dedicated mobile 4:5 | Home hero (art-directed `<picture>`, switches at 767px), plus CSS-only crops on every inner page |
-| Proposed pink `#F3A3BB`, cream `#F6F1EE`, dark `#0B0B0C` | Colour tokens in `src/css/styles.css` |
-| Wordmark vector studies (superseded) and the later five supplied logo SVGs | Header/footer wordmark, favicon and social image use the supplied logo SVGs. The hero name is still live uppercase Bodoni Moda (earlier study direction), to be re-cut to the new lettering |
-| Focal points and safe areas (`assets/brand/crop-settings.json`) | Hero `object-position` and wordmark placement, asserted by `npm run verify` |
+| **Direction 01, Sculpted Masthead** wordmark (primary, compact, stacked SVG) | Header, footer, hero lettering, favicon, social image |
+| Palette: plum, ivory, rose, blush, dusty pink, lilac, peach | Colour tokens in `src/css/styles.css`; pink leads, plum gives weight |
+| Bricolage Grotesque 600 + DM Sans (self-hosted, OFL) | Headings and body |
+| Ten hero options (desktop 2:1 + mobile 4:5) | Home hero = option 01; other options head the inner pages (see `docs/ASSETS.md`) |
+| Crop and focal-point guidance, alt text | Hero placement and per-page crops, checked at every breakpoint |
 
-Photographs are never edited, recoloured or stretched; cropping is CSS (`object-position` + scale). See [`docs/ASSETS.md`](docs/ASSETS.md) for the inventory and what is still missing.
+All pack imagery is **AI-assisted** (reconstructions with invented scenes; not documentary photographs) and needs Anya's approval before publication. See [`docs/ASSETS.md`](docs/ASSETS.md).
 
 ## Configuration (all at build time)
 
@@ -61,10 +62,10 @@ The production build **refuses to run** without `SITE_URL` and an enquiry route.
 | `src/data/tv.json` | Television credits and speaking, with currency and sources |
 | `src/data/press.json` | Coverage entries (type, date, URL, evidence) and a `videos` array (empty: no verified video yet) |
 | `src/data/metrics.json` | Every displayed figure with label, source, period, status; plus figures recorded but not displayed |
-| `src/data/site.json` | Name, navigation, education, Instagram |
+| `src/data/site.json` | Name, tagline, navigation, education, Instagram |
 | `src/templates/components.mjs` | Shared marquee, statistic, press, masthead, photo-crop and CTA components |
 
-To add a verified video, add an object to `videos` in `press.json`. To add photography, drop masters in `assets/source/` and run `npm run images` (AVIF + WebP at several widths, never upscaled).
+To add a verified video, add an object to `videos` in `press.json`. To add photography, drop exports in `assets/source/` named `hero-NN-desktop.jpg` / `hero-NN-mobile.jpg` and run `npm run images` (AVIF + WebP at several widths, never upscaled), then reference them with `photo({ img: "NN-desktop", … })`.
 
 ## Accessibility and motion
 

@@ -1,16 +1,16 @@
-import { data, esc, button, photo, tvMarquee, mastheads, closingCta, spin, sparkle, squiggle, arrow, pv, stat } from "../templates/components.mjs";
+import { data, esc, button, photo, tvMarquee, mastheads, closingCta, wordmark, arrow, pv } from "../templates/components.mjs";
 import { config } from "../config.mjs";
 
 const m = data.images;
 const set = (slot, ext) => m[slot].widths.map((w) => `/img/${slot}-${w}.${ext} ${w}w`).join(", ");
 
 const heroPicture = `<picture class="hero__picture">
-      <source media="(max-width: 767px)" type="image/avif" srcset="${set("hero-mobile", "avif")}" sizes="100vw">
-      <source media="(max-width: 767px)" type="image/webp" srcset="${set("hero-mobile", "webp")}" sizes="100vw">
-      <source type="image/avif" srcset="${set("hero-desktop", "avif")}" sizes="100vw">
-      <source type="image/webp" srcset="${set("hero-desktop", "webp")}" sizes="100vw">
-      <img class="hero__photo" src="/img/hero-desktop-1774.webp" width="1774" height="887" fetchpriority="high"
-           alt="Black-and-white portrait of Anya Sarre holding an iced drink while a team styles her hair and makeup.">
+      <source media="(max-width: 767px)" type="image/avif" srcset="${set("hero-01-mobile", "avif")}" sizes="100vw">
+      <source media="(max-width: 767px)" type="image/webp" srcset="${set("hero-01-mobile", "webp")}" sizes="100vw">
+      <source type="image/avif" srcset="${set("hero-01-desktop", "avif")}" sizes="100vw">
+      <source type="image/webp" srcset="${set("hero-01-desktop", "webp")}" sizes="100vw">
+      <img class="hero__photo" src="/img/hero-01-desktop-1774.webp" width="1774" height="887" fetchpriority="high"
+           alt="Black-and-white concept portrait of Anya with a makeup artist and hair stylist behind her.">
     </picture>`;
 
 const press = data.press.entries.filter((e) => e.display);
@@ -26,13 +26,13 @@ export default {
 <section class="hero" aria-label="Introduction">
   <div class="hero__stage">
     ${heroPicture}
-    <h1 class="hero__name"><span>Anya</span> <span>Sarre</span></h1>
-    ${spin}
+    <h1 class="hero__name"><span class="sr-only">Anya Sarre</span>${wordmark("stacked", "hero__mark hero__mark--stacked", { label: false })}${wordmark("compact", "hero__mark hero__mark--compact", { label: false })}</h1>
+    <p class="hero__tag">Fashion / Beauty / Lifestyle</p>
   </div>
   <div class="wrap hero__copy">
-    <p class="kicker kicker--pink">Los Angeles · Celebrity fashion stylist · TV style expert</p>
+    <p class="kicker">Los Angeles · Celebrity fashion stylist · TV style expert</p>
     <div class="hero__row">
-      <p class="hero__lead">Red-carpet polish. <em>Real-life advice.</em></p>
+      <p class="hero__lead">Hollywood polish. <em>Human warmth.</em></p>
       <div class="hero__aside">
         <p>Anya styles for award season, explains fashion on air, and makes great clothes feel doable. Producers, brands and private clients are all welcome.</p>
         <div class="btn-row">${button("Work with Anya", "/contact/", "solid")}<a class="btn btn--ghost" href="#work"><span>See the work</span>${arrow}</a></div>
@@ -91,7 +91,7 @@ ${tvMarquee()}
     </div>
     <div class="work__grid">
       <article class="work__tile work__tile--big">
-        ${photo({ src: "desktop", ratio: "4 / 3", pos: "70% 42%", scale: 1.5, alt: "", sizes: "(min-width: 900px) 50vw, 100vw", cls: "work__photo" })}
+        ${photo({ img: "01-desktop", ratio: "4 / 3", pos: "74% 36%", scale: 1.5, alt: "", sizes: "(min-width: 900px) 50vw, 100vw", cls: "work__photo" })}
         <div class="work__body">
           <p class="work__cat">Red-carpet styling</p>
           <h3 class="work__title">Award-season work</h3>
@@ -126,7 +126,7 @@ ${tvMarquee()}
 
 <section class="bio" aria-labelledby="bio-title">
   <div class="wrap bio__grid">
-    ${photo({ src: "mobile", ratio: "4 / 5", pos: "52% 46%", scale: 1.25, alt: "Close portrait of Anya Sarre in black and white, wide-eyed, with windswept hair and hoop earrings.", sizes: "(min-width: 900px) 40vw, 100vw", cls: "bio__photo" })}
+    ${photo({ img: "09-mobile", ratio: "4 / 5", pos: "60% 31%", scale: 1, alt: "Daylight concept portrait of Anya in black against a warm plaster wall with palms at the edge.", sizes: "(min-width: 900px) 40vw, 100vw", cls: "bio__photo" })}
     <div class="bio__text">
       <p class="kicker">The short version</p>
       <h2 id="bio-title" class="section-title">Hollywood training. <em>Human advice.</em></h2>

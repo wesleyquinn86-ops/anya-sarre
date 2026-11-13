@@ -1,5 +1,5 @@
 {
-  "hero-desktop": {
+  "hero-01-desktop": {
     "width": 1774,
     "height": 887,
     "widths": [
@@ -11,14 +11,168 @@
       1774
     ]
   },
-  "hero-mobile": {
-    "width": 1122,
-    "height": 1402,
+  "hero-01-mobile": {
+    "width": 1120,
+    "height": 1400,
     "widths": [
       480,
       720,
       960,
-      1122
+      1120
+    ]
+  },
+  "hero-02-desktop": {
+    "width": 1774,
+    "height": 887,
+    "widths": [
+      480,
+      720,
+      960,
+      1280,
+      1600,
+      1774
+    ]
+  },
+  "hero-02-mobile": {
+    "width": 1120,
+    "height": 1400,
+    "widths": [
+      480,
+      720,
+      960,
+      1120
+    ]
+  },
+  "hero-03-desktop": {
+    "width": 1774,
+    "height": 887,
+    "widths": [
+      480,
+      720,
+      960,
+      1280,
+      1600,
+      1774
+    ]
+  },
+  "hero-03-mobile": {
+    "width": 1120,
+    "height": 1400,
+    "widths": [
+      480,
+      720,
+      960,
+      1120
+    ]
+  },
+  "hero-04-desktop": {
+    "width": 1774,
+    "height": 887,
+    "widths": [
+      480,
+      720,
+      960,
+      1280,
+      1600,
+      1774
+    ]
+  },
+  "hero-04-mobile": {
+    "width": 1120,
+    "height": 1400,
+    "widths": [
+      480,
+      720,
+      960,
+      1120
+    ]
+  },
+  "hero-05-desktop": {
+    "width": 1774,
+    "height": 887,
+    "widths": [
+      480,
+      720,
+      960,
+      1280,
+      1600,
+      1774
+    ]
+  },
+  "hero-05-mobile": {
+    "width": 1120,
+    "height": 1400,
+    "widths": [
+      480,
+      720,
+      960,
+      1120
+    ]
+  },
+  "hero-08-desktop": {
+    "width": 1774,
+    "height": 887,
+    "widths": [
+      480,
+      720,
+      960,
+      1280,
+      1600,
+      1774
+    ]
+  },
+  "hero-08-mobile": {
+    "width": 1120,
+    "height": 1400,
+    "widths": [
+      480,
+      720,
+      960,
+      1120
+    ]
+  },
+  "hero-09-desktop": {
+    "width": 1774,
+    "height": 887,
+    "widths": [
+      480,
+      720,
+      960,
+      1280,
+      1600,
+      1774
+    ]
+  },
+  "hero-09-mobile": {
+    "width": 1120,
+    "height": 1400,
+    "widths": [
+      480,
+      720,
+      960,
+      1120
+    ]
+  },
+  "hero-10-desktop": {
+    "width": 1774,
+    "height": 887,
+    "widths": [
+      480,
+      720,
+      960,
+      1280,
+      1600,
+      1774
+    ]
+  },
+  "hero-10-mobile": {
+    "width": 1120,
+    "height": 1400,
+    "widths": [
+      480,
+      720,
+      960,
+      1120
     ]
   }
 }

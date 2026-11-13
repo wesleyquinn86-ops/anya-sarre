@@ -30,7 +30,7 @@ function header(active) {
     .join("");
   return `<header class="site-header" data-header>
   <div class="wrap site-header__bar">
-    <a class="site-header__brand" href="/" aria-label="Anya Sarre — home">${wordmark("inline")}</a>
+    <a class="site-header__brand" href="/" aria-label="Anya Sarre — home">${wordmark("primary", "", { label: false })}</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle hidden><span class="nav-toggle__bars" aria-hidden="true"></span><span>Menu</span></button>
     <nav class="site-nav" id="site-nav" aria-label="Primary" data-nav>
       <ul>${links}</ul>
@@ -50,7 +50,7 @@ function footer() {
   return `<footer class="site-footer">
   <div class="wrap">
     <div class="site-footer__top">
-      <a class="site-footer__brand" href="/" aria-label="Anya Sarre — home">${wordmark("inline")}</a>
+      <a class="site-footer__brand" href="/" aria-label="Anya Sarre — home">${wordmark("stacked", "", { label: false })}</a>
       <p class="site-footer__line">${esc(site.tagline)}<br>${esc(site.location)}</p>
       <nav aria-label="Footer"><ul class="site-footer__nav">${nav}</ul></nav>
       <ul class="site-footer__social"><li><a href="${esc(site.instagram.url)}" rel="noopener noreferrer" target="_blank">Instagram ${esc(site.instagram.handle)}<span class="sr-only"> (opens in a new tab)</span></a></li></ul>
@@ -60,8 +60,8 @@ function footer() {
       ${
         config.preview
           ? `<p>This is a concept website prepared by ${config.proposal.by} as an unsolicited proposal. It is not live, not approved by Anya Sarre, and not indexed by search engines. Statistics are third-party and provisional; each one shows its source and date.</p>
-      <p>Hero photography: composite edit supplied with the proposal pack. The scene around Anya was extended with AI, and the team shown are not documented photographs of her staff.</p>`
-          : `<p>Hero photography is a composite; the surrounding scene was extended with AI.</p>`
+      <p>Imagery: AI-assisted concept images supplied with the proposal pack. They are reconstructions based on source photographs of Anya, with invented scenes, assistants and details. They are not untouched photographs, documentary stills or evidence of a real shoot, team or client. All imagery needs Anya’s approval before publication.</p>`
+          : `<p>Imagery is AI-assisted: reconstructions based on source photographs, with invented scenes and details.</p>`
       }
     </div>
   </div>
@@ -73,7 +73,7 @@ export function layout({ page, ctx }) {
   const base = config.siteUrl;
   const fullTitle = pagePath === "/" ? `${site.name} — Celebrity Stylist & TV Style Expert, Los Angeles` : `${title} — ${site.name}`;
   const canonical = base ? `${base}${pagePath}` : "";
-  const ogImage = `${base}/og.png`;
+  const ogImage = `${base}/og.jpg`;
   const robots = config.preview
     ? `<meta name="robots" content="noindex, nofollow, noarchive">\n  <meta name="googlebot" content="noindex, nofollow">`
     : `<meta name="robots" content="index, follow, max-image-preview:large">`;
@@ -86,7 +86,7 @@ export function layout({ page, ctx }) {
   <meta name="description" content="${esc(description)}">
   ${robots}
   ${canonical ? `<link rel="canonical" href="${esc(canonical)}">` : ""}
-  <meta name="theme-color" content="#0B0B0C">
+  <meta name="theme-color" content="#FFF9F6">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="${esc(site.name)}">
   <meta property="og:title" content="${esc(ogTitle || fullTitle)}">
@@ -95,7 +95,7 @@ export function layout({ page, ctx }) {
   <meta property="og:image" content="${esc(ogImage)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Anya Sarre in pink lettering beside a black-and-white portrait of her being styled.">
+  <meta property="og:image:alt" content="The name Anya Sarre in plum lettering beside a black-and-white concept portrait of Anya with a makeup artist and hair stylist.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(ogTitle || fullTitle)}">
   <meta name="twitter:description" content="${esc(description)}">
@@ -103,8 +103,8 @@ export function layout({ page, ctx }) {
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="preload" href="/fonts/bodoni-moda-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/BricolageGrotesque-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/DMSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/styles.css?v=${ctx.cssHash}">
   <script>${JS_FLAG}</script>
   ${pagePath === "/" || pagePath === "/about/" ? `<script type="application/ld+json">${jsonLd(base)}</script>` : ""}

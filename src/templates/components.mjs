@@ -29,33 +29,43 @@ export function button(label, href, variant = "solid", extra = "") {
 export const pv = (text, cls = "") =>
   config.preview ? `<p class="pv-note ${cls}"><strong>Preview note</strong> ${text}</p>` : "";
 
-/* ---------- wordmark (supplied vector study, recoloured via currentColor) ---------- */
+/* ---------- wordmark (approved pack: Direction 01, Sculpted Masthead, genuine vector paths) ---------- */
 const wordmarkCache = {};
-export function wordmark(kind = "inline", cls = "") {
+/**
+ * Inline SVG wordmark, recoloured through currentColor so one file serves every surface.
+ * kind: "primary" | "compact" | "stacked". When `label` is false the SVG is decorative and the
+ * adjacent text supplies the accessible name "Anya Sarre".
+ */
+export function wordmark(kind = "primary", cls = "", { label = true } = {}) {
   if (!wordmarkCache[kind]) {
-    // Supplied logo files (assets/brand/anya-sarre-primary-light.svg is the recolourable master).
-    const svg = readFileSync(path.join(root, "assets/brand/anya-sarre-primary-light.svg"), "utf8").replace(/<title>[\s\S]*?<\/title>/, "");
+    const svg = readFileSync(path.join(root, `assets/pack/01-Identity/wordmarks/svg/anya-sarre-${kind}-dark.svg`), "utf8");
     const viewBox = svg.match(/viewBox="([^"]+)"/)[1];
-    const inner = svg.replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
+    const inner = svg
+      .replace(/^[\s\S]*?<svg[^>]*>/, "")
+      .replace(/<\/svg>\s*$/, "")
+      .replace(/<title>[\s\S]*?<\/title>/, "")
+      .replace(/ aria-label="[^"]*"/g, "")
+      .replace(/fill="#[0-9A-Fa-f]{3,8}"/g, 'fill="currentColor"');
     wordmarkCache[kind] = { viewBox, inner };
   }
   const { viewBox, inner } = wordmarkCache[kind];
-  return `<svg class="wordmark wordmark--${kind} ${cls}" viewBox="${viewBox}" role="img" aria-label="Anya Sarre" focusable="false" fill="currentColor">${inner}</svg>`;
+  const a11y = label ? 'role="img" aria-label="Anya Sarre"' : 'aria-hidden="true"';
+  return `<svg class="wordmark wordmark--${kind} ${cls}" viewBox="${viewBox}" ${a11y} focusable="false">${inner}</svg>`;
 }
 
 /* ---------- photography ---------- */
-const sourceFor = { desktop: "hero-desktop", mobile: "hero-mobile" };
 function srcset(slot, ext) {
   const m = data.images[slot];
   return m.widths.map((w) => `/img/${slot}-${w}.${ext} ${w}w`).join(", ");
 }
 /**
- * Cropped view of a supplied photograph. Cropping is CSS-only (object-position + scale)
- * so the supplied compositions are never altered. `src` picks the desktop (2:1) or mobile (4:5) master.
+ * Cropped view of a supplied hero export. `img` is "<option>-<desktop|mobile>", e.g. "01-mobile".
+ * Cropping is CSS-only (object-position + scale) so the supplied compositions are never altered.
  */
-export function photo({ src = "desktop", ratio = "4 / 5", pos = "50% 50%", scale = 1, alt = "", sizes = "100vw", cls = "", priority = false, label = "" }) {
-  const slot = sourceFor[src];
+export function photo({ img, ratio = "4 / 5", pos = "50% 50%", scale = 1, alt = "", sizes = "100vw", cls = "", priority = false, label = "" }) {
+  const slot = `hero-${img}`;
   const m = data.images[slot];
+  if (!m) throw new Error(`Unknown image slot: ${slot}`);
   const mid = m.widths.includes(1280) ? 1280 : m.widths[m.widths.length - 1];
   const style = `--ratio:${ratio};--pos:${pos};--scale:${scale}`;
   return `<figure class="photo ${cls}" style="${style}">
@@ -140,5 +150,3 @@ export function closingCta({ kicker = "Ready when you are", title = "Let’s mak
   </div>
 </section>`;
 }
-
-export const spin = `<svg class="badge" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><defs><path id="badge-circle" d="M60 60m-45 0a45 45 0 1 1 90 0a45 45 0 1 1-90 0"/></defs><circle cx="60" cy="60" r="58" fill="currentColor" opacity="0"/><text><textPath href="#badge-circle" startOffset="0">Styled By Anya Inc. ✦ Los Angeles ✦ Styled By Anya Inc. ✦ Los Angeles ✦</textPath></text><path d="M60 44c1.2 10.800 5.200 14.800 16 16-10.800 1.200-14.800 5.200-16 16-1.200-10.800-5.200-14.800-16-16 10.800-1.200 14.800-5.200 16-16Z" fill="currentColor"/></svg>`;

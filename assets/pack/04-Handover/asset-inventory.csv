@@ -1,0 +1,113 @@
+file,format,dimensions,size_bytes
+01-Identity/brand-tokens.css,CSS,,293
+01-Identity/explorations/01-sculpted-masthead.png,PNG / RGBA transparent,2000 x 421px,59406
+01-Identity/explorations/01-sculpted-masthead.svg,SVG,viewBox 0 0 1450 305 (vector),3067
+01-Identity/explorations/02-screen-credit.png,PNG / RGBA transparent,2000 x 410px,48368
+01-Identity/explorations/02-screen-credit.svg,SVG,viewBox 0 0 1426 292 (vector),7901
+01-Identity/explorations/03-personal-inscription.png,PNG / RGBA transparent,2000 x 663px,87261
+01-Identity/explorations/03-personal-inscription.svg,SVG,viewBox 0 0 845 280 (vector),1245
+01-Identity/palette.json,JSON,,159
+01-Identity/wordmarks/png/anya-sarre-compact-dark.png,PNG / RGBA transparent,3000 x 580px,91196
+01-Identity/wordmarks/png/anya-sarre-compact-light.png,PNG / RGBA transparent,3000 x 580px,80150
+01-Identity/wordmarks/png/anya-sarre-compact-pink.png,PNG / RGBA transparent,3000 x 580px,92861
+01-Identity/wordmarks/png/anya-sarre-primary-dark.png,PNG / RGBA transparent,3000 x 631px,92423
+01-Identity/wordmarks/png/anya-sarre-primary-light.png,PNG / RGBA transparent,3000 x 631px,81054
+01-Identity/wordmarks/png/anya-sarre-primary-pink.png,PNG / RGBA transparent,3000 x 631px,93733
+01-Identity/wordmarks/png/anya-sarre-stacked-dark.png,PNG / RGBA transparent,3000 x 2132px,188013
+01-Identity/wordmarks/png/anya-sarre-stacked-light.png,PNG / RGBA transparent,3000 x 2132px,167658
+01-Identity/wordmarks/png/anya-sarre-stacked-pink.png,PNG / RGBA transparent,3000 x 2132px,190579
+01-Identity/wordmarks/svg/anya-sarre-compact-dark.svg,SVG,viewBox 0 0 1438 278 (vector),3067
+01-Identity/wordmarks/svg/anya-sarre-compact-light.svg,SVG,viewBox 0 0 1438 278 (vector),3067
+01-Identity/wordmarks/svg/anya-sarre-compact-pink.svg,SVG,viewBox 0 0 1438 278 (vector),3067
+01-Identity/wordmarks/svg/anya-sarre-primary-dark.svg,SVG,viewBox 0 0 1450 305 (vector),3067
+01-Identity/wordmarks/svg/anya-sarre-primary-light.svg,SVG,viewBox 0 0 1450 305 (vector),3067
+01-Identity/wordmarks/svg/anya-sarre-primary-pink.svg,SVG,viewBox 0 0 1450 305 (vector),3067
+01-Identity/wordmarks/svg/anya-sarre-stacked-dark.svg,SVG,viewBox 0 0 750 533 (vector),3066
+01-Identity/wordmarks/svg/anya-sarre-stacked-light.svg,SVG,viewBox 0 0 750 533 (vector),3066
+01-Identity/wordmarks/svg/anya-sarre-stacked-pink.svg,SVG,viewBox 0 0 750 533 (vector),3066
+02-Heroes/desktop/01-backstage-monochrome-desktop.jpg,JPG / RGB,1774 x 887px,304163
+02-Heroes/desktop/01-backstage-monochrome-desktop.webp,WEBP / RGB,1774 x 887px,182772
+02-Heroes/desktop/02-jewellery-pink-desktop.jpg,JPG / RGB,1774 x 887px,314183
+02-Heroes/desktop/02-jewellery-pink-desktop.webp,WEBP / RGB,1774 x 887px,158434
+02-Heroes/desktop/03-emerald-lilac-desktop.jpg,JPG / RGB,1774 x 887px,275887
+02-Heroes/desktop/03-emerald-lilac-desktop.webp,WEBP / RGB,1774 x 887px,119376
+02-Heroes/desktop/04-silver-beauty-desktop.jpg,JPG / RGB,1774 x 887px,276053
+02-Heroes/desktop/04-silver-beauty-desktop.webp,WEBP / RGB,1774 x 887px,146744
+02-Heroes/desktop/05-ivory-couture-desktop.jpg,JPG / RGB,1774 x 887px,296822
+02-Heroes/desktop/05-ivory-couture-desktop.webp,WEBP / RGB,1774 x 887px,136124
+02-Heroes/desktop/06-atelier-monochrome-desktop.jpg,JPG / RGB,1774 x 887px,310311
+02-Heroes/desktop/06-atelier-monochrome-desktop.webp,WEBP / RGB,1774 x 887px,189346
+02-Heroes/desktop/07-bridal-edit-desktop.jpg,JPG / RGB,1774 x 887px,288353
+02-Heroes/desktop/07-bridal-edit-desktop.webp,WEBP / RGB,1774 x 887px,123468
+02-Heroes/desktop/08-rose-studio-desktop.jpg,JPG / RGB,1774 x 887px,252127
+02-Heroes/desktop/08-rose-studio-desktop.webp,WEBP / RGB,1774 x 887px,107044
+02-Heroes/desktop/09-la-daylight-desktop.jpg,JPG / RGB,1774 x 887px,386018
+02-Heroes/desktop/09-la-daylight-desktop.webp,WEBP / RGB,1774 x 887px,209150
+02-Heroes/desktop/10-stylists-edit-desktop.jpg,JPG / RGB,1774 x 887px,279238
+02-Heroes/desktop/10-stylists-edit-desktop.webp,WEBP / RGB,1774 x 887px,149308
+02-Heroes/masters/01-backstage-monochrome-desktop-master.png,PNG / RGB,1774 x 887px,2396918
+02-Heroes/masters/01-backstage-monochrome-mobile-master.png,PNG / RGB,1122 x 1402px,2474051
+02-Heroes/masters/02-jewellery-pink-desktop-master.png,PNG / RGB,1774 x 887px,2068928
+02-Heroes/masters/02-jewellery-pink-mobile-master.png,PNG / RGB,1122 x 1402px,2249367
+02-Heroes/masters/03-emerald-lilac-desktop-master.png,PNG / RGB,1774 x 887px,2003139
+02-Heroes/masters/03-emerald-lilac-mobile-master.png,PNG / RGB,1122 x 1402px,1941746
+02-Heroes/masters/04-silver-beauty-desktop-master.png,PNG / RGB,1774 x 887px,2353936
+02-Heroes/masters/04-silver-beauty-mobile-master.png,PNG / RGB,1122 x 1402px,2466508
+02-Heroes/masters/05-ivory-couture-desktop-master.png,PNG / RGB,1774 x 887px,2008552
+02-Heroes/masters/05-ivory-couture-mobile-master.png,PNG / RGB,1122 x 1402px,2082764
+02-Heroes/masters/06-atelier-monochrome-desktop-master.png,PNG / RGB,1774 x 887px,2353861
+02-Heroes/masters/06-atelier-monochrome-mobile-master.png,PNG / RGB,1122 x 1402px,2580781
+02-Heroes/masters/07-bridal-edit-desktop-master.png,PNG / RGB,1774 x 887px,1897530
+02-Heroes/masters/07-bridal-edit-mobile-master.png,PNG / RGB,1122 x 1402px,1975332
+02-Heroes/masters/08-rose-studio-desktop-master.png,PNG / RGB,1774 x 887px,1996585
+02-Heroes/masters/08-rose-studio-mobile-master.png,PNG / RGB,1122 x 1402px,1935503
+02-Heroes/masters/09-la-daylight-desktop-master.png,PNG / RGB,1774 x 887px,2408601
+02-Heroes/masters/09-la-daylight-mobile-master.png,PNG / RGB,1122 x 1402px,2302775
+02-Heroes/masters/10-stylists-edit-desktop-master.png,PNG / RGB,1774 x 887px,2117321
+02-Heroes/masters/10-stylists-edit-mobile-master.png,PNG / RGB,1122 x 1402px,2128640
+02-Heroes/mobile/01-backstage-monochrome-mobile.jpg,JPG / RGB,1120 x 1400px,321049
+02-Heroes/mobile/01-backstage-monochrome-mobile.webp,WEBP / RGB,1120 x 1400px,197738
+02-Heroes/mobile/02-jewellery-pink-mobile.jpg,JPG / RGB,1120 x 1400px,378617
+02-Heroes/mobile/02-jewellery-pink-mobile.webp,WEBP / RGB,1120 x 1400px,207554
+02-Heroes/mobile/03-emerald-lilac-mobile.jpg,JPG / RGB,1120 x 1400px,268156
+02-Heroes/mobile/03-emerald-lilac-mobile.webp,WEBP / RGB,1120 x 1400px,116938
+02-Heroes/mobile/04-silver-beauty-mobile.jpg,JPG / RGB,1120 x 1400px,308892
+02-Heroes/mobile/04-silver-beauty-mobile.webp,WEBP / RGB,1120 x 1400px,174788
+02-Heroes/mobile/05-ivory-couture-mobile.jpg,JPG / RGB,1120 x 1400px,333625
+02-Heroes/mobile/05-ivory-couture-mobile.webp,WEBP / RGB,1120 x 1400px,158746
+02-Heroes/mobile/06-atelier-monochrome-mobile.jpg,JPG / RGB,1120 x 1400px,375089
+02-Heroes/mobile/06-atelier-monochrome-mobile.webp,WEBP / RGB,1120 x 1400px,251796
+02-Heroes/mobile/07-bridal-edit-mobile.jpg,JPG / RGB,1120 x 1400px,322812
+02-Heroes/mobile/07-bridal-edit-mobile.webp,WEBP / RGB,1120 x 1400px,142220
+02-Heroes/mobile/08-rose-studio-mobile.jpg,JPG / RGB,1120 x 1400px,244406
+02-Heroes/mobile/08-rose-studio-mobile.webp,WEBP / RGB,1120 x 1400px,103274
+02-Heroes/mobile/09-la-daylight-mobile.jpg,JPG / RGB,1120 x 1400px,371287
+02-Heroes/mobile/09-la-daylight-mobile.webp,WEBP / RGB,1120 x 1400px,186968
+02-Heroes/mobile/10-stylists-edit-mobile.jpg,JPG / RGB,1120 x 1400px,285952
+02-Heroes/mobile/10-stylists-edit-mobile.webp,WEBP / RGB,1120 x 1400px,145990
+03-Previews/Anya-Sarre-Composition-Overview.png,PNG / RGB,2400 x 1720px,1419511
+03-Previews/Anya-Sarre-Identity-Lookbook.pdf,PDF,1200 x 860pt; 1200 x 860pt; 1200 x 1530pt; 1200 x 860pt,8570686
+03-Previews/Anya-Sarre-Identity-Overview.png,PNG / RGB,2400 x 1720px,1085211
+03-Previews/Anya-Sarre-Ten-Hero-Options.png,PNG / RGB,2400 x 3060px,5010169
+03-Previews/Anya-Sarre-Three-Lettering-Directions.png,PNG / RGB,2400 x 1720px,241021
+03-Previews/hero-01-wordmark-composition-desktop.png,PNG / RGBA transparent,1774 x 887px,1362405
+03-Previews/hero-01-wordmark-composition-mobile.png,PNG / RGBA transparent,1120 x 1400px,1393577
+04-Handover/Anya-Sarre-Handover-Sheet.pdf,PDF,595 x 842pt; 595 x 842pt,24418
+04-Handover/contrast-ratios.json,JSON,,186
+04-Handover/generation-prompts.json,JSON,,20929
+04-Handover/hero-crop-guidance.csv,CSV,,3175
+04-Handover/hero-crop-guidance.json,JSON,,9124
+05-Supporting-Graphics/editorial-rule-plum.png,PNG / RGBA transparent,1800 x 33px,563
+05-Supporting-Graphics/editorial-rule-plum.svg,SVG,viewBox 0 0 754 14 (vector),278
+05-Supporting-Graphics/editorial-tail-rose.png,PNG / RGBA transparent,1800 x 499px,31040
+05-Supporting-Graphics/editorial-tail-rose.svg,SVG,viewBox 0 0 310 86 (vector),381
+05-Supporting-Graphics/open-frame-rose.png,PNG / RGBA transparent,1800 x 1409px,13606
+05-Supporting-Graphics/open-frame-rose.svg,SVG,viewBox 0 0 460 360 (vector),327
+06-Fonts/BricolageGrotesque-OFL.txt,TXT,,4403
+06-Fonts/BricolageGrotesque-Variable.ttf,TTF,,408496
+06-Fonts/BricolageGrotesque-Variable.woff2,WOFF2,,205136
+06-Fonts/DMSans-OFL.txt,TXT,,4482
+06-Fonts/DMSans-Variable.ttf,TTF,,240164
+06-Fonts/DMSans-Variable.woff2,WOFF2,,88848
+06-Fonts/fonts.css,CSS,,307
+README-START-HERE.md,MD,,6060

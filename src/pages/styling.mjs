@@ -9,7 +9,7 @@ const services = [
     source: "Beverly Hills Courier, Nov 12, 2024",
     status: "confirmed",
     tone: "pink",
-    img: { src: "desktop", ratio: "5 / 4", pos: "80% 100%", scale: 2.3, alt: "Black off-the-shoulder tulle-trimmed dress and a hand holding an iced drink, from a portrait of Anya Sarre." },
+    img: { img: "05-mobile", ratio: "5 / 4", pos: "55% 78%", scale: 1.5, alt: "Detail of a voluminous ivory ruffled skirt from a concept portrait of Anya." },
   },
   {
     id: "personal",
@@ -19,7 +19,7 @@ const services = [
     status: "to-confirm",
     note: "Service category is part of the working brief. Session format, process and pricing are not stated in any source and need Anya’s confirmation.",
     tone: "lilac",
-    img: { src: "mobile", ratio: "4 / 5", pos: "52% 49%", scale: 1, alt: "" },
+    img: { img: "10-desktop", ratio: "4 / 3", pos: "72% 56%", scale: 1, alt: "Pastel fashion still life with a pink satin shoe, lilac cube, blush fabric, silver earrings and makeup brushes." },
   },
   {
     id: "wardrobe",
@@ -54,7 +54,7 @@ ${pageHero({
   kicker: "Styling",
   title: "Dressed for the <em>moment.</em>",
   lead: "Red-carpet standards, applied to real calendars. Styling through Styled By Anya Inc.",
-  img: { src: "desktop", ratio: "4 / 3", pos: "72% 62%", scale: 1.25, alt: "Anya Sarre in a black-and-white portrait, in an off-the-shoulder dress with tulle trim, while her hair and makeup are finished.", sizes: "(min-width: 900px) 44vw, 90vw", priority: true },
+  img: { img: "05-desktop", ratio: "4 / 3", pos: "66% 40%", scale: 1, alt: "Concept portrait of Anya in a cream bodice and voluminous ivory ruffled skirt on a pale blush studio floor.", sizes: "(min-width: 900px) 44vw, 90vw", priority: true },
 })}
 
 <section class="services" aria-labelledby="services-title">

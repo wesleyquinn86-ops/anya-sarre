@@ -21,7 +21,7 @@ ${pageHero({
   kicker: "About Anya",
   title: "A stylist with a <em>stage voice.</em>",
   lead: "Los Angeles-based celebrity fashion stylist, television fashion, beauty and lifestyle expert, and brand influencer.",
-  img: { src: "mobile", ratio: "4 / 5", pos: "52% 44%", scale: 1.35, alt: "Anya Sarre in black and white, wide-eyed, with windswept hair, hoop earrings and an iced drink.", sizes: "(min-width: 900px) 34vw, 90vw", priority: true },
+  img: { img: "04-mobile", ratio: "4 / 5", pos: "65% 44%", scale: 1, alt: "Black-and-white three-quarter concept portrait of Anya with wavy blonde hair and a large crystal earring.", sizes: "(min-width: 900px) 34vw, 90vw", priority: true },
 })}
 
 <section class="story" aria-labelledby="story-title">

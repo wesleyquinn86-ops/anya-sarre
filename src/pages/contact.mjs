@@ -50,7 +50,7 @@ ${pageHero({
   kicker: "Contact",
   title: "Work with <em>Anya.</em>",
   lead: "Choose the route that fits. Each goes to the right conversation.",
-  img: { src: "mobile", ratio: "4 / 5", pos: "52% 47%", scale: 1.1, alt: "Anya Sarre in a black-and-white portrait, wide-eyed, with windswept hair, hoop earrings and an iced drink.", sizes: "(min-width: 900px) 30vw, 80vw", priority: true, cls: "page-hero__photo--narrow" },
+  img: { img: "08-mobile", ratio: "4 / 5", pos: "50% 33%", scale: 1, alt: "Concept portrait of Anya seated in black with an ornate statement necklace against a rose studio wall.", sizes: "(min-width: 900px) 30vw, 80vw", priority: true, cls: "page-hero__photo--narrow" },
 })}
 
 <section class="contact" aria-labelledby="routes-title">

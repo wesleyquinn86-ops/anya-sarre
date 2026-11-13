@@ -1,0 +1,342 @@
+[
+  {
+    "id": "01",
+    "name": "Backstage / monochrome",
+    "provenance": "Source-based AI reconstruction",
+    "source": "Earlier preferred backstage edit (444 x 690)",
+    "desktop_focal_percent": [
+      74,
+      36
+    ],
+    "mobile_focal_percent": [
+      50,
+      53
+    ],
+    "crop_guidance": "Keep both tool hands and assistant arm trajectories. Desktop copy left 5-37%; mobile copy in top 3-16%.",
+    "alt_text": "Black-and-white concept portrait of Anya with a makeup artist and hair stylist behind her.",
+    "desktop_master_dimensions": [
+      1774,
+      887
+    ],
+    "desktop_export": "02-Heroes/desktop/01-backstage-monochrome-desktop.jpg",
+    "desktop_export_dimensions": [
+      1774,
+      887
+    ],
+    "mobile_master_dimensions": [
+      1122,
+      1402
+    ],
+    "mobile_export": "02-Heroes/mobile/01-backstage-monochrome-mobile.jpg",
+    "mobile_export_dimensions": [
+      1120,
+      1400
+    ]
+  },
+  {
+    "id": "02",
+    "name": "Jewellery / pink",
+    "provenance": "Source-based AI reconstruction",
+    "source": "homepage-slider-headshot-03.jpg (540 x 240)",
+    "desktop_focal_percent": [
+      72,
+      28
+    ],
+    "mobile_focal_percent": [
+      50,
+      36
+    ],
+    "crop_guidance": "Keep both raised hands and jewellery inside the frame. Desktop copy left 5-40%; mobile top 3-18%.",
+    "alt_text": "Anya in pink with statement jewellery held in both raised hands against a pink studio background.",
+    "desktop_master_dimensions": [
+      1774,
+      887
+    ],
+    "desktop_export": "02-Heroes/desktop/02-jewellery-pink-desktop.jpg",
+    "desktop_export_dimensions": [
+      1774,
+      887
+    ],
+    "mobile_master_dimensions": [
+      1122,
+      1402
+    ],
+    "mobile_export": "02-Heroes/mobile/02-jewellery-pink-mobile.jpg",
+    "mobile_export_dimensions": [
+      1120,
+      1400
+    ]
+  },
+  {
+    "id": "03",
+    "name": "Emerald / lilac",
+    "provenance": "Source-based AI reconstruction",
+    "source": "homepage-slider-headshot-01.jpg (540 x 240)",
+    "desktop_focal_percent": [
+      75,
+      32
+    ],
+    "mobile_focal_percent": [
+      52,
+      44
+    ],
+    "crop_guidance": "Keep raised hand, fingertips and bracelet stack. Desktop copy left 5-43%; mobile top 3-18%.",
+    "alt_text": "Anya wearing emerald green with a statement necklace and one hand at her temple on a lilac background.",
+    "desktop_master_dimensions": [
+      1774,
+      887
+    ],
+    "desktop_export": "02-Heroes/desktop/03-emerald-lilac-desktop.jpg",
+    "desktop_export_dimensions": [
+      1774,
+      887
+    ],
+    "mobile_master_dimensions": [
+      1122,
+      1402
+    ],
+    "mobile_export": "02-Heroes/mobile/03-emerald-lilac-mobile.jpg",
+    "mobile_export_dimensions": [
+      1120,
+      1400
+    ]
+  },
+  {
+    "id": "04",
+    "name": "Silver / beauty",
+    "provenance": "Source-based AI reconstruction",
+    "source": "homepage-slider-headshot-04.jpg (640 x 427)",
+    "desktop_focal_percent": [
+      76,
+      34
+    ],
+    "mobile_focal_percent": [
+      65,
+      44
+    ],
+    "crop_guidance": "Keep eye line, nose silhouette and visible earring. Desktop copy left 5-42%; mobile top 3-16%.",
+    "alt_text": "Black-and-white three-quarter portrait of Anya with wavy blonde hair and a large crystal earring.",
+    "desktop_master_dimensions": [
+      1774,
+      887
+    ],
+    "desktop_export": "02-Heroes/desktop/04-silver-beauty-desktop.jpg",
+    "desktop_export_dimensions": [
+      1774,
+      887
+    ],
+    "mobile_master_dimensions": [
+      1122,
+      1402
+    ],
+    "mobile_export": "02-Heroes/mobile/04-silver-beauty-mobile.jpg",
+    "mobile_export_dimensions": [
+      1120,
+      1400
+    ]
+  },
+  {
+    "id": "05",
+    "name": "Ivory / couture",
+    "provenance": "Source-based AI reconstruction",
+    "source": "homepage-header-portrait-full-length.jpg (279 x 352)",
+    "desktop_focal_percent": [
+      77,
+      17
+    ],
+    "mobile_focal_percent": [
+      65,
+      29
+    ],
+    "crop_guidance": "Preserve the full skirt silhouette. Desktop copy upper-left; mobile top only or outside the image.",
+    "alt_text": "Anya in a cream bodice and voluminous ivory ruffled skirt on a pale blush studio floor.",
+    "desktop_master_dimensions": [
+      1774,
+      887
+    ],
+    "desktop_export": "02-Heroes/desktop/05-ivory-couture-desktop.jpg",
+    "desktop_export_dimensions": [
+      1774,
+      887
+    ],
+    "mobile_master_dimensions": [
+      1122,
+      1402
+    ],
+    "mobile_export": "02-Heroes/mobile/05-ivory-couture-mobile.jpg",
+    "mobile_export_dimensions": [
+      1120,
+      1400
+    ]
+  },
+  {
+    "id": "06",
+    "name": "Atelier / monochrome",
+    "provenance": "TV-derived AI reconstruction",
+    "source": "TV: behind-the-seams-at-tadashi (400 x 275)",
+    "desktop_focal_percent": [
+      71,
+      29
+    ],
+    "mobile_focal_percent": [
+      60,
+      43
+    ],
+    "crop_guidance": "Keep both faces, working hands, fabric and machine. Desktop copy left 5-31%; mobile copy above the image.",
+    "alt_text": "Reconstructed monochrome atelier scene of Anya beside a dressmaker at a sewing machine.",
+    "desktop_master_dimensions": [
+      1774,
+      887
+    ],
+    "desktop_export": "02-Heroes/desktop/06-atelier-monochrome-desktop.jpg",
+    "desktop_export_dimensions": [
+      1774,
+      887
+    ],
+    "mobile_master_dimensions": [
+      1122,
+      1402
+    ],
+    "mobile_export": "02-Heroes/mobile/06-atelier-monochrome-mobile.jpg",
+    "mobile_export_dimensions": [
+      1120,
+      1400
+    ]
+  },
+  {
+    "id": "07",
+    "name": "The bridal edit",
+    "provenance": "TV-derived AI reconstruction",
+    "source": "TV: wedding-dress-trends (400 x 275)",
+    "desktop_focal_percent": [
+      71,
+      22
+    ],
+    "mobile_focal_percent": [
+      51,
+      33
+    ],
+    "crop_guidance": "Keep both hands, waist belt and necklace. Desktop copy left 5-37%; mobile top 3-17%.",
+    "alt_text": "Reconstructed portrait of Anya in an emerald dress with ivory gowns hanging behind her.",
+    "desktop_master_dimensions": [
+      1774,
+      887
+    ],
+    "desktop_export": "02-Heroes/desktop/07-bridal-edit-desktop.jpg",
+    "desktop_export_dimensions": [
+      1774,
+      887
+    ],
+    "mobile_master_dimensions": [
+      1122,
+      1402
+    ],
+    "mobile_export": "02-Heroes/mobile/07-bridal-edit-mobile.jpg",
+    "mobile_export_dimensions": [
+      1120,
+      1400
+    ]
+  },
+  {
+    "id": "08",
+    "name": "Rose studio",
+    "provenance": "New AI concept portrait",
+    "source": "New scene; identity refs headshot-05 and -04",
+    "desktop_focal_percent": [
+      29,
+      20
+    ],
+    "mobile_focal_percent": [
+      50,
+      33
+    ],
+    "crop_guidance": "Subject is on the left. Desktop copy right 53-94%; mobile top 3-16%. Keep both lap hands.",
+    "alt_text": "Imagined rose studio portrait of Anya seated in a black outfit with an ornate statement necklace.",
+    "desktop_master_dimensions": [
+      1774,
+      887
+    ],
+    "desktop_export": "02-Heroes/desktop/08-rose-studio-desktop.jpg",
+    "desktop_export_dimensions": [
+      1774,
+      887
+    ],
+    "mobile_master_dimensions": [
+      1122,
+      1402
+    ],
+    "mobile_export": "02-Heroes/mobile/08-rose-studio-mobile.jpg",
+    "mobile_export_dimensions": [
+      1120,
+      1400
+    ]
+  },
+  {
+    "id": "09",
+    "name": "L.A. daylight",
+    "provenance": "New AI concept portrait",
+    "source": "New scene; identity refs headshot-05 and -04",
+    "desktop_focal_percent": [
+      74,
+      24
+    ],
+    "mobile_focal_percent": [
+      60,
+      31
+    ],
+    "crop_guidance": "Keep face, hair and necklace. Desktop copy left 5-40%; mobile top 3-16%.",
+    "alt_text": "Imagined daylight portrait of Anya in black against a warm plaster wall with palms at the edge.",
+    "desktop_master_dimensions": [
+      1774,
+      887
+    ],
+    "desktop_export": "02-Heroes/desktop/09-la-daylight-desktop.jpg",
+    "desktop_export_dimensions": [
+      1774,
+      887
+    ],
+    "mobile_master_dimensions": [
+      1122,
+      1402
+    ],
+    "mobile_export": "02-Heroes/mobile/09-la-daylight-mobile.jpg",
+    "mobile_export_dimensions": [
+      1120,
+      1400
+    ]
+  },
+  {
+    "id": "10",
+    "name": "The stylist's edit",
+    "provenance": "New AI concept still life",
+    "source": "Newly generated still life; no person reference",
+    "desktop_focal_percent": [
+      72,
+      56
+    ],
+    "mobile_focal_percent": [
+      52,
+      68
+    ],
+    "crop_guidance": "Keep shoe tip and heel, both earrings, cube and brushes. Desktop copy left 5-38%; mobile top 3-20%.",
+    "alt_text": "Pastel fashion still life with a pink satin shoe, lilac cube, blush fabric, silver earrings and makeup brushes.",
+    "desktop_master_dimensions": [
+      1774,
+      887
+    ],
+    "desktop_export": "02-Heroes/desktop/10-stylists-edit-desktop.jpg",
+    "desktop_export_dimensions": [
+      1774,
+      887
+    ],
+    "mobile_master_dimensions": [
+      1122,
+      1402
+    ],
+    "mobile_export": "02-Heroes/mobile/10-stylists-edit-mobile.jpg",
+    "mobile_export_dimensions": [
+      1120,
+      1400
+    ]
+  }
+]

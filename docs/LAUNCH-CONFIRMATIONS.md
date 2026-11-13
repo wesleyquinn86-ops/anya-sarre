@@ -4,8 +4,8 @@
 
 ## Permission and approval
 1. Anya's agreement to a website at all, and the production domain (`SITE_URL`).
-2. Approval of the **AI-extended hero** and the footer disclosure; confirmation that the original portrait is licensed for this use, with any photographer credit.
-3. Approval of the wordmark treatment (the pack's studies are not an approved logo) and of the pink/pastel palette and typography.
+2. Approval of the **AI-assisted imagery** (hero 01 and the seven other options used; see `docs/ASSETS.md`): Anya's approval of her likeness, jewellery details and the invented scenes/assistants, permission to use the source photographs (with any photographer credit), and the footer disclosure. Remove any option she dislikes; prefer licensed original photography (option 05's reference is only 279×352).
+3. Approval of the **Sculpted Masthead wordmark**, palette and Bricolage Grotesque/DM Sans pairing, which are a proposed identity, **not an approved rebrand**.
 4. Whether Styled By Anya Inc. branding and the name “Styled By Anya” may be used as shown.
 
 ## Facts to verify against anyasarre.com or Anya

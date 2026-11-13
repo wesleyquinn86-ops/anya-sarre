@@ -1,31 +1,51 @@
 # Asset inventory
 
-## Supplied (`Anya-Sarre-Hero-Pack.zip`, received 13 Nov 2026)
+## Approved identity pack
 
-| File in pack | In project | Used for |
+Source: `Anya-Sarre-Concept-Asset-Pack.zip` (Drive, 70 MB), prepared by Wesley Quinn / Built By Wes, 13 Nov 2026. It was designated **the approved pack for this concept** on 13 Nov 2026. Its own README is kept at `assets/pack/README-START-HERE.md`; it states the pack is an independent concept, **not an approved rebrand** by Anya.
+
+| Pack folder | In the repo | Used for |
 | --- | --- | --- |
-| `assets/anya-sarre-hero-desktop.png` (1774×887, 2:1) | `assets/source/` → `public/img/hero-desktop-*.{avif,webp}` | Home hero ≥768px; CSS crops on inner pages |
-| `assets/anya-sarre-hero-mobile.png` (1122×1402, ~4:5) | `assets/source/` → `public/img/hero-mobile-*.{avif,webp}` | Home hero <768px; portrait crops (About, Bio, Contact, Styling, Partnerships) |
-| `assets/anya-sarre-hero-*.webp` | not used directly | Regenerated at responsive widths from the PNG masters |
-| `assets/wordmark-study-inline.svg`, `-stacked.svg` | `assets/brand/` | Header/footer wordmark (recoloured via `currentColor`), favicon, social image. The pack calls these *studies*, **not an approved logo** |
-| `crop-settings.json`, `README-crop-guidance.md` | `assets/brand/` | Focal points and safe areas, enforced by `scripts/verify.mjs` |
-| `anya-sarre-composition-preview.png/.svg` | PNG in `assets/brand/` | Reference only |
-| Proposed colours (`#F3A3BB`, `#F6F1EE`, `#0B0B0C`) | CSS tokens | Palette. Supporting pastels (lilac, mint, butter, peach) are proposal choices |
+| `01-Identity/wordmarks/svg` (primary, compact, stacked × dark/light/pink) | `assets/pack/01-Identity/` (SVG + transparent PNG) | **Direction 01, Sculpted Masthead.** Inline SVG recoloured via `currentColor`: *primary* in the header, *stacked* in the hero (desktop) and footer, *compact* in the mobile hero. Genuine vector paths. Decorative where adjacent text supplies the name “Anya Sarre” |
+| `01-Identity/brand-tokens.css`, `palette.json` | same | Colour tokens in `src/css/styles.css`: plum `#2B1728`, ivory `#FFF9F6`, rose `#B52B62`, blush `#F2CED8`, dusty pink `#CF91A6`, lilac `#DED5EC`, peach `#F6DBCE` |
+| `06-Fonts` | `public/fonts/` (self-hosted) + OFL texts | Bricolage Grotesque (headings, 600, optical size 48; the width axis is used for the condensed marquee names) and DM Sans (body, UI). SIL OFL; licence texts are kept with the fonts |
+| `02-Heroes/desktop`, `mobile` (JPEG exports) | `assets/source/hero-NN-{desktop,mobile}.jpg` → `public/img/` (AVIF + WebP, 480–native widths, never upscaled) | See hero allocation below. The PNG masters (~46 MB) stay in Drive |
+| `04-Handover` (crop guidance, inventory, contrast ratios, prompts, PDF) | `assets/pack/04-Handover/` | Focal points, copy zones, alt text (reused for the hero) |
+| `05-Supporting-Graphics` (open frame, rule, curved tail) | `assets/pack/05-Supporting-Graphics/` | **Not used yet.** The pack asks for one gestural motif per composition, used sparingly |
+| `03-Previews` | not copied (Drive) | Reference only |
 
-Responsive images: AVIF + WebP at 480/720/960/1280/1600/native, never upscaled (`npm run images`). `width`/`height` are set; the hero is `fetchpriority="high"`, all other images lazy.
+### Hero allocation (8 of the 10 options)
+
+| Option | Provenance (per pack) | Where used |
+| --- | --- | --- |
+| **01** Backstage / monochrome | Source-based AI reconstruction | **Home hero** (recommended pairing with Direction 01); a face crop in Selected work |
+| 02 Jewellery / pink | Source-based AI reconstruction | Brand Partnerships header |
+| 03 Emerald / lilac | Source-based AI reconstruction | Media & Press header |
+| 04 Silver / beauty | Source-based AI reconstruction | About header |
+| 05 Ivory / couture | Source-based AI reconstruction (lowest-resolution reference, 279×352) | Styling header and red-carpet service crop |
+| 08 Rose studio | New AI concept portrait | Contact header |
+| 09 L.A. daylight | New AI concept portrait | Home short bio |
+| 10 The stylist's edit | New AI concept still life (no person) | Styling, personal-styling service |
+| 06 Atelier, 07 Bridal edit | **TV-derived** reconstructions | **Deliberately not used**: they could be mistaken for broadcast stills |
+
+The README advises one hero rather than a carousel; the site uses one home hero and a different option as each inner page's header image.
+
+Placement follows the pack: desktop and mobile files from the **same option**; hero 01 shown at its delivered 2:1 and 4:5 ratios; the wordmark sits in the desktop left field (copy zone 5–37%) and the mobile top field (3–16%); supporting copy sits below the mobile photograph. Other crops use CSS `object-position` and scale from the pack's focal points and are checked per page.
+
+### Contrast on the photograph (measured, hero 01)
+
+Plum against the pixels behind the lettering: desktop wordmark median **7.6:1** (5th percentile 4.1:1, darkest 1% 3.4:1, which is acceptable for large display type); desktop tagline **6.2:1** at worst-1%; mobile wordmark **6.2:1** at worst-1%. Pack palette ratios: plum on ivory 16.0, plum on dusty pink 6.6, ivory on rose 5.8, rose on ivory 5.8. Small text on dusty pink uses plum (not the muted tone) to stay AA; axe checks all pages.
 
 ## Disclosure carried into the site
 
-The pack states the **scene around Anya was extended/recomposed with AI** and that the **team members shown are not documented photographs of Anya's staff.** The footer says so, alt text describes the picture without claiming those people are her team, and this must be approved by Anya (see launch confirmations). Image-use rights/credits for the original portrait are not stated in the pack.
+All pack imagery is AI-assisted: **reconstructions from small source photographs, with invented scenes, assistants and details; options 08–10 are newly imagined.** The footer says so, alt text describes pictures without claiming the people shown are Anya's team, and the Instagram/other photography is never mixed in. **Approval of likeness, jewellery detail and permission to use the source photographs are Anya's to give** (pack README), and replacing any option she dislikes with licensed original photography is expected before publication.
 
-## Missing or temporary
+## Still missing or temporary
 
-| Needed | Status | Temporary treatment |
-| --- | --- | --- |
-| Approved logo and variations | **Received later (13 Nov, five SVGs):** `anya-sarre-primary-{dark,light}.svg`, `anya-sarre-compact-{dark,light,pink}.svg` in `assets/brand/`. Mixed-case “Anya Sarre”, plain paths, fills `#291C2A` dark, `#ED7BA5` pink, `#FFF8F2` light. Now used for the header and footer wordmark (recoloured via `currentColor`), favicon glyph and social image. **Not yet applied:** the large hero name is still live uppercase Bodoni Moda from the earlier study direction and **no longer matches** this lettering; the site palette still uses the earlier proposed pink `#F3A3BB`/dark `#0B0B0C` rather than `#ED7BA5`/`#291C2A`/`#FFF8F2`. Waiting on the guidelines and the fourth colour before re-toning. No stacked version was supplied, so a stacked hero lockup would need to be cut from the supplied paths or supplied |
-| Brand guide and typography guidance | Only three hex values and crop notes | **Bodoni Moda** (display, matches the Didone wordmark) + **DM Sans** (body), both SIL OFL, self-hosted in `public/fonts/` |
-| Supporting editorial graphics | None supplied | CSS shapes (rounded blocks, arch crop, hard shadows, rotating “Styled By Anya Inc.” badge, sparkles) |
-| Additional photography (work, TV stills, red-carpet) | None supplied. Note: the chat message displayed light-background and studio variants of the hero, but only the dark desktop and mobile files were in the zip | Inner pages reuse CSS crops of the two supplied masters (different regions/scales) |
-| Television show marks/posters, official publication mastheads | Not sourced (sites unreachable; rights unconfirmed) | Typeset names |
-| Verified video | None found | No “watch” action; the Selected videos section renders automatically once `press.json` has an entry |
-| Social image | Built from the hero + wordmark (`public/og.png`, 1200×630) | Rebuild with `node scripts/brand-assets.mjs` if the hero or wordmark changes |
+| Needed | Status |
+| --- | --- |
+| Official publication mastheads, TV network/show marks | Not sourced (pack leaves them out on purpose). Outlet and show names are typeset |
+| Verified video | Candidates exist in the wider Drive folder (see `docs/SOURCES.md`); none is published on the site yet |
+| High-resolution original photography | Recommended before launch (option 05's reference is only 279×352) |
+| The pre-existing Styled by Anya seal | Assessed by the pack but not redrawn or included; not used |
+| Social image | `public/og.jpg`, built from hero 01 + the stacked wordmark (`node scripts/brand-assets.mjs`) |

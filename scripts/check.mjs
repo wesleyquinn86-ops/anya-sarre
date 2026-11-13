@@ -96,7 +96,7 @@ for (const [rel, html] of Object.entries(pages)) {
 }
 
 ok(await exists(path.join(dist, "_headers")), "missing _headers");
-ok(await exists(path.join(dist, "og.png")), "missing og.png");
+ok(await exists(path.join(dist, "og.jpg")), "missing og.jpg");
 ok(await exists(path.join(dist, "favicon.svg")), "missing favicon.svg");
 if (preview) {
   ok(!(await exists(path.join(dist, "sitemap.xml"))), "preview must not ship a sitemap");

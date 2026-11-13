@@ -18,7 +18,7 @@ ${pageHero({
   kicker: "Media & Press",
   title: "On air, on stage, <em>on record.</em>",
   lead: "Television, hosting, speaking and coverage, with the role and source for each.",
-  img: { src: "desktop", ratio: "4 / 3", pos: "74% 38%", scale: 1.9, alt: "Anya Sarre looking straight to camera, wide-eyed, with a makeup brush at her temple.", sizes: "(min-width: 900px) 44vw, 90vw", priority: true },
+  img: { img: "03-desktop", ratio: "4 / 3", pos: "76% 32%", scale: 1, alt: "Concept portrait of Anya in emerald green with a statement necklace and one hand at her temple against a lilac background.", sizes: "(min-width: 900px) 44vw, 90vw", priority: true },
 })}
 
 <section class="tvlist" id="television" aria-labelledby="tvlist-title">
