@@ -1,4 +1,4 @@
-import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoMark, photo } from "../templates/components.mjs";
+import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoMark, photo, hasStill } from "../templates/components.mjs";
 import { pageHero } from "./_shared.mjs";
 
 const { tv, press, metrics } = data;
@@ -44,7 +44,38 @@ ${pageHero({
   </div>
 </section>
 
-<section class="speaking" id="speaking" aria-labelledby="speaking-title">
+${
+  hasStill("still-ktla-morning-news") && hasStill("still-tedx-stage")
+    ? `<section class="speaking" id="speaking" aria-labelledby="speaking-title">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="kicker kicker--pink">Hosting &amp; speaking</p>
+        <h2 id="speaking-title" class="section-title">Comfortable with a <em>room.</em></h2>
+      </div>
+      <p class="section-sub">On a live morning-news set and on a TEDx stage.</p>
+    </div>
+    <ul class="speaking__cards">
+      <li class="spcard">
+        ${photo({ img: "still-ktla-morning-news", ratio: "16 / 9", pos: "52% 30%", scale: 1, alt: "Anya Sarre smiling on the KTLA 5 Morning News set in a sequined top and long crystal earrings, with an on-screen banner reading Anya Sarre @AnyaSarre.", sizes: "(min-width: 900px) 48vw, 94vw", cls: "spcard__photo" })}
+        <div class="spcard__body">
+          <h3>Host &amp; curator · KTLA 5</h3>
+          <p>“Countdown to Gold: Getting Carpet Ready with Anya Sarre,” an awards-season television special. Pictured on KTLA 5 Morning News.</p>
+          <p class="speaking__src">LOCAL Life Q+A · KTLA 5</p>
+        </div>
+      </li>
+      <li class="spcard">
+        ${photo({ img: "still-tedx-stage", ratio: "16 / 9", pos: "72% 40%", scale: 1, alt: "Anya Sarre speaking on a TEDx stage in a black top and a gold pleated skirt, holding notes, with large red TEDx letters behind her.", sizes: "(min-width: 900px) 48vw, 94vw", cls: "spcard__photo" })}
+        <div class="spcard__body">
+          <h3>Speaker · TEDxHiltonHead Women</h3>
+          <p>Anya has taken the stage as a TEDx speaker. A LOCAL Life profile calls the talk a highlight of her career.</p>
+          <p class="speaking__src">LOCAL Life Q+A</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>`
+    : `<section class="speaking" id="speaking" aria-labelledby="speaking-title">
   <div class="wrap speaking__grid">
     <div class="speaking__lead">
       <p class="kicker kicker--pink">Hosting &amp; speaking</p>
@@ -55,16 +86,17 @@ ${pageHero({
       <li>
         <h3>Host &amp; curator · KTLA 5</h3>
         <p>“Countdown to Gold: Getting Carpet Ready with Anya Sarre,” an awards-season television special.</p>
-        <p class="speaking__src">LOCAL Life Q+A · broadcast date to confirm</p>
+        <p class="speaking__src">LOCAL Life Q+A</p>
       </li>
       <li>
         <h3>Speaker · TEDxHiltonHead Women</h3>
-        <p>Anya’s TEDx talk is described as a highlight of her career. TEDx appears here, under speaking, rather than as a television credit.</p>
-        <p class="speaking__src">LOCAL Life Q+A · talk title and date to confirm</p>
+        <p>Anya has taken the stage as a TEDx speaker. A LOCAL Life profile calls the talk a highlight of her career.</p>
+        <p class="speaking__src">LOCAL Life Q+A</p>
       </li>
     </ul>
   </div>
-</section>
+</section>`
+}
 
 ${
   videos.length

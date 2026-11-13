@@ -1,4 +1,4 @@
-import { data, esc, button, photo, tvMarquee, mastheads, closingCta, wordmark, arrow, pv, pressEntries, visibleVideos } from "../templates/components.mjs";
+import { data, esc, button, photo, tvMarquee, mastheads, closingCta, wordmark, arrow, pv, pressEntries, visibleVideos, hasStill } from "../templates/components.mjs";
 import { config } from "../config.mjs";
 
 const m = data.images;
@@ -101,19 +101,25 @@ ${tvMarquee()}
           <a class="text-link" href="/styling/">Explore styling ${arrow}</a>
         </div>
       </article>
-      <article class="work__tile work__tile--pink">
-        <p class="work__cat">Television &amp; hosting</p>
-        <h3 class="work__title">Countdown to Gold</h3>
-        <p>A KTLA 5 special hosted and curated by Anya: <em>Getting Carpet Ready with Anya Sarre</em>.</p>
-        <p class="work__src">LOCAL Life Q+A · KTLA 5</p>
-        <a class="text-link" href="/media/#television">Television credits ${arrow}</a>
+      <article class="work__tile work__tile--pink${hasStill("still-ktla-morning-news") ? " work__tile--photo" : ""}">
+        ${hasStill("still-ktla-morning-news") ? photo({ img: "still-ktla-morning-news", ratio: "16 / 9", pos: "52% 30%", scale: 1, alt: "Anya Sarre on the KTLA 5 Morning News set, smiling in a sequined top and crystal earrings.", sizes: "(min-width: 900px) 36vw, 94vw", cls: "work__still" }) : ""}
+        <div class="work__body">
+          <p class="work__cat">Television &amp; hosting</p>
+          <h3 class="work__title">Countdown to Gold</h3>
+          <p>A KTLA 5 special hosted and curated by Anya: <em>Getting Carpet Ready with Anya Sarre</em>.</p>
+          <p class="work__src">LOCAL Life Q+A · KTLA 5</p>
+          <a class="text-link" href="/media/#television">Television credits ${arrow}</a>
+        </div>
       </article>
-      <article class="work__tile work__tile--lilac">
-        <p class="work__cat">Speaking</p>
-        <h3 class="work__title">TEDxHiltonHead Women</h3>
-        <p>Speaker at TEDxHiltonHead Women, described as a career highlight.</p>
-        <p class="work__src">LOCAL Life Q+A · date to be confirmed</p>
-        <a class="text-link" href="/media/#speaking">Speaking ${arrow}</a>
+      <article class="work__tile work__tile--lilac${hasStill("still-tedx-stage") ? " work__tile--photo" : ""}">
+        ${hasStill("still-tedx-stage") ? photo({ img: "still-tedx-stage", ratio: "16 / 9", pos: "72% 40%", scale: 1, alt: "Anya Sarre speaking on a TEDx stage in a black top and gold pleated skirt, with large red TEDx letters behind her.", sizes: "(min-width: 900px) 36vw, 94vw", cls: "work__still" }) : ""}
+        <div class="work__body">
+          <p class="work__cat">Speaking</p>
+          <h3 class="work__title">TEDxHiltonHead Women</h3>
+          <p>Speaker at TEDxHiltonHead Women, described as a career highlight.</p>
+          <p class="work__src">LOCAL Life Q+A</p>
+          <a class="text-link" href="/media/#speaking">Speaking ${arrow}</a>
+        </div>
       </article>
       <article class="work__tile work__tile--ink">
         <p class="work__cat">On-air expert</p>

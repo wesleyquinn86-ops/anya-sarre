@@ -5,7 +5,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { config } from "../src/config.mjs";
 import { layout, JS_FLAG } from "../src/templates/layout.mjs";
-import { visibleVideos } from "../src/templates/components.mjs";
+import { visibleVideos, stillsAllowed } from "../src/templates/components.mjs";
 import { readdir } from "node:fs/promises";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -26,6 +26,8 @@ if (!config.preview) {
 await rm(dist, { recursive: true, force: true });
 await mkdir(path.join(dist, "assets"), { recursive: true });
 await cp(path.join(root, "public"), dist, { recursive: true });
+// Rights-sensitive stills (still-*): ship only when allowed.
+if (!stillsAllowed()) for (const f of await readdir(path.join(dist, "img")).catch(() => [])) if (f.startsWith("still-")) await rm(path.join(dist, "img", f), { force: true });
 // Broadcaster footage: ship only clips the page actually offers (preview: all local clips; production: only rights "cleared"; SKIP_VIDEO=1: none).
 {
   const allowed = new Set(visibleVideos().flatMap((v) => [v.file, v.poster]));

@@ -77,6 +77,8 @@ The four KTLA clips are **broadcaster footage whose rights are unconfirmed**, an
 
 **Make the repository private** before sharing links (GitHub → Settings → Danger zone → Change visibility).
 
+The two real photographs (KTLA Morning News, TEDx) are handled the same way: `assets/private/` and `public/img/still-*` are gitignored and ship only in the private zip; production needs `STILLS_CLEARED=1`.
+
 ## Accessibility and motion
 
 Skip link, landmarks, one `h1` per page, visible focus, 44px+ targets, reduced-motion support, and no motion without JavaScript. The television marquee has a visible Pause/Resume control, pauses on hover and keyboard focus, has a static readable list for reduced motion, and its duplicate loop copy is `aria-hidden` with no focusable content.

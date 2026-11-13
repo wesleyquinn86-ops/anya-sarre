@@ -23,6 +23,7 @@
 11. A **verified email** per route (media, brands, styling) and/or a **form endpoint** (`FORM_ENDPOINT`) that accepts JSON from the production origin, handles CORS, and has spam protection. Nothing has been submitted to any real endpoint.
 
 ## Press, logos and video
+11a. **Photo rights for the two real photographs** (KTLA 5 Morning News frame; TEDx stage still): who owns them, whether KTLA/TEDx permit this use, and any credit line. They are gitignored and ship only in the private zip; set `STILLS_CLEARED=1` for a production build once cleared.
 12. Official **masthead SVG/PNG** assets from publisher-controlled sources (names are typeset until then), and publisher URLs where the coverage exists online. The archive scans are not publisher links.
 13. Read the remaining archive pages (OK! ~25 pages, Life & Style, Inside Weddings, Genlux, Gladys, Capitol File, Infatuation, TV Guide, web press) before adding more entries or changing types.
 14. **Video rights and suitability.** The four KTLA clips are broadcaster footage; the archive README says Anya's permission does not clear KTLA/CBS rights. Get written clearance, confirm Anya appears in each clip, choose posters that show her, supply **captions and transcripts**, then set `"rights": "cleared"` per clip. Until then production hides them. Also decide whether to host video on Cloudflare (25 MB per-file limit) or a video platform.

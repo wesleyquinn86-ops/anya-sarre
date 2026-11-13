@@ -42,6 +42,12 @@ Placement follows the pack's principles: desktop and mobile versions of the same
 
 Plum against the pixels behind the lettering on the chosen home hero: see the figures in `docs/CHECKS.md` (all well above AA for the wordmark and tagline; on mobile the wordmark sits on the ivory page, not on the photograph). Pack palette ratios: plum on ivory 16.0, plum on dusty pink 6.6, ivory on rose 5.8, rose on ivory 5.8. Small text on dusty pink uses plum (not the muted tone) to stay AA; axe checks all pages.
 
+## Real photographs (supplied 13 Nov 2026)
+
+Two photographs of Anya, supplied by the site owner as chat attachments: **on the KTLA 5 Morning News set** (a 1920×1080 broadcast frame with KTLA's on-screen graphics) and **on a TEDx stage** (1672×941). They head the Media page's Hosting & speaking section and the Home "Countdown to Gold" and TEDx tiles. They are **rights-sensitive** (a broadcaster's frame and an event still; the GitHub repo is public), so they live in `assets/private/` and `public/img/still-*`, both **gitignored**, are processed by `npm run images`, and ship only in the private zip. A build without them (the committed zip) falls back to the illustrative microphone still life and plain tiles. Production builds omit them unless `STILLS_CLEARED=1`. Credit/permission for both is unconfirmed (see launch confirmations).
+
+The wider Drive archive also holds real event and personal photographs (several above 2000 px, e.g. a red-carpet portrait, a jewelry display, weddings pages). They are **not used yet**: most are small or old, and some belong to a "Sawyer's World" set that appears to involve a child, which should not be used without Anya's explicit approval.
+
 ## Supporting photography (13 Nov 2026)
 
 `Anya-Sarre-Supporting-Photos.zip` (Drive): six **AI-generated editorial still lifes** in the blush palette, none showing Anya. Stored as JPEG in `assets/source/support-*.jpg`; the original placement guide is `assets/support/PLACEMENT-GUIDE.md`; alt text follows the guide.

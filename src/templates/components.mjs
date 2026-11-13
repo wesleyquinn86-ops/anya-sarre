@@ -5,18 +5,22 @@ import { config } from "../config.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const readJson = (p) => JSON.parse(readFileSync(path.join(root, p), "utf8"));
+const readJsonIf = (p) => (existsSync(path.join(root, p)) ? readJson(p) : {});
 export const data = {
   site: readJson("src/data/site.json"),
   tv: readJson("src/data/tv.json"),
   press: readJson("src/data/press.json"),
   metrics: readJson("src/data/metrics.json"),
-  images: readJson("src/data/images.json"),
+  images: { ...readJson("src/data/images.json"), ...readJsonIf("src/data/images.private.json") },
   bio: readJson("src/data/bio.json"),
 };
 
 /** Videos render only when their files exist locally (they are gitignored broadcaster footage); production also needs rights "cleared". */
 export const visibleVideos = () =>
   process.env.SKIP_VIDEO === "1" ? [] : (data.press.videos || []).filter((v) => existsSync(path.join(root, "public", v.file)) && (config.preview || v.rights === "cleared"));
+/** Rights-sensitive photographs (slots named still-*): present only in local/private builds; production also needs STILLS_CLEARED=1. */
+export const stillsAllowed = () => process.env.SKIP_VIDEO !== "1" && (config.preview || process.env.STILLS_CLEARED === "1");
+export const hasStill = (slot) => stillsAllowed() && Boolean(data.images[slot]) && existsSync(path.join(root, "public/img", `${slot}-${data.images[slot].widths[0]}.webp`));
 export const pressEntries = () => data.press.entries.filter((e) => e.display).slice().sort((a, b) => (b.sort || 0) - (a.sort || 0));
 
 export const esc = (s) =>
@@ -85,7 +89,7 @@ function srcset(slot, ext) {
  * Cropping is CSS-only (object-position + scale) so the supplied compositions are never altered.
  */
 export function photo({ img, ratio = "4 / 5", pos = "50% 50%", scale = 1, alt = "", sizes = "100vw", cls = "", priority = false, label = "" }) {
-  const slot = img.startsWith("support-") ? img : `hero-${img}`;
+  const slot = /^(support-|still-)/.test(img) ? img : `hero-${img}`;
   const m = data.images[slot];
   if (!m) throw new Error(`Unknown image slot: ${slot}`);
   const mid = m.widths.includes(1280) ? 1280 : m.widths[m.widths.length - 1];

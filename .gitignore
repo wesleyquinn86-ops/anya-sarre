@@ -6,3 +6,6 @@ dist/
 dist*/
 public/video/
 private-deliverables/
+assets/private/
+public/img/still-*
+src/data/images.private.json

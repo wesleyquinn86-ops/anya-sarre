@@ -278,6 +278,21 @@ for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, tru
   }
 }
 
+// ---- 6c. real photographs (private stills): Hosting & speaking ---------------------------------------------------
+{
+  const { existsSync } = await import("node:fs");
+  if (!existsSync(path.join(root, "assets/private/ktla-morning-news.jpg"))) note("stills: skipped (private photos not present)", true);
+  else {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const { page } = await openPage(ctx, BASE + "/media/");
+    await page.evaluate(() => document.querySelectorAll("img[loading=lazy]").forEach((i) => (i.loading = "eager")));
+    await page.waitForTimeout(700);
+    const imgs = await page.evaluate(() => [...document.querySelectorAll(".spcard__photo img")].map((i) => ({ alt: i.alt.length, ok: i.complete && i.naturalWidth > 0, w: i.naturalWidth })));
+    note("Hosting & speaking shows the KTLA and TEDx photographs with real alt text", imgs.length === 2 && imgs.every((i) => i.alt > 40 && i.ok), JSON.stringify(imgs));
+    await page.close(); await ctx.close();
+  }
+}
+
 // ---- 7. external links + a11y of names -------------------------------------------------------------------------------
 {
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
