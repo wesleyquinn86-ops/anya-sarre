@@ -3,11 +3,11 @@ import { pageHero } from "./_shared.mjs";
 
 const rows = [
   ["Business", "Styled By Anya Inc. is Anya’s styling business.", "Current", "Beverly Hills Courier, Nov 12, 2024"],
-  ["Television", "Frequent fashion and style expert on KTLA 5; host and curator of the special “Countdown to Gold: Getting Carpet Ready with Anya Sarre.”", "Recurring", "Beverly Hills Courier, 2024 · LOCAL Life"],
-  ["Red carpet", "Clients styled for events including the Oscars, Golden Globes, Emmys and Grammys.", "Reported", "Beverly Hills Courier, Nov 12, 2024"],
+  ["Television", "Frequent fashion and style expert on KTLA 5; host and curator of the special “Countdown to Gold: Getting Carpet Ready with Anya Sarre.”", "Recurring", "Beverly Hills Courier, 2024 · LOCAL Life · KTLA clips in her archive"],
+  ["Entertainment Tonight & The Insider", "Fashion expert, credited as head fashion stylist for Entertainment Tonight, The Insider and ET on MTV; presenter of The Insider’s “Look For Less” segments.", "Historical", "944 Magazine (undated) · Life & Style, Jun 15, 2009 · The Hollywood Reporter, Jul 19, 2010"],
+  ["Red carpet", "Clients styled for events including the Oscars, Golden Globes, Emmys and Grammys. Variety profiled her award-weekend styling.", "Reported", "Beverly Hills Courier, Nov 12, 2024 · Variety, Oct 24, 2008"],
   ["Speaking", "Speaker at TEDxHiltonHead Women.", "Date to confirm", "LOCAL Life Q+A"],
-  ["Education", "University of Southern California; graduate degree from Parsons School of Design.", "—", "Beverly Hills Courier, Nov 12, 2024"],
-  ["Television, earlier", "A 2016 profile lists Entertainment Tonight, Extra, The Insider, The Rachael Ray Show and STYLE Network among her appearances.", "Historical", "Ella+Mila, 2016"],
+  ["Education", "University of Southern California (B.A., communications); Parsons School of Design fashion program, described as a graduate degree.", "—", "944 Magazine Q&A · Beverly Hills Courier, Nov 12, 2024"],
 ];
 
 export default {
@@ -31,7 +31,7 @@ ${pageHero({
       <h2 id="story-title" class="section-title">Red-carpet expertise, <em>everyday language.</em></h2>
       <p>Anya grew up in the Bay Area, moved to Los Angeles for USC, then earned a graduate degree at Parsons School of Design. Today she works through Styled By Anya Inc., dressing clients for award-season events and explaining fashion to television audiences.</p>
       <p>Her point of view is simple: great style should be exciting and approachable, and a stylist with a big personality is allowed to have fun with it.</p>
-      ${pv("The biography is assembled from published profiles. The official bio at anyasarre.com could not be read from the build environment, so personal details, awards and earlier corporate roles still need Anya’s review.")}
+      ${pv("The biography is assembled from published profiles and Anya’s old official-site press archive (page scans). The current official bio page could not be read, so awards and anything after about 2017 still need Anya’s review.")}
     </div>
     <dl class="glance">
       <div><dt>Based in</dt><dd>Los Angeles, California</dd></div>

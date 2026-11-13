@@ -4,3 +4,5 @@ dist/
 .env
 .env.*
 dist*/
+public/video/
+private-deliverables/

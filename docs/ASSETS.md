@@ -50,7 +50,7 @@ All pack imagery is AI-assisted: **reconstructions from small source photographs
 | Needed | Status |
 | --- | --- |
 | Official publication mastheads, TV network/show marks | Not sourced (pack leaves them out on purpose). Outlet and show names are typeset |
-| Verified video | Candidates exist in the wider Drive folder (see `docs/SOURCES.md`); none is published on the site yet |
+| Video | Four KTLA clips from the wider Drive archive are on the Media page in the preview only (gitignored, rights unconfirmed, no captions); see `docs/SOURCES.md` |
 | High-resolution original photography | Recommended before launch (option 05's reference is only 279×352) |
 | The pre-existing Styled by Anya seal | Assessed by the pack but not redrawn or included; not used |
 | Social image | `public/og.jpg`, built from hero 01 + the stacked wordmark (`node scripts/brand-assets.mjs`) |

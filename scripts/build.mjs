@@ -5,6 +5,8 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { config } from "../src/config.mjs";
 import { layout, JS_FLAG } from "../src/templates/layout.mjs";
+import { visibleVideos } from "../src/templates/components.mjs";
+import { readdir } from "node:fs/promises";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.resolve(root, process.env.OUT_DIR || "dist");
@@ -24,6 +26,13 @@ if (!config.preview) {
 await rm(dist, { recursive: true, force: true });
 await mkdir(path.join(dist, "assets"), { recursive: true });
 await cp(path.join(root, "public"), dist, { recursive: true });
+// Broadcaster footage: ship only clips the page actually offers (preview: all local clips; production: only rights "cleared"; SKIP_VIDEO=1: none).
+{
+  const allowed = new Set(visibleVideos().flatMap((v) => [v.file, v.poster]));
+  const dir = path.join(dist, "video");
+  for (const f of await readdir(dir).catch(() => [])) if (!allowed.has(`video/${f}`)) await rm(path.join(dir, f), { force: true });
+  if ((await readdir(dir).catch(() => ["x"])).length === 0) await rm(dir, { recursive: true, force: true });
+}
 
 const css = await readFile(path.join(root, "src/css/styles.css"));
 const js = await readFile(path.join(root, "src/js/main.js"));

@@ -81,6 +81,35 @@
     enable();
   }
 
+  /* ---------- Click-to-load video: nothing loads or plays until the visitor asks ---------- */
+  document.querySelectorAll("[data-video-src]").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      var v = document.createElement("video");
+      v.className = "video__player";
+      v.controls = true;
+      v.playsInline = true;
+      v.preload = "auto";
+      v.poster = link.getAttribute("data-video-poster");
+      v.setAttribute("aria-label", link.getAttribute("data-video-title"));
+      v.src = link.getAttribute("data-video-src");
+      v.addEventListener("play", function () {
+        document.querySelectorAll("video.video__player").forEach(function (o) { if (o !== v) o.pause(); });
+      });
+      v.addEventListener("error", function () {
+        var p = document.createElement("p");
+        p.className = "video__error";
+        p.setAttribute("role", "alert");
+        p.textContent = "This video could not be loaded.";
+        v.replaceWith(p);
+      });
+      link.replaceWith(v);
+      v.focus();
+      var played = v.play();
+      if (played && played.catch) played.catch(function () { /* the visitor can press play on the controls */ });
+    });
+  });
+
   /* ---------- Contact form: real states only ---------- */
   var form = document.getElementById("enquiry-form");
   if (form) {

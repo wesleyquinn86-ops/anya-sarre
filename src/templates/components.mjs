@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { config } from "../config.mjs";
@@ -12,6 +12,11 @@ export const data = {
   metrics: readJson("src/data/metrics.json"),
   images: readJson("src/data/images.json"),
 };
+
+/** Videos render only when their files exist locally (they are gitignored broadcaster footage); production also needs rights "cleared". */
+export const visibleVideos = () =>
+  process.env.SKIP_VIDEO === "1" ? [] : (data.press.videos || []).filter((v) => existsSync(path.join(root, "public", v.file)) && (config.preview || v.rights === "cleared"));
+export const pressEntries = () => data.press.entries.filter((e) => e.display).slice().sort((a, b) => (b.sort || 0) - (a.sort || 0));
 
 export const esc = (s) =>
   String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -129,7 +134,7 @@ export function pressList(entries, { compact = false } = {}) {
 export function mastheads(entries) {
   return `<ul class="mastheads">${entries
     .map(
-      (e) => `<li><a class="masthead masthead--${e.mastheadStyle}" href="${esc(e.url)}" rel="noopener noreferrer" target="_blank"><span class="masthead__name">${esc(e.outlet)}</span><span class="masthead__type">${esc(e.type)}${e.date ? ` · ${esc(e.dateLabel)}` : ""}</span><span class="sr-only"> — ${esc(e.title)} (opens in a new tab)</span></a></li>`
+      (e) => `<li><a class="masthead masthead--${e.mastheadStyle}" href="${esc(e.url)}" rel="noopener noreferrer" target="_blank"><span class="masthead__name">${esc(e.outlet)}</span><span class="masthead__type">${esc(e.type)}${/^Undated/.test(e.dateLabel) ? "" : ` · ${esc(e.dateLabel)}`}</span><span class="sr-only"> — ${esc(e.title)} (opens in a new tab)</span></a></li>`
     )
     .join("")}</ul>`;
 }
@@ -149,4 +154,22 @@ export function closingCta({ kicker = "Ready when you are", title = "Let’s mak
     </div>
   </div>
 </section>`;
+}
+
+/* ---------- selected videos: click-to-load, no autoplay, no preload ---------- */
+const mmss = (n) => `${Math.floor(n / 60)}:${String(n % 60).padStart(2, "0")}`;
+export function videoGrid(videos) {
+  return `<ul class="videos__grid">${videos
+    .map(
+      (v) => `<li class="video">
+    <a class="video__play" href="/${esc(v.file)}" data-video-src="/${esc(v.file)}" data-video-poster="/${esc(v.poster)}" data-video-title="${esc(v.title)}">
+      <img src="/${esc(v.poster)}" width="${v.width}" height="${v.height}" alt="" loading="lazy" decoding="async">
+      <span class="video__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+      <span class="video__dur" aria-hidden="true">${mmss(v.seconds)}</span>
+      <span class="sr-only">Play video: ${esc(v.title)}, ${esc(v.outlet)}, ${Math.floor(v.seconds / 60)} minutes ${v.seconds % 60} seconds. Opens the video file if scripting is off.</span>
+    </a>
+    <div class="video__cap"><h3>${esc(v.title)}</h3><p>${esc(v.outlet)} · ${esc(v.dateLabel)}</p></div>
+  </li>`
+    )
+    .join("")}</ul>`;
 }

@@ -1,5 +1,5 @@
 {
-  "_note": "Compiled from third-party sources because anyasarre.com could not be read from the build environment (see docs/SOURCES.md). Reconcile with Anya's official credit list before launch. Years are the year of the source, not the year of appearance.",
+  "_note": "Rebuilt on 13 Nov 2026 from Anya's old official-site archive (Watch Anya pages, segment stills/clips, press scans) plus third-party sources. Credits with no segment evidence (Extra, STYLE Network from a 2016 profile; Home & Family, VH1, CBS logos on the Watch Anya page) are not shown. 'era' is what the archive supports, not a guaranteed air date.",
   "credits": [
     {
       "id": "ktla",
@@ -7,59 +7,85 @@
       "network": "Los Angeles",
       "role": "Fashion & style expert; host of the special “Countdown to Gold: Getting Carpet Ready with Anya Sarre”",
       "currency": "recurring",
+      "era": "recent",
       "style": "a",
-      "sources": ["beverly-hills-courier-2024", "local-life-sc", "ktla-segment"],
-      "status": "corroborated-by-two-sources"
+      "sources": [
+        "beverly-hills-courier-2024",
+        "local-life-sc",
+        "ktla-segment",
+        "official-watch-anya"
+      ],
+      "status": "archive-clips-2014-2017-plus-2024-source"
     },
     {
       "id": "et",
       "show": "Entertainment Tonight",
-      "network": "Syndicated",
-      "role": "Fashion & style guest",
+      "network": "CBS · syndicated",
+      "role": "Fashion expert; credited as head fashion stylist for the show",
       "currency": "historical",
+      "era": "c. 2008–2011",
       "style": "b",
-      "sources": ["ella-mila-2016"],
-      "status": "single-source-2016"
-    },
-    {
-      "id": "extra",
-      "show": "Extra",
-      "network": "Syndicated",
-      "role": "Fashion & style guest",
-      "currency": "historical",
-      "style": "c",
-      "sources": ["ella-mila-2016"],
-      "status": "single-source-2016"
+      "sources": [
+        "944-magazine",
+        "thr-2010",
+        "official-watch-anya"
+      ],
+      "status": "archive-segments-and-press"
     },
     {
       "id": "insider",
       "show": "The Insider",
-      "network": "Syndicated",
-      "role": "Fashion & style guest",
+      "network": "CBS · syndicated",
+      "role": "Fashion expert and stylist; presenter of the “Look For Less” segments",
       "currency": "historical",
-      "style": "a",
-      "sources": ["ella-mila-2016"],
-      "status": "single-source-2016"
+      "era": "c. 2009–2010",
+      "style": "c",
+      "sources": [
+        "life-style-2009",
+        "us-weekly-2009",
+        "la-confidential",
+        "official-watch-anya"
+      ],
+      "status": "archive-segments-and-press"
     },
     {
       "id": "rachael-ray",
       "show": "The Rachael Ray Show",
       "network": "Syndicated",
-      "role": "Fashion & style guest",
+      "role": "Fashion guest",
       "currency": "historical",
-      "style": "b",
-      "sources": ["ella-mila-2016"],
-      "status": "single-source-2016"
+      "era": "undated archive clips",
+      "style": "a",
+      "sources": [
+        "official-watch-anya"
+      ],
+      "status": "archive-clips-undated"
     },
     {
-      "id": "style",
-      "show": "STYLE Network",
-      "network": "Cable",
-      "role": "Fashion & style guest",
+      "id": "kcal9",
+      "show": "KCAL 9",
+      "network": "Los Angeles",
+      "role": "Fashion guest, Oscar fashion predictions",
       "currency": "historical",
+      "era": "undated archive clip",
+      "style": "b",
+      "sources": [
+        "official-watch-anya"
+      ],
+      "status": "archive-clip-undated"
+    },
+    {
+      "id": "htl",
+      "show": "Hollywood Today Live",
+      "network": "Syndicated, national",
+      "role": "Fashion guest",
+      "currency": "historical",
+      "era": "April 22, 2016",
       "style": "c",
-      "sources": ["ella-mila-2016"],
-      "status": "single-source-2016"
+      "sources": [
+        "official-watch-anya"
+      ],
+      "status": "archive-clip-date-from-filename"
     }
   ],
   "speaking": [
@@ -69,7 +95,9 @@
       "role": "Speaker",
       "date": null,
       "note": "Described as a career highlight in a LOCAL Life Q+A. Talk title and date to be confirmed.",
-      "sources": ["local-life-sc"],
+      "sources": [
+        "local-life-sc"
+      ],
       "status": "single-source-undated"
     }
   ]

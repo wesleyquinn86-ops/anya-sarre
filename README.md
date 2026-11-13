@@ -60,12 +60,21 @@ The production build **refuses to run** without `SITE_URL` and an enquiry route.
 | File | Holds |
 | --- | --- |
 | `src/data/tv.json` | Television credits and speaking, with currency and sources |
-| `src/data/press.json` | Coverage entries (type, date, URL, evidence) and a `videos` array (empty: no verified video yet) |
+| `src/data/press.json` | Coverage entries (type, date, URL, evidence) and `videos` (broadcaster clips; see below) |
 | `src/data/metrics.json` | Every displayed figure with label, source, period, status; plus figures recorded but not displayed |
 | `src/data/site.json` | Name, tagline, navigation, education, Instagram |
 | `src/templates/components.mjs` | Shared marquee, statistic, press, masthead, photo-crop and CTA components |
 
 To add a verified video, add an object to `videos` in `press.json`. To add photography, drop exports in `assets/source/` named `hero-NN-desktop.jpg` / `hero-NN-mobile.jpg` and run `npm run images` (AVIF + WebP at several widths, never upscaled), then reference them with `photo({ img: "NN-desktop", … })`.
+
+## Videos and the public repository
+
+The four KTLA clips are **broadcaster footage whose rights are unconfirmed**, and **this GitHub repository is public**, so `public/video/` is gitignored and never committed. Videos render only when the files exist locally; production also needs `"rights": "cleared"` per clip. Two zips are produced:
+
+* `deliverables/anya-sarre-preview-dist.zip` (committed): `SKIP_VIDEO=1 OUT_DIR=dist-novideo node scripts/build.mjs`, no clips.
+* `private-deliverables/anya-sarre-preview-with-videos.zip` (gitignored, local only): the full `dist/` with clips (24 MB).
+
+**Make the repository private** before sharing links (GitHub → Settings → Danger zone → Change visibility).
 
 ## Accessibility and motion
 

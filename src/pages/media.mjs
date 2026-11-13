@@ -1,11 +1,11 @@
-import { data, esc, closingCta, pv, pressList, stat, button } from "../templates/components.mjs";
+import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid } from "../templates/components.mjs";
 import { pageHero } from "./_shared.mjs";
 
 const { tv, press, metrics } = data;
 const credits = tv.credits;
-const currencyLabel = { recurring: "Recurring · recent", historical: "Earlier · 2016 profile" };
-const entries = press.entries.filter((e) => e.display);
-const videos = press.videos || [];
+const chipLabel = (c) => (c.currency === "recurring" ? "Recurring · recent" : `Earlier · ${c.era}`);
+const entries = pressEntries();
+const videos = visibleVideos();
 
 export default {
   path: "/media/",
@@ -28,7 +28,7 @@ ${pageHero({
         <p class="kicker">Television</p>
         <h2 id="tvlist-title" class="section-title">Credits, <em>dated honestly</em></h2>
       </div>
-      <p class="section-sub">Appearances over the years. Each line says whether it is recent or from an earlier profile.</p>
+      <p class="section-sub">Appearances over the years. Each line says whether it is recent or earlier, and roles come from the sources named on the About page.</p>
     </div>
     <ul class="tvlist__rows">
       ${credits
@@ -37,12 +37,12 @@ ${pageHero({
         <p class="tvrow__show tv--${c.style}">${esc(c.show)}</p>
         <p class="tvrow__role">${esc(c.role)}</p>
         <p class="tvrow__net">${esc(c.network)}</p>
-        <p class="tvrow__cur"><span class="chip chip--${c.currency}">${esc(currencyLabel[c.currency])}</span></p>
+        <p class="tvrow__cur"><span class="chip chip--${c.currency}">${esc(chipLabel(c))}</span></p>
       </li>`
         )
         .join("")}
     </ul>
-    ${pv("Recent roles outside KTLA 5, and the complete official credit list, need Anya’s confirmation. Show names are typeset; authentic show marks were not sourced.", "pv-note--tight")}
+    ${pv("Credits come from Anya’s old official-site archive (segment stills and clips, press scans), which mostly dates from about 2008–2017; only KTLA 5 is evidenced as recent. Home &amp; Family, VH1 and CBS logos on the old Watch Anya page have no segment evidence, so they are not shown. Show names are typeset; authentic show marks were not sourced.", "pv-note--tight")}
   </div>
 </section>
 
@@ -69,8 +69,20 @@ ${pageHero({
 
 ${
   videos.length
-    ? `<section class="videos" id="videos" aria-labelledby="videos-title"><div class="wrap"><h2 id="videos-title" class="section-title">Selected videos</h2></div></section>`
-    : pv("Selected videos: no verified, embeddable video was located, so there is no “watch” action yet. Add a video entry to src/data/press.json and the section renders automatically, with click-to-load playback.", "pv-note--page")
+    ? `<section class="videos" id="videos" aria-labelledby="videos-title">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="kicker">Watch</p>
+        <h2 id="videos-title" class="section-title">Anya <em>on air</em></h2>
+      </div>
+      <p class="section-sub">Four KTLA 5 segments from Anya’s own archive. Nothing loads or plays until you press play.</p>
+    </div>
+    ${videoGrid(videos)}
+    ${pv("These are broadcaster clips from Anya’s old Watch Anya archive. Air dates are not recorded, usage rights from KTLA/CBS are unconfirmed, and there are no captions or transcripts yet. The clips are kept out of the public repository, and a production build hides them until each entry is marked rights: “cleared” in press.json.", "pv-note--tight")}
+  </div>
+</section>`
+    : pv("Selected videos: no clip files are present in this build (they are gitignored broadcaster footage). Add entries to press.json and files to public/video/ and the section renders with click-to-load playback.", "pv-note--page")
 }
 
 <section class="coverage" id="coverage" aria-labelledby="coverage-title">
@@ -83,7 +95,7 @@ ${
       <p class="section-sub">The type of coverage is stated for each entry: a feature, an interview, a brand feature or a television segment.</p>
     </div>
     ${pressList(entries)}
-    ${pv("Searches for Variety, The Hollywood Reporter, The Wall Street Journal, LA Confidential, Us Weekly, OK!, Life &amp; Style and Inside Weddings found no coverage of Anya, so none are listed. Anya’s official press pages could not be read; they may list more.", "pv-note--tight")}
+    ${pv("Print entries are read from page scans on Anya’s official Press page, so they link there rather than to the publishers. The Wall Street Journal was searched for and not found. Several more magazines and websites appear in the same archive but their pages were not read.", "pv-note--tight")}
   </div>
 </section>
 

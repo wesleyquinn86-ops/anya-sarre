@@ -1,16 +1,17 @@
 # Checks performed, and limits
 
-Run on 13 November 2026 against the final preview build, **re-run after the site was re-skinned to the approved identity pack** (all 260 browser checks and 650 static checks pass on the re-skinned build).
+Run on 13 November 2026 against the final preview build, **re-run after the site was re-skinned to the approved identity pack** (all browser and static checks pass on the re-skinned build).
 
 ## Automated (re-runnable)
 
-**`npm run check`: 650 static checks, all passing.** Per page: `lang`, title, meta description, exactly one `h1`, no skipped heading levels, landmarks, skip link, social tags, favicon, `noindex` (preview), every `<img>` has `alt` plus `width`/`height`, every internal link and `#anchor` resolves, every local asset exists, external `_blank` links carry `noopener`, JSON-LD parses, no `undefined`/`NaN` leaking into copy. Plus `_headers`, `og.png`, `favicon.svg`, no sitemap in preview.
+**`npm run check`: 704 static checks, all passing.** Per page: `lang`, title, meta description, exactly one `h1`, no skipped heading levels, landmarks, skip link, social tags, favicon, `noindex` (preview), every `<img>` has `alt` plus `width`/`height`, every internal link and `#anchor` resolves, every local asset exists, external `_blank` links carry `noopener`, JSON-LD parses, no `undefined`/`NaN` leaking into copy. Plus `_headers`, `og.png`, `favicon.svg`, no sitemap in preview.
 
-**`npm run verify`: 260 browser checks (Chromium via Playwright), all passing.**
+**`npm run verify`: 266 browser checks (Chromium via Playwright; Chrome for video playback), all passing.**
 * All 6 pages × widths **320, 390, 768, 1024, 1440**: zero console errors/warnings, zero failed or 4xx requests, no horizontal overflow, all images decode, navigation inline ≥1200px; below that a Menu button that opens, lists all links and closes on Escape.
 * **axe-core** (WCAG 2.0/2.1/2.2 A+AA and best-practice) on all 6 pages at 390 and 1440: zero violations after fixes (earlier runs caught low-contrast italics on pink, a non-landmark notice bar, and un-focusable scrollable tables; all fixed).
 * **Hero (pack option 01)**: mobile master below 768px and desktop above; ratios 4:5 / 2:1; the wordmark box sits inside the pack's copy zones (desktop left field, mobile top field) and clear of the face at 1440/1024/768/767/390. Contrast against the photograph was measured separately (see `docs/ASSETS.md`).
 * **Marquee**: sits directly below the hero; animates; visible Pause/Resume; manual pause persists after the pointer leaves; resume works while hovered; hover pauses; keyboard focus pauses; duplicate loop list is `aria-hidden` with no focusable content and equal width (seamless); **reduced-motion emulation** shows a static wrapped list with no control; **JavaScript disabled** shows no animation.
+* **Videos (needs local clips)**: four click-to-load posters; no `<video>` element and no `.mp4` request until the visitor presses play; accessible names; in Chrome, Enter on a poster loads a controllable player, moves focus to it and starts playback; only one plays at a time; the home hero offers “Watch Anya on air” only because clips exist.
 * **Keyboard**: first Tab stop is a visible skip link that moves focus to `main`; first 40 Tab stops all show a focus outline.
 * **Contact form**, with the endpoint mocked in-browser (`.invalid` host; nothing real contacted): with no endpoint no form is rendered; route preselected from `?route=`; empty and invalid submits are blocked with `aria-invalid` errors and send nothing; HTTP 500 and network failure show an error and keep the typed data; success is shown only after a 2xx; payload excludes the honeypot; honeypot submissions are dropped.
 * External links announce “opens in a new tab”.

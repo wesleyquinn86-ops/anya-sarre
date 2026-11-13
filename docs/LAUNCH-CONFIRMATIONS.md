@@ -8,26 +8,28 @@
 3. Approval of the **Sculpted Masthead wordmark**, palette and Bricolage Grotesque/DM Sans pairing, which are a proposed identity, **not an approved rebrand**.
 4. Whether Styled By Anya Inc. branding and the name “Styled By Anya” may be used as shown.
 
-## Facts to verify against anyasarre.com or Anya
-5. The **official biography, awards, qualifications and previous corporate roles** (not read; “L.A.'s Best Personal Stylist” and similar awards are deliberately omitted).
-6. The **complete television list**: roles, networks and dates. Current items are KTLA 5 plus a 2016 third-party list. Decide which belong in the marquee and whether any are current.
+## Facts to verify with Anya
+5. **What is current.** Her credits are evidenced mostly to 2008–2017 (old official-site archive). Only KTLA 5 is evidenced as recent. Confirm current shows, roles and clients, and whether the historical credits should stay in the marquee.
+6. The **current official bio, awards and qualifications**. The live site could not be read; “L.A.'s Best Personal Stylist” and similar awards are deliberately omitted.
 7. Date/title of the **TEDxHiltonHead Women** talk and the **Countdown to Gold** broadcast.
-8. Confirmed **services**: personal styling format and process, wardrobe/closet edits, personal shopping, any others. (Preview shows these as labelled drafts; production hides unconfirmed ones.)
+8. Confirmed **services**: personal styling process, weddings/showers/events (old pages only), wardrobe/closet edits, personal shopping. Preview shows unconfirmed ones as labelled drafts; production hides them.
 9. Whether Anya wants named clients, testimonials or campaign examples shown (none are included).
 10. Approval of the **approach copy**, positioning lines and the five partnership formats (proposal wording, not a rate card).
+11. Whether the Inside Weddings “features” entry should be listed at all (one is about her own wedding).
 
 ## Contact and forms
 11. A **verified email** per route (media, brands, styling) and/or a **form endpoint** (`FORM_ENDPOINT`) that accepts JSON from the production origin, handles CORS, and has spam protection. Nothing has been submitted to any real endpoint.
 
 ## Press, logos and video
-12. Official **masthead SVG/PNG** assets from publisher-controlled sources, with permission as needed; outlet names are typeset until then. Confirm Anya's involvement for Variety, The Hollywood Reporter, WSJ, LA Confidential, Us Weekly, OK!, Life & Style and Inside Weddings before adding any of them. None were found.
-13. Open and confirm the located coverage pages (Courier, LOCAL Life, Ella+Mila, KTLA); their text was seen only via search summaries. Add dates (LOCAL Life, KTLA).
-14. A suitable **verified video** (YouTube/Vimeo or hosted) if a viewing action is wanted. Show marks/posters only with accurate titles and verified video destinations.
+12. Official **masthead SVG/PNG** assets from publisher-controlled sources (names are typeset until then), and publisher URLs where the coverage exists online. The archive scans are not publisher links.
+13. Read the remaining archive pages (OK! ~25 pages, Life & Style, Inside Weddings, Genlux, Gladys, Capitol File, Infatuation, TV Guide, web press) before adding more entries or changing types.
+14. **Video rights and suitability.** The four KTLA clips are broadcaster footage; the archive README says Anya's permission does not clear KTLA/CBS rights. Get written clearance, confirm Anya appears in each clip, choose posters that show her, supply **captions and transcripts**, then set `"rights": "cleared"` per clip. Until then production hides them. Also decide whether to host video on Cloudflare (25 MB per-file limit) or a video platform.
+15. Show marks/posters only with accurate titles and verified video destinations (none used).
 
 ## Audience figures
 15. Re-check Fohr's 280K and the four Reel views on launch day (they move). Prefer Anya's own **Instagram Insights / media kit** for followers, reach and demographics.
 16. Decide whether to keep the Entertainment Tonight programme-context figure, and confirm the date and nature of Anya's ET appearances (a 2016 source is the only evidence).
 
 ## Technical
-17. Put the **preview** behind Cloudflare Access before sharing; switch to `BUILD_MODE=production` with all variables for launch; submit the sitemap; add analytics/consent only if wanted (none is included).
+17. **Make the GitHub repository private.** It is currently **public**, and it contains the AI-assisted imagery and the site source. Videos are kept out of git on purpose. Put the **preview** behind Cloudflare Access before sharing; switch to `BUILD_MODE=production` with all variables for launch; submit the sitemap; add analytics/consent only if wanted (none is included).
 18. Review privacy/terms wording if the form collects personal data.

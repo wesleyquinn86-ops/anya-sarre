@@ -1,4 +1,4 @@
-import { data, esc, button, photo, tvMarquee, mastheads, closingCta, wordmark, arrow, pv } from "../templates/components.mjs";
+import { data, esc, button, photo, tvMarquee, mastheads, closingCta, wordmark, arrow, pv, pressEntries, visibleVideos } from "../templates/components.mjs";
 import { config } from "../config.mjs";
 
 const m = data.images;
@@ -13,7 +13,8 @@ const heroPicture = `<picture class="hero__picture">
            alt="Black-and-white concept portrait of Anya on a white studio background, holding an iced drink while a team styles her hair and makeup.">
     </picture>`;
 
-const press = data.press.entries.filter((e) => e.display);
+const press = pressEntries().filter((e) => e.featured).sort((a, b) => (b.sort || 0) - (a.sort || 0));
+const hasVideo = visibleVideos().length > 0;
 const followers = data.metrics.followers;
 
 export default {
@@ -35,7 +36,7 @@ export default {
       <p class="hero__lead">Hollywood polish. <em>Human warmth.</em></p>
       <div class="hero__aside">
         <p>Anya styles for award season, explains fashion on air, and makes great clothes feel doable. Producers, brands and private clients are all welcome.</p>
-        <div class="btn-row">${button("Work with Anya", "/contact/", "solid")}<a class="btn btn--ghost" href="#work"><span>See the work</span>${arrow}</a></div>
+        <div class="btn-row">${button("Work with Anya", "/contact/", "solid")}<a class="btn btn--ghost" href="${hasVideo ? "/media/#videos" : "#work"}"><span>${hasVideo ? "Watch Anya on air" : "See the work"}</span>${arrow}</a></div>
       </div>
     </div>
   </div>
@@ -144,10 +145,10 @@ ${tvMarquee()}
         <p class="kicker kicker--pink">In the press</p>
         <h2 id="featured-title" class="section-title">Featured in</h2>
       </div>
-      <p class="section-sub">Each entry shows what kind of coverage it is, so a profile is never mistaken for a byline.</p>
+      <p class="section-sub">From Anya’s press archive. Each entry says what kind of coverage it is: a profile, a mention, expert advice or a promo.</p>
     </div>
     ${mastheads(press)}
-    ${pv("Typeset outlet names stand in for official mastheads, which could not be sourced from the build environment. Variety, The Hollywood Reporter, WSJ, LA Confidential, Us Weekly, OK!, Life &amp; Style and Inside Weddings are not shown because no coverage of Anya was found for them. See docs/SOURCES.md.", "pv-note--dark")}
+    ${pv("Typeset outlet names stand in for official mastheads, which could not be sourced. The older entries are page scans on Anya’s official Press page, mostly 2008–2011, so they are historical. The Wall Street Journal was searched for and not found. See docs/SOURCES.md.", "pv-note--dark")}
   </div>
 </section>
 

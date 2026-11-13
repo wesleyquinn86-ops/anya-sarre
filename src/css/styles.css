@@ -348,6 +348,20 @@ a:hover > .arrow, .text-link:hover .arrow { transform: translateX(3px); }
 @media (max-width: 52em) { .prompts__grid { grid-template-columns: 1fr; } .prompts__grid .btn-row { grid-column: auto; } }
 
 /* ---------- Media ---------- */
+.videos { background: var(--paper); padding-block: var(--section); border-block: 1px solid rgba(43,23,40,.08); }
+.videos__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(.75rem, 1.6vw, 1.25rem); }
+.video__play { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 1.25rem; overflow: hidden; background: var(--ink); }
+.video__play img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+.video__play:hover img { transform: scale(1.03); }
+.video__icon { position: absolute; left: 50%; top: 50%; width: 4.5rem; height: 4.5rem; transform: translate(-50%, -50%); display: grid; place-items: center; border-radius: 50%; background: var(--rose); color: var(--cream); box-shadow: 0 0 0 6px rgba(255,249,246,.4); }
+.video__dur { position: absolute; right: .75rem; bottom: .75rem; background: var(--ink); color: var(--cream); font: 700 .78rem var(--sans); padding: .2rem .6rem; border-radius: 999px; }
+.video__player { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 1.25rem; background: #000; }
+.video__error { display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: 1.25rem; background: var(--pink-soft); font-weight: 600; }
+.video__cap { padding: .85rem .25rem 0; }
+.video__cap h3 { font-family: var(--display); font-weight: 600; font-size: 1.35rem; line-height: 1.15; font-variation-settings: "opsz" 48; }
+.video__cap p { color: var(--muted); font-size: .9rem; margin-top: .2rem; }
+@media (max-width: 52em) { .videos__grid { grid-template-columns: 1fr; } }
+
 .tvlist { padding-block: var(--section); }
 .tvlist__rows { border-top: 2px solid var(--ink); }
 .tvrow { display: grid; grid-template-columns: 1.1fr 1.6fr .6fr auto; gap: .5rem 2rem; align-items: baseline; padding-block: 1.25rem; border-bottom: 1px solid rgba(11,11,12,.25); }
@@ -486,3 +500,5 @@ a:hover > .arrow, .text-link:hover .arrow { transform: translateX(3px); }
 @media (max-width: 52em) { .site-footer__top { grid-template-columns: 1fr; } }
 
 @media print { .preview-bar, .site-header, .marquee__toggle { display: none; } }
+
+@media (min-width: 62em) { .mastheads { grid-template-columns: repeat(3, 1fr); } }

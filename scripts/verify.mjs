@@ -236,6 +236,48 @@ for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, tru
   await page.close(); await ctx.close();
 }
 
+// ---- 6b. selected videos: click-to-load, no autoplay/preload, keyboard operable ------------------------------------
+{
+  const { existsSync } = await import("node:fs");
+  const chromePath = ["/usr/bin/google-chrome", "/usr/bin/chromium"].find((p) => existsSync(p));
+  const hasClips = existsSync(path.join(root, "public/video"));
+  if (!hasClips) note("videos: skipped (no local clips; they are gitignored)", true);
+  else {
+    // Page-level behaviour in the default browser: nothing requested until the visitor presses play.
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const page = await ctx.newPage();
+    const media = [];
+    page.on("request", (r) => { if (/\.mp4(\?|$)/.test(r.url())) media.push(r.url()); });
+    await page.goto(BASE + "/media/", { waitUntil: "networkidle" });
+    const n = await page.locator(".video__play").count();
+    note("media page shows 4 click-to-load videos", n === 4, String(n));
+    note("no video element and no .mp4 request before the visitor presses play", (await page.locator("video").count()) === 0 && media.length === 0, media.join(","));
+    note("video links are keyboard-reachable with accessible names", await page.evaluate(() => [...document.querySelectorAll(".video__play")].every((a) => a.textContent.trim().length > 20 && a.tabIndex >= 0)));
+    const home = await openPage(ctx, BASE + "/");
+    note("home hero offers “Watch Anya on air” only because clips exist", (await home.page.locator('.hero .btn--ghost').innerText()).includes("Watch Anya on air"));
+    await home.page.close(); await page.close(); await ctx.close();
+    if (!chromePath) note("videos: playback test skipped (no H.264-capable browser found)", true);
+    else {
+      const chrome = await chromium.launch({ executablePath: chromePath, args: ["--no-sandbox"] });
+      const c2 = await chrome.newContext({ viewport: { width: 1440, height: 900 } });
+      const p2 = await c2.newPage();
+      await p2.goto(BASE + "/media/", { waitUntil: "networkidle" });
+      await p2.focus(".video__play >> nth=0");
+      await p2.keyboard.press("Enter");
+      await p2.waitForSelector("video.video__player", { timeout: 8000 });
+      await p2.waitForTimeout(1500);
+      const st = await p2.evaluate(() => { const v = document.querySelector("video.video__player"); return { controls: v.controls, paused: v.paused, t: v.currentTime, ready: v.readyState, label: v.getAttribute("aria-label"), focused: document.activeElement === v, err: !!document.querySelector(".video__error") }; });
+      note("Enter on the poster loads a controllable player, focuses it and starts playback", st.controls && st.focused && !st.err && (!st.paused || st.t > 0) && st.ready >= 2, JSON.stringify(st));
+      await p2.evaluate(() => document.querySelector("video.video__player").pause());
+      await p2.focus(".video__play >> nth=0");
+      await p2.keyboard.press("Enter"); await p2.waitForTimeout(800);
+      const paused = await p2.evaluate(() => [...document.querySelectorAll("video.video__player")].filter((v) => !v.paused).length);
+      note("only one video plays at a time", paused <= 1, String(paused));
+      await chrome.close();
+    }
+  }
+}
+
 // ---- 7. external links + a11y of names -------------------------------------------------------------------------------
 {
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
