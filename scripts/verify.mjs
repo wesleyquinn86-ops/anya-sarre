@@ -324,7 +324,7 @@ for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, tru
     await page.keyboard.press("Escape");
     const hv = await openPage(ctx, BASE + "/");
     const roll = await hv.page.evaluate(() => ({ n: document.querySelectorAll(".roll__item").length, linked: document.querySelectorAll(".roll__link").length, logos: document.querySelectorAll('.roll [role="img"]').length }));
-    note("Featured in lists publication titles (and logos where available), all linked", roll.n >= 25 && roll.linked === roll.n && roll.logos >= 1, JSON.stringify(roll));
+    note("As featured in banner: the 8 major titles, all linked, at least one white logo", roll.n === 8 && roll.linked === roll.n && roll.logos >= 1, JSON.stringify(roll));
     const target = await hv.page.getAttribute('.roll__link[href="/media/#press-variety"]', "href");
     note("Featured in links go to the matching archive section", target === "/media/#press-variety" && (await page.locator("#press-variety").count()) === 1);
     await hv.page.close(); await page.close(); await ctx.close();

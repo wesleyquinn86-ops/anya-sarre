@@ -90,7 +90,7 @@ All 105 readable scans from the archive's **Press** (62) and **Web Press** (44) 
 
 * **Names and dates** come from the archive's own file names (`image-index.csv`), which were read from the printed pages. **Headlines** are shown only for the eight I read off the scans; the rest show outlet and date only, because headlines derived from file names lost punctuation. Dates are the issue dates where legible, else a year or season.
 * **What the scans prove:** that Anya (or her work) appears on that page, not the kind of role. Only the scans I read are typed on the Media page's "In the press" list (profile, mention, expert advice, promotion). One scan could not be decoded and was left out (Fairweather Faces).
-* **"As featured in" (Home)** lists publication titles only, per the site owner's request. Each print or online title links to its archive section; Beverly Hills Courier and LOCAL Life link to their articles. Order is by prominence, not date. Not included: The Wall Street Journal (not found).
+* **"As featured in" (Home)** is a slim banner of the **8 major titles** only (Variety, The Hollywood Reporter, Us Weekly, OK!, Life & Style, TV Guide, Los Angeles Confidential, Inside Weddings), per the site owner. Each links to its archive section; the other 28 outlets appear only in the Press archive. Not included: The Wall Street Journal (not found).
 * **Rights:** the scans are page images of copyrighted magazines. They live in `assets/private/press/` and `public/press/` (gitignored), ship only in the private zip, and a production build omits them unless `PRESS_CLEARED=1`. The 105-page archive is **not** in the public GitHub repo.
 
 ## Videos

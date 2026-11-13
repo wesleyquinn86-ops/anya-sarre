@@ -32,8 +32,8 @@
 15. **Show logos** are used on the site owner's instruction, traced to **single-colour white marks** from the small rasters on Anya's old Watch Anya page (ET shows the older “ET HD” mark; Rachael Ray and VH1 are the roughest traces). Before launch, swap in current official artwork where the networks allow it, and confirm Anya wants Home & Family, VH1 and CBS 2 listed, since the archive gives only their logos (no role or date).
 
 ## Press archive and logos
-12a. **Rights for the press-page scans.** Anya's old Press pages displayed them, but they are copyrighted magazine and web pages: confirm permission to republish (or reduce the archive to what the publishers allow), then set `PRESS_CLEARED=1` for production. Choose whether to keep "Gladys", "The Costume Designer" and other minor titles in "As featured in".
-12b. **Publication logos.** Only The Hollywood Reporter has a white mark; the rest show typeset names. Supply official logos (see `docs/LOGOS-NEEDED.md`).
+12a. **Rights for the press-page scans.** Anya's old Press pages displayed them, but they are copyrighted magazine and web pages: confirm permission to republish (or reduce the archive to what the publishers allow), then set `PRESS_CLEARED=1` for production. 
+12b. **Publication logos.** The "As featured in" banner has 8 major titles; only The Hollywood Reporter has a white mark and the other 7 show typeset names until official logos are supplied (see `docs/LOGOS-NEEDED.md` and the reference zip).
 
 ## Audience figures
 14a. **Ask Anya for an Instagram performance report** (Insights: reach, impressions, Reels views, engagement, demographics, sponsored-post results) in the second email once she agrees to go ahead; see `docs/FOLLOW-UP-EMAIL.md`. The site shows no "not yet available" box any more, so these numbers are simply absent until she supplies them.

@@ -238,12 +238,7 @@ export function showCard({ id, logos, title, lead, extra = "" }) {
 export const unscriptedLogos = () => data.metrics.programmes.unscripted.logos;
 
 /* ---------- "Featured in": publication titles only, as white marks where a clean logo exists ---------- */
-const FEATURED = [
-  "variety", "the-hollywood-reporter", "us-weekly", "ok", "life-and-style", "tv-guide", "los-angeles-confidential", "inside-weddings",
-  "genlux", "capitol-file", "infatuation", "944-magazine", "gladys", "beverly-hills-courier", "local-life", "the-costume-designer",
-  "pilates-style", "diamonds-and-stars", "sheknows", "stylelist", "youceleb", "mystyle", "examiner", "marriage-com", "poshglam",
-  "collegefashionista", "okmagazine-com", "toronto-sun",
-];
+const FEATURED = ["variety", "the-hollywood-reporter", "us-weekly", "ok", "life-and-style", "tv-guide", "los-angeles-confidential", "inside-weddings"]; // major, recognisable titles only; the full list lives in the press archive
 const OFFSITE = {
   "beverly-hills-courier": { name: "Beverly Hills Courier", url: "https://beverlyhillscourier.com/2024/11/12/the-stylists-shaping-beverly-hills" },
   "local-life": { name: "LOCAL Life", url: "https://www.locallifesc.com/qa-celebrity-connection-anya-sarre/" },
@@ -256,13 +251,13 @@ export function featuredRoll() {
     if (!o) return "";
     const logoFile = `img/logos/pub-${slug}.svg`;
     const hasLogo = existsSync(path.join(root, "public", logoFile));
-    const label = hasLogo ? logoMark({ file: logoFile, alt: o.name, ...svgDims(logoFile), displayHeight: 40 }) : `<span class="roll__name">${esc(o.name)}</span>`;
+    const label = hasLogo ? logoMark({ file: logoFile, alt: o.name, ...svgDims(logoFile), displayHeight: 32 }) : `<span class="roll__name">${esc(o.name)}</span>`;
     const href = OFFSITE[slug]?.url || (archive && byslug[slug] ? `/media/#press-${slug}` : "");
     const ext = OFFSITE[slug] ? ` rel="noopener noreferrer" target="_blank"` : "";
     const sr = OFFSITE[slug] ? `<span class="sr-only"> (opens in a new tab)</span>` : "";
     return `<li class="roll__item">${href ? `<a class="roll__link" href="${esc(href)}"${ext}>${label}${hasLogo ? "" : ""}${sr}</a>` : label}</li>`;
   });
-  return `<ul class="roll" aria-label="Publications that have featured Anya">${items.join("")}</ul>`;
+  return `<ul class="roll" aria-label="Major publications that have featured Anya">${items.join("")}</ul>`;
 }
 
 /* ---------- press archive: scans of Anya's press pages, grouped by publication, with a lightbox ---------- */

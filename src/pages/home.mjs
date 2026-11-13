@@ -144,18 +144,12 @@ ${tvMarquee()}
   </div>
 </section>
 
-<section class="featured" aria-labelledby="featured-title">
-  <div class="wrap">
-    <div class="section-head section-head--split">
-      <div>
-        <p class="kicker kicker--pink">As featured in</p>
-        <h2 id="featured-title" class="section-title">Seen in print <em>and online</em></h2>
-      </div>
-      <p class="section-sub">Magazines, newspapers and websites that have featured, quoted or profiled Anya.</p>
-    </div>
+<section class="featured-banner" aria-labelledby="featured-title">
+  <div class="wrap featured-banner__inner">
+    <h2 id="featured-title" class="featured-banner__label">As featured in</h2>
     ${featuredRoll()}
-    ${hasPressArchive() ? `<div class="btn-row">${button("Browse the press archive", "/media/#press-archive", "solid")}</div>` : ""}
   </div>
+  ${hasPressArchive() ? `<p class="wrap featured-banner__more"><a href="/media/#press-archive">Browse the full press archive ${arrow}</a></p>` : ""}
 </section>
 
 ${closingCta({ title: "Ready for the <em>big night,</em> the big show, or the big campaign?" , text: "Tell Anya what you’re planning and which route fits best."})}
