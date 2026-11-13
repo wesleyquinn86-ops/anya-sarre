@@ -23,6 +23,22 @@ export const esc = (s) =>
   String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
 /* ---------- small primitives ---------- */
+const ICONS = {
+  tv: '<rect x="3" y="7" width="18" height="12" rx="2"/><path d="m8 3 4 4 4-4"/>',
+  award: '<circle cx="12" cy="9" r="5.5"/><path d="m8.6 13.6-1.4 7.2L12 18l4.8 2.8-1.4-7.2"/>',
+  briefcase: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3 13h18"/>',
+  star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  tag: '<path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+  pen: '<path d="m4 20 1-4L16.5 4.5a2.1 2.1 0 0 1 3 3L8 19l-4 1z"/><path d="m14.5 6.5 3 3"/>',
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+  cap: '<path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5M22 9v6"/>',
+  book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5z"/><path d="M8 7h7"/>',
+  hanger: '<path d="M12 8a2.2 2.2 0 1 0-2.2-2.2M12 8v3L3.4 17.2a1 1 0 0 0 .6 1.8h16a1 1 0 0 0 .6-1.8L12 11"/>',
+  chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>',
+  sparkles: '<path d="M12 3c.6 4.6 3.4 7.4 8 8-4.600.6-7.400 3.400-8 8-.6-4.600-3.400-7.400-8-8 4.600-.6 7.400-3.400 8-8z"/>',
+};
+export const icon = (name, cls = "") => `<svg class="icon ${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[name]}</svg>`;
+
 export const arrow = `<svg class="arrow" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" focusable="false"><path d="M4 12h15M13 5.5 19.5 12 13 18.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg>`;
 export const sparkle = (cls = "") => `<svg class="sparkle ${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 0c.8 7.2 4.8 11.2 12 12-7.200.8-11.2 4.800-12 12-.8-7.200-4.800-11.200-12-12C7.200 11.200 11.200 7.200 12 0Z" fill="currentColor"/></svg>`;
 export const squiggle = `<svg class="squiggle" viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2 6c8-8 12 8 20 0s12 8 20 0 12 8 20 0 12 8 20 0 12 8 20 0 12 8 16 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>`;
@@ -33,7 +49,7 @@ export function button(label, href, variant = "solid", extra = "") {
 
 /** Visible only in the private preview; never shipped in a production build. */
 export const pv = (text, cls = "") =>
-  config.preview && process.env.PREVIEW_NOTES !== "0" ? `<p class="pv-note ${cls}"><strong>Preview note</strong> ${text}</p>` : "";
+  config.preview && process.env.PREVIEW_NOTES === "1" ? `<p class="pv-note ${cls}"><strong>Preview note</strong> ${text}</p>` : "";
 
 /* ---------- wordmark (approved pack: Direction 01, Sculpted Masthead, genuine vector paths) ---------- */
 const wordmarkCache = {};
@@ -104,14 +120,13 @@ export function logoMark(logo, { named = true } = {}) {
 export function tvMarquee() {
   // Official show marks from Anya's Watch Anya page, as single-colour masks. The looping copy is aria-hidden and unnamed.
   const item = (c, asCopy) =>
-    `<li class="tv">${logoMark(c.logo, { named: !asCopy })}${c.currency === "recurring" ? `<span class="tv__tag">Recurring expert</span>` : ""}</li>`;
+    `<li class="tv">${logoMark(c.logo, { named: !asCopy })}</li>`;
   const withLogo = data.tv.credits.filter((c) => c.logo); // a typeset stand-in would be the wrong typeface, so credits without an official mark stay out of the marquee
   const list = withLogo.map((c) => item(c, false)).join("");
   const copy = withLogo.map((c) => item(c, true)).join("");
   return `<section class="marquee" aria-labelledby="tv-title" data-marquee>
   <div class="marquee__head">
     <h2 id="tv-title" class="marquee__title">Seen on television</h2>
-    <p class="marquee__note">Appearances over the years.</p>
     <button class="marquee__toggle" type="button" data-marquee-toggle hidden aria-label="Pause scrolling television credits"><span class="marquee__icon" aria-hidden="true"></span><span data-marquee-label>Pause</span></button>
   </div>
   <div class="marquee__viewport">

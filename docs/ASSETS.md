@@ -24,14 +24,15 @@ Inner-page header images come from the approved pack:
 
 | Option | Provenance (per pack) | Where used |
 | --- | --- | --- |
-| 02 Jewellery / pink | Source-based AI reconstruction | Brand Partnerships header |
+| 02 Jewellery / pink | Source-based AI reconstruction | Brand Partnerships header; Meet Anya side portrait |
 | 03 Emerald / lilac | Source-based AI reconstruction | Media & Press header |
 | 04 Silver / beauty | Source-based AI reconstruction | About header |
-| 05 Ivory / couture | Source-based AI reconstruction (lowest-resolution reference, 279×352) | Styling header and red-carpet service crop |
-| 08 Rose studio | New AI concept portrait | Contact header |
+| 05 Ivory / couture | Source-based AI reconstruction (lowest-resolution reference, 279×352) | Styling header |
+| 08 Rose studio | New AI concept portrait | Contact header; Styling, personal-styling row |
 | 09 L.A. daylight | New AI concept portrait | Home short bio |
-| 10 The stylist's edit | New AI concept still life (no person) | Styling, personal-styling service |
-| 01 Backstage; 06 Atelier; 07 Bridal edit | 01 source-based; 06 and 07 **TV-derived** reconstructions | **Not used.** 06 and 07 could be mistaken for broadcast stills |
+| 10 The stylist's edit | New AI concept still life (no person) | Styling, personal-shopping row |
+| 07 The bridal edit | **TV-derived** AI reconstruction (pack README: not a documentary still) | Styling, weddings/showers/events row, as a concept image only |
+| 01 Backstage; 06 Atelier | 01 source-based; 06 **TV-derived** | **Not used.** 06 could be mistaken for a broadcast still |
 
 Home hero crops reuse the chosen frame for the Selected work tile. The pack advises one hero rather than a carousel; the site uses one home hero and a different image as each inner page's header.
 

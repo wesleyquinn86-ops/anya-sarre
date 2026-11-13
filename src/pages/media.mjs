@@ -3,7 +3,6 @@ import { pageHero } from "./_shared.mjs";
 
 const { tv, press, metrics } = data;
 const credits = tv.credits;
-const chipLabel = (c) => (c.currency === "recurring" ? "Recurring · recent" : c.currency === "per-bio" ? "Per Anya’s bio" : `Earlier · ${c.era}`);
 const entries = pressEntries();
 const videos = visibleVideos();
 
@@ -26,18 +25,17 @@ ${pageHero({
     <div class="section-head section-head--split">
       <div>
         <p class="kicker">Television</p>
-        <h2 id="tvlist-title" class="section-title">Credits, <em>dated honestly</em></h2>
+        <h2 id="tvlist-title" class="section-title">On the <em>small screen</em></h2>
       </div>
-      <p class="section-sub">Appearances over the years. Each line says whether it is recent or earlier, and roles come from the sources named on the Meet Anya page.</p>
+      <p class="section-sub">The shows Anya has appeared on, with her role where it is documented. Sources are named on the Meet Anya page.</p>
     </div>
     <ul class="tvlist__rows">
       ${credits
         .map(
-          (c) => `<li class="tvrow tvrow--${c.currency}">
+          (c) => `<li class="tvrow">
         <p class="tvrow__show">${c.logo ? logoMark(c.logo) : `<span class="tvrow__name">${esc(c.show)}</span>`}</p>
         <p class="tvrow__role">${esc(c.role)}</p>
         <p class="tvrow__net">${esc(c.network)}</p>
-        <p class="tvrow__cur"><span class="chip chip--${c.currency}">${esc(chipLabel(c))}</span></p>
       </li>`
         )
         .join("")}

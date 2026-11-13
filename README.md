@@ -38,7 +38,7 @@ All pack imagery is **AI-assisted** (reconstructions with invented scenes; not d
 | `FORM_ENDPOINT` | URL that accepts JSON `POST`s. Without it **no form is rendered** (no simulated success) |
 | `CONTACT_EMAIL`, `CONTACT_EMAIL_MEDIA`, `CONTACT_EMAIL_BRANDS`, `CONTACT_EMAIL_STYLING` | Verified addresses; become `mailto:` routes. Production needs `FORM_ENDPOINT` or `CONTACT_EMAIL` |
 | `OUT_DIR` | Output directory (default `dist`) |
-| `PREVIEW_NOTES=0` | Keep the preview build (noindex, banner) but hide the yellow “Preview note” boxes |
+| `PREVIEW_NOTES=1` | Show the yellow “Preview note” boxes (hidden by default; they hold the review caveats that also live in `docs/`) |
 
 Production example:
 

@@ -87,6 +87,18 @@
       1120
     ]
   },
+  "hero-07-desktop": {
+    "width": 1774,
+    "height": 887,
+    "widths": [
+      480,
+      720,
+      960,
+      1280,
+      1600,
+      1774
+    ]
+  },
   "hero-08-desktop": {
     "width": 1774,
     "height": 887,

@@ -18,7 +18,7 @@ const services = [
     source: "944 Magazine profile (undated) · Styled By Anya Inc.",
     status: "confirmed",
     tone: "lilac",
-    img: { img: "05-mobile", ratio: "5 / 4", pos: "55% 78%", scale: 1.5, alt: "Detail of a voluminous ivory ruffled skirt from a concept portrait of Anya." },
+    img: { img: "08-mobile", ratio: "5 / 4", pos: "50% 33%", scale: 1, alt: "Concept portrait of Anya seated in black with an ornate statement necklace against a rose studio wall." },
   },
   {
     id: "weddings-events",
@@ -28,7 +28,7 @@ const services = [
     status: "to-confirm",
     note: "Appears in the old site's navigation with baby-shower, bridal-shower, wedding and event galleries, but the pages are years old. Confirm that Anya still offers this and what it covers.",
     tone: "butter",
-    img: null,
+    img: { img: "07-desktop", ratio: "5 / 4", pos: "76% 38%", scale: 1, alt: "Concept portrait of Anya in an emerald dress with a gold belt, with ivory gowns on a rail behind her." },
   },
   {
     id: "wardrobe",
@@ -38,7 +38,7 @@ const services = [
     status: "to-confirm",
     note: "Supported only by article headlines from the old Web Press page, not by a service description. Confirm against Anya.",
     tone: "mint",
-    img: { img: "support-styling-wardrobe-edit", ratio: "5 / 4", pos: "50% 45%", scale: 1, alt: "Ivory tailoring, blush silk and lilac knitwear on a curated clothes rail." },
+    img: { img: "support-styling-wardrobe-edit", ratio: "5 / 4", pos: "50% 42%", scale: 1, alt: "Ivory tailoring, blush silk and lilac knitwear on a curated clothes rail." },
   },
   {
     id: "shopping",
@@ -48,7 +48,7 @@ const services = [
     status: "to-confirm",
     note: "The Variety feature shows her shopping for red-carpet clients; a personal-shopping service for private clients is not documented. Confirm.",
     tone: "pink",
-    img: null,
+    img: { img: "10-desktop", ratio: "5 / 4", pos: "68% 56%", scale: 1, alt: "Pastel fashion still life with a pink satin shoe, lilac cube, blush fabric, silver earrings and makeup brushes." },
   },
 ].filter(visible);
 
@@ -75,7 +75,7 @@ ${pageHero({
     <ul class="services__list">
       ${services
         .map(
-          (s, i) => `<li class="service service--${s.tone}${s.img ? "" : " service--text"}">
+          (s, i) => `<li class="service service--${s.tone}">
         <div class="service__body">
           <p class="service__num" aria-hidden="true">0${i + 1}</p>
           <h3 class="service__title">${s.title}</h3>
