@@ -104,6 +104,23 @@ Unchanged from the first pass; all figures live in `src/data/metrics.json` and a
 
 **Discrepancy with the brief:** the brief recorded Reels at roughly 16,600–42,100; the live Fohr page lists 16,629–56,031 for Oct–Nov Reels. The site follows the live page. **Recorded, not displayed:** Fohr "6.0% viewership / 12.9% engagement" (undefined), Fohr demographics (attribution unclear), reach (listed as 0), segment ratings, unique reach, campaign results.
 
+## Anya's partner deck (supplied 13 Nov 2026) and LA Unscripted
+
+A five-page 2026 partner deck from Anya (a seasonal sponsored-segment package on KTLA 5's *LA Unscripted*, branded **Style Smart**). The site uses its **evergreen** parts only: no seasonal framing, dates, deadlines or prices.
+
+| Used on the site | From the deck | Status |
+| --- | --- | --- |
+| "Style Smart" segments on KTLA 5's LA Unscripted; KTLA 5 primetime broadcast, KTLA.com livestream, worldwide viewing on the KTLA 5 app, HD segment copy, social amplification, premium production | Pages 1–2, 4 | Anya's own deck |
+| **115+ markets, 265 stations, 132 U.S. DMAs, 80% of U.S. TV households** (Nexstar Media Group footprint; national distribution is an optional add-on) | Page 5 | Anya's deck, citing Nexstar; **not independently verified**; shown as the network footprint, never as an audience for one segment |
+| "We partner with you to create your segment": brand chooses segment type, representative and key points | Page 4 | Anya's deck |
+| **Contact: an email address and a text number** | Footer of pages 2–5 | **Verified from Anya's own deck**; resolves the earlier "no verified contact" gap. The values are deliberately **not in git** (public repo): they live in the gitignored `src/data/contact.private.json` |
+
+**LA Unscripted itself:** KTLA's weeknight lifestyle show, launched September 2020, covering local spots, restaurants and style, streamed on KTLA.com and the KTLA 5 app ([Nexstar, "KTLA to launch LA Unscripted"](https://nexstar.tv/ktla-to-launch-la-unscripted-fall-2020); search-read). Current schedule and hosts were not confirmed.
+
+**Deliberately not used:** the deck's holiday framing and shopping statistics ($1+ trillion U.S. holiday sales, $1,627 average LA spend, 88% deal-seekers, 82% Black Friday–Cyber Monday; uncited third-party figures), the dates and early-booking deadlines, and the **$5K / $10K / $15K package prices** (no prices are published on the site). The Anya "Styled By" seal and the Nexstar mark appear in the deck; the Nexstar mark is used as a partner logo, the seal is not used.
+
+**"One of the most popular channels in LA": not stated.** I found no current ratings figure. KTLA's own older claims (Tribune Media releases, about 2017, citing Nielsen) say its morning and 10 p.m. newscasts were Los Angeles' most-watched among adults; they are too old and too narrow to quote as current. To make a ranking claim, get a current Nielsen figure from KTLA or Nexstar and add it to `src/data/metrics.json`.
+
 ## Contact
 
-No verified email or booking channel found. Production is blocked until `CONTACT_EMAIL` or `FORM_ENDPOINT` is set.
+An email address and a text number, both from Anya's partner deck, stored in the gitignored `src/data/contact.private.json` (ignored by public-safe builds); `CONTACT_EMAIL` overrides. A fresh checkout therefore builds without them until that file or `CONTACT_EMAIL` is provided. No form endpoint exists yet.

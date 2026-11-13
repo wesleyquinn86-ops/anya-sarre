@@ -64,7 +64,7 @@ The wider Drive archive also holds real event and personal photographs (several 
 
 ## Logos in white
 
-The ten show logos were traced to single-colour vector marks with `scripts/logos-to-mono.py` (needs `pip install potracer numpy pillow`): **`assets/logos/mono/*.svg`** (white fill, scalable) and **`assets/logos/mono/png/*.png`** (white on transparent, 1200 px wide). The site paints them in the surrounding text colour (ivory on the rose marquee, plum in the Media list). They are traces of small originals (the Rachael Ray and VH1 marks are the roughest), so replace them with official vector artwork where the networks provide it. The colour originals stay in `assets/logos/`.
+The ten show logos were traced to single-colour vector marks with `scripts/logos-to-mono.py` (needs `pip install potracer numpy pillow`): **`assets/logos/mono/*.svg`** (white fill, scalable) and **`assets/logos/mono/png/*.png`** (white on transparent, 1200 px wide). The site paints them in the surrounding text colour (ivory on the rose marquee, plum in the Media list). They are traces of small originals (the Rachael Ray and VH1 marks are the roughest), so replace them with official vector artwork where the networks provide it. Three more marks (**LA Unscripted, Style Smart, Nexstar Media Group**) were cropped from Anya's partner deck and traced the same way. The colour originals stay in `assets/logos/`.
 
 ## Disclosure carried into the site
 

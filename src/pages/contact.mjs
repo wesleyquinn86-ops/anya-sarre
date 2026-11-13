@@ -1,7 +1,6 @@
-import { data, esc, pv, arrow } from "../templates/components.mjs";
+import { data, esc, pv, arrow, button } from "../templates/components.mjs";
 import { config } from "../config.mjs";
 import { pageHero } from "./_shared.mjs";
-import { button } from "../templates/components.mjs";
 
 const routes = [
   { id: "media", title: "Media &amp; hosting", who: "Producers, event organisers and editors", subject: "Media and hosting enquiry", tone: "pink", email: config.emails.media },
@@ -15,8 +14,9 @@ const routeCard = (r) => `<li class="croute croute--${r.tone}">
   ${
     r.email
       ? `<a class="croute__mail" href="mailto:${esc(r.email)}?subject=${encodeURIComponent(r.subject)}">${esc(r.email)}</a>`
-      : `<p class="croute__pending">Direct email to be confirmed before launch.</p>`
+      : `<p class="croute__pending">Use the form or Instagram.</p>`
   }
+  ${r.id === "brands" && data.contact.textTel ? `<a class="croute__mail" href="sms:${data.contact.textTel}">Text ${data.contact.textDisplay}</a>` : ""}
   ${config.formEndpoint ? `<a class="text-link" href="/contact/?route=${r.id}#enquiry">Use the form ${arrow}</a>` : ""}
 </li>`;
 
@@ -34,10 +34,14 @@ const form = config.formEndpoint
       <div class="hp" aria-hidden="true"><label>Leave this empty <input name="company_website" type="text" tabindex="-1" autocomplete="off"></label></div>
       <button class="btn btn--dark" type="submit" data-submit><span>Send enquiry</span></button>
     </form>`
-  : `<div class="form-off" role="note">
-      <h3>The enquiry form isn’t connected yet</h3>
-      <p>${config.preview ? "In this preview, no form endpoint is configured, so nothing can be submitted. When one is set (FORM_ENDPOINT), the form appears here with validation, sending, success and error states." : "Please use one of the email routes or Instagram."}</p>
-      <div class="btn-row"><a class="btn btn--dark" href="${esc(data.site.instagram.url)}" rel="noopener noreferrer" target="_blank"><span>Visit ${esc(data.site.instagram.handle)} on Instagram<span class="sr-only"> (opens in a new tab)</span></span></a></div>
+  : `<div class="form-off">
+      <h3>Email or text Anya</h3>
+      <p>The quickest ways to reach Anya about a segment, a booking or a styling enquiry.</p>
+      <div class="btn-row">
+        ${config.emails.general ? button(`Email ${config.emails.general}`, `mailto:${config.emails.general}?subject=${encodeURIComponent("Enquiry via anyasarre.com")}`, "dark") : ""}
+        ${data.contact.textTel ? button(`Text ${data.contact.textDisplay}`, `sms:${data.contact.textTel}`, "ghost-dark") : ""}
+        <a class="btn btn--ghost-dark" href="${esc(data.site.instagram.url)}" rel="noopener noreferrer" target="_blank"><span>Instagram ${esc(data.site.instagram.handle)}<span class="sr-only"> (opens in a new tab)</span></span></a>
+      </div>
     </div>`;
 
 export default {

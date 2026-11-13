@@ -1,4 +1,4 @@
-import { data, esc, closingCta, pv, stat, arrow, photo } from "../templates/components.mjs";
+import { data, esc, closingCta, pv, stat, arrow, photo, icon, button, markFromFile, unscriptedLogos } from "../templates/components.mjs";
 import { pageHero } from "./_shared.mjs";
 
 const { metrics } = data;
@@ -15,9 +15,9 @@ const formats = [
 export default {
   path: "/partnerships/",
   active: "partnerships",
-  title: "Brand Partnerships",
+  title: "Brand Partnerships: Style Smart on KTLA 5’s LA Unscripted",
   description:
-    "Collaborate with Anya Sarre: fashion, beauty and lifestyle partnerships backed by television credibility. Sourced audience figures, each labelled with its source and date.",
+    "Partner with Anya Sarre on Style Smart segments on KTLA 5’s LA Unscripted: primetime broadcast, KTLA.com livestream, worldwide viewing on the KTLA 5 app, and optional national distribution across Nexstar’s 115+ markets.",
   body: `
 ${pageHero({
   kicker: "Brand Partnerships",
@@ -25,6 +25,35 @@ ${pageHero({
   lead: "Fashion, beauty and lifestyle collaborations, led by a stylist with television credibility and a big personality.",
   img: { img: "02-desktop", ratio: "4 / 3", pos: "76% 28%", scale: 1, alt: "Anya in pink holding statement jewellery in both raised hands against a pink studio background.", sizes: "(min-width: 900px) 44vw, 90vw", priority: true },
 })}
+
+<section class="unscripted" id="unscripted" aria-labelledby="unscripted-title">
+  <div class="wrap unscripted__grid">
+    <div class="unscripted__main">
+      <div class="unscripted__logos">${unscriptedLogos().map((l) => markFromFile(l)).join("")}</div>
+      <p class="kicker kicker--pink">Featured opportunity</p>
+      <h2 id="unscripted-title" class="section-title">Style Smart on <em>LA Unscripted</em></h2>
+      <p class="unscripted__lead">Put your brand in front of Los Angeles on KTLA 5, presented the way only Anya can. Style Smart segments air on KTLA 5’s LA Unscripted, and can travel to markets across the country.</p>
+      <p>We partner with you to create your segment. You choose the segment type, whether to feature a brand representative, and the key products, points and offers to highlight.</p>
+      <div class="btn-row">${button("Enquire about a feature", "/contact/?route=brands#enquiry", "solid")}</div>
+    </div>
+    <div class="unscripted__side">
+      <p class="unscripted__eyebrow">Optional national reach</p>
+      <ul class="unscripted__stats">${data.metrics.programmes.unscripted.stats.map((x) => `<li><strong>${esc(x.display)}</strong><span>${esc(x.label)}</span></li>`).join("")}</ul>
+      <p class="unscripted__note">Nexstar Media Group’s national footprint, from Anya’s partner deck (2026). A segment can be extended across these markets as an add-on; the figures describe the network, not an audience for one segment.</p>
+    </div>
+  </div>
+  <div class="wrap unscripted__inc">
+    <h3 class="unscripted__inc-title">Every feature includes</h3>
+    <ul class="unscripted__includes">
+      <li>${icon("tv")}<span>Primetime broadcast on KTLA 5</span></li>
+      <li>${icon("play")}<span>Livestream on KTLA.com</span></li>
+      <li>${icon("globe")}<span>Worldwide viewing on the KTLA 5 app</span></li>
+      <li>${icon("camera")}<span>Premium production and an HD copy of your segment</span></li>
+      <li>${icon("chat")}<span>Social amplification beyond the broadcast</span></li>
+    </ul>
+    <p class="unscripted__ctx">LA Unscripted is KTLA 5’s Los Angeles lifestyle show, launched in September 2020 and covering local spots, food and style (<a href="https://nexstar.tv/ktla-to-launch-la-unscripted-fall-2020" rel="noopener noreferrer" target="_blank">Nexstar<span class="sr-only"> (opens in a new tab)</span></a>).</p>
+  </div>
+</section>
 
 <section class="formats" aria-labelledby="formats-title">
   <div class="wrap">

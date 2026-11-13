@@ -67,7 +67,7 @@ ${tvMarquee()}
       <article class="route route--lilac">
         <p class="route__num" aria-hidden="true">02</p>
         <h3 class="route__title">Brands &amp; agencies</h3>
-        <p>Fashion, beauty and lifestyle collaborations, with sourced audience figures and clear notes on what each number means.</p>
+        <p>Fashion, beauty and lifestyle collaborations, including Style Smart segments on KTLA 5’s LA Unscripted, with sourced figures and clear notes on what each number means.</p>
         <p class="route__stat"><strong>${esc(followers.display)}</strong> Instagram followers <span>Fohr · Nov 13, 2026 · provisional</span></p>
         <a class="route__link" href="/partnerships/">Brand Partnerships ${arrow}</a>
       </article>

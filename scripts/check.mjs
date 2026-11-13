@@ -71,7 +71,7 @@ for (const [rel, html] of Object.entries(pages)) {
       if (/target="_blank"/.test(m[0])) ok(/rel="[^"]*noopener/.test(m[0]), `${tag} external _blank link without noopener: ${href}`);
       continue;
     }
-    if (href.startsWith("mailto:")) continue;
+    if (/^(mailto|sms|tel):/.test(href)) continue;
     const [p0, hash] = href.split("#");
     const [pathname] = p0.split("?");
     const target = pathname === "" ? rel : pathname;

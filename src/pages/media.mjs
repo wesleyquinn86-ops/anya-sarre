@@ -1,4 +1,4 @@
-import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoMark, photo, hasStill } from "../templates/components.mjs";
+import { data, esc, closingCta, pv, pressList, stat, pressEntries, visibleVideos, videoGrid, logoMark, photo, hasStill, showCard, unscriptedLogos, icon } from "../templates/components.mjs";
 import { pageHero } from "./_shared.mjs";
 
 const { tv, press, metrics } = data;
@@ -136,16 +136,29 @@ ${
   </div>
 </section>
 
-<section class="context" id="audience" aria-labelledby="context-title">
-  <div class="wrap context__grid">
-    <div>
-      <p class="kicker">Programme context</p>
-      <h2 id="context-title" class="section-title">The shows in <em>context</em></h2>
-      <p>A programme’s audience is not the audience for any one segment. This figure describes the whole show.</p>
+<section class="shows" id="audience" aria-labelledby="shows-title">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <div>
+        <p class="kicker kicker--pink">Where her segments air</p>
+        <h2 id="shows-title" class="section-title">Big stages, <em>big reach</em></h2>
+      </div>
+      <p class="section-sub">The programmes behind the credits, with the numbers each publisher reports.</p>
     </div>
-    <div>
-      ${stat({ ...metrics.programme, tone: "stat--context" })}
-      <p class="context__caveat"><strong>Read carefully:</strong> this is Entertainment Tonight’s programme-wide figure from its publisher, not an audience or rating for any appearance by Anya. Segment ratings and demographics are not available.</p>
+    <div class="shows__grid">
+      ${showCard({
+        id: "unscripted",
+        logos: unscriptedLogos(),
+        title: "Style Smart on LA Unscripted",
+        lead: "Anya’s Style Smart segments air on KTLA 5’s LA Unscripted, the Los Angeles lifestyle show launched in September 2020 that covers local spots, food and style. Segments broadcast on KTLA 5, stream live on KTLA.com and play worldwide on the KTLA 5 app.",
+        extra: `<a class="text-link text-link--light" href="/partnerships/#unscripted">Partner on a segment ${"→"}</a>`,
+      })}
+      ${showCard({
+        id: "et",
+        logos: [{ file: data.tv.credits.find((c) => c.id === "et").logo.file, alt: "Entertainment Tonight", h: 62 }],
+        title: "Entertainment Tonight",
+        lead: "One of the shows Anya has brought fashion to. The publisher calls Entertainment Tonight the number-one entertainment news show on TV, with nine Emmy wins.",
+      })}
     </div>
   </div>
 </section>

@@ -13,6 +13,8 @@ export const data = {
   metrics: readJson("src/data/metrics.json"),
   images: { ...readJson("src/data/images.json"), ...readJsonIf("src/data/images.private.json") },
   bio: readJson("src/data/bio.json"),
+  // Gitignored (public repo); absent in public-safe builds.
+  contact: process.env.SKIP_VIDEO === "1" ? {} : readJsonIf("src/data/contact.private.json"),
 };
 
 /** Videos render only when their files exist locally (they are gitignored broadcaster footage); production also needs rights "cleared". */
@@ -39,6 +41,9 @@ const ICONS = {
   book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5z"/><path d="M8 7h7"/>',
   hanger: '<path d="M12 8a2.2 2.2 0 1 0-2.2-2.2M12 8v3L3.4 17.2a1 1 0 0 0 .6 1.8h16a1 1 0 0 0 .6-1.8L12 11"/>',
   chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+  play: '<circle cx="12" cy="12" r="9"/><path d="m10 8.5 5.5 3.5-5.5 3.5z"/>',
+  camera: '<rect x="3" y="6" width="14" height="12" rx="2"/><path d="m17 10 4-2.5v9L17 14"/>',
   sparkles: '<path d="M12 3c.6 4.6 3.4 7.4 8 8-4.600.6-7.400 3.400-8 8-.6-4.600-3.400-7.400-8-8 4.600-.6 7.400-3.400 8-8z"/>',
 };
 export const icon = (name, cls = "") => `<svg class="icon ${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[name]}</svg>`;
@@ -200,3 +205,29 @@ export function videoGrid(videos) {
     )
     .join("")}</ul>`;
 }
+
+/* ---------- programme panels: official marks + the numbers each publisher reports ---------- */
+const svgDims = (file) => {
+  const t = readFileSync(path.join(root, "public", file), "utf8");
+  const [, w, h] = t.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+  return { width: Math.round(w), height: Math.round(h) };
+};
+export const markFromFile = ({ file, alt, h }) => logoMark({ file, alt, displayHeight: h, ...svgDims(file) });
+
+const sourceLinks = (sources) =>
+  sources.map((x) => (x.url ? `<a href="${esc(x.url)}" rel="noopener noreferrer" target="_blank">${esc(x.name)}<span class="sr-only"> (opens in a new tab)</span></a>` : esc(x.name))).join(" · ");
+
+export function showCard({ id, logos, title, lead, extra = "" }) {
+  const p = data.metrics.programmes[id];
+  return `<article class="showcard showcard--${id}">
+  <div class="showcard__logos">${logos.map((l) => markFromFile(l)).join("")}</div>
+  <h3 class="showcard__title">${title}</h3>
+  <p class="showcard__lead">${lead}</p>
+  <ul class="showcard__stats">${p.stats.map((x) => `<li><strong>${esc(x.display)}</strong><span>${esc(x.label)}</span></li>`).join("")}</ul>
+  ${extra}
+  <p class="showcard__src">Source: ${sourceLinks(p.sources)} · ${esc(p.period)}.</p>
+  <p class="showcard__note">${esc(p.note)}</p>
+</article>`;
+}
+
+export const unscriptedLogos = () => data.metrics.programmes.unscripted.logos;

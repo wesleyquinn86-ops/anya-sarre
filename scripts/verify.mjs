@@ -199,7 +199,7 @@ for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, tru
 {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 900 } });
   const off = await openPage(await browser.newContext({ viewport: { width: 1440, height: 900 } }), BASE + "/contact/");
-  note("no endpoint: no form rendered, no fake submit", (await off.page.$("form")) === null && (await off.page.textContent("#enquiry")).includes("isn’t connected"));
+  note("no endpoint: no form rendered, no fake submit; verified email and text links offered", (await off.page.$("form")) === null && (await off.page.locator('.form-off a[href^="mailto:"]').count()) === 1 && (await off.page.locator('.form-off a[href^="sms:"]').count()) === 1);
   await off.page.close();
 
   const { page } = await openPage(ctx, BASE_FORM + "/contact/?route=brands");

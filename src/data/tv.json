@@ -25,6 +25,26 @@
       "status": "archive-clips-2014-2017-plus-2024-source"
     },
     {
+      "id": "la-unscripted",
+      "show": "LA Unscripted",
+      "network": "KTLA 5",
+      "role": "Style Smart segments on KTLA 5’s weeknight lifestyle show",
+      "currency": "recurring",
+      "era": "recent",
+      "style": "a",
+      "logo": {
+        "file": "img/logos/la-unscripted.svg",
+        "width": 1642,
+        "height": 1404,
+        "alt": "LA Unscripted",
+        "displayHeight": 50
+      },
+      "sources": [
+        "partner-deck-2026"
+      ],
+      "status": "partner-deck"
+    },
+    {
       "id": "et",
       "show": "Entertainment Tonight",
       "network": "CBS · syndicated",

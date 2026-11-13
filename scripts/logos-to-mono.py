@@ -73,6 +73,10 @@ def trim_sides(rule, frac):  # drop thin frame lines at the left/right edges of 
     return f
 
 
+def rule_ink_on_cream(rgb, alpha):  # deep-red line art on a cream page (crops from the partner deck)
+    return smooth(non_white(rgb, alpha), 0.32, 0.5)
+
+
 def rule_saturated(rgb, alpha):  # coloured banner on a grey ground, white type knocked out
     s, v = saturation(rgb)
     return smooth(s, 0.35, 0.5) * smooth(v, 0.3, 0.45)
@@ -96,6 +100,9 @@ LOGOS = {
     "cbs-2": ("cbs-2.png", rule_silhouette_knockout(0.92, 0.98)),
     "kcal-9": ("kcal-9.png", rule_silhouette_knockout(0.9, 0.96)),
     "hollywood-today-live": ("hollywood-today-live.jpg", rule_light_on_dark(0.55, 0.7)),
+    "la-unscripted": ("la-unscripted.png", rule_ink_on_cream),
+    "style-smart": ("style-smart.png", rule_ink_on_cream),
+    "nexstar": ("nexstar.png", rule_ink_on_cream),
     "the-hollywood-reporter": ("the-hollywood-reporter.jpg", trim_sides(rule_light_on_dark(0.5, 0.7), 0.12)),
 }
 

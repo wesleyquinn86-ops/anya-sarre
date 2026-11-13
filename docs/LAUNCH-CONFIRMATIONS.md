@@ -23,6 +23,8 @@
 11. A **verified email** per route (media, brands, styling) and/or a **form endpoint** (`FORM_ENDPOINT`) that accepts JSON from the production origin, handles CORS, and has spam protection. Nothing has been submitted to any real endpoint.
 
 ## Press, logos and video
+11b. **LA Unscripted claims.** The 115+ / 265 / 132 / 80% figures come from Anya's deck (Nexstar footprint, optional national add-on); confirm they are current and that she is happy to publish them. Get a current KTLA/Nexstar ratings figure if a "most-watched" claim is wanted. Confirm the hosts, schedule and "Style Smart" branding, and whether the logos of KTLA 5, LA Unscripted, Style Smart and Nexstar may be shown (they are traced from the deck).
+11c. **Contact details.** The email address and text number from Anya's deck live in the gitignored `src/data/contact.private.json` (the repo is public). Confirm she wants both published on the site, then ship them via that file or `CONTACT_EMAIL`. A production build needs one of those or `FORM_ENDPOINT`. No form endpoint is configured.
 11a. **Photo rights for the two real photographs** (KTLA 5 Morning News frame; TEDx stage still): who owns them, whether KTLA/TEDx permit this use, and any credit line. They are gitignored and ship only in the private zip; set `STILLS_CLEARED=1` for a production build once cleared.
 12. Official **masthead SVG/PNG** assets from publisher-controlled sources (names are typeset until then), and publisher URLs where the coverage exists online. The archive scans are not publisher links.
 13. Read the remaining archive pages (OK! ~25 pages, Life & Style, Inside Weddings, Genlux, Gladys, Capitol File, Infatuation, TV Guide, web press) before adding more entries or changing types.

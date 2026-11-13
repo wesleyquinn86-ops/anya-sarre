@@ -7,7 +7,7 @@ const groups = [
     title: "At work",
     rows: [
       ["briefcase", "Business", "Anya heads Styled By Anya Inc.", "Anya’s bio · Beverly Hills Courier, Nov 12, 2024"],
-      ["tv", "Television", "Breaks down red-carpet trends on KTLA 5, Entertainment Tonight and Extra. Host and curator of the KTLA 5 special “Countdown to Gold: Getting Carpet Ready with Anya Sarre.”", "Anya’s bio · Courier, 2024 · LOCAL Life · KTLA clips in her archive"],
+      ["tv", "Television", "Breaks down red-carpet trends on KTLA 5, Entertainment Tonight and Extra. Presents Style Smart segments on KTLA 5’s LA Unscripted, and is host and curator of the KTLA 5 special “Countdown to Gold: Getting Carpet Ready with Anya Sarre.”", "Anya’s bio · Courier, 2024 · LOCAL Life · KTLA clips in her archive"],
       ["star", "Red carpet", "Dresses clients for the Oscars, Golden Globes and Emmys. Variety profiled her award-weekend styling.", "Anya’s bio · Courier, 2024 · Variety, Oct 24, 2008"],
       ["book", "Teaching", "Teaches styling at FIDM and guest lectures at USC.", "Anya’s bio"],
     ],
