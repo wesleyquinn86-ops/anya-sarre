@@ -160,11 +160,14 @@ for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, tru
   const rp = await openPage(rctx, BASE + "/");
   const rm = await rp.page.evaluate(() => {
     const t = document.querySelector("[data-marquee-track]"), cs = getComputedStyle(t);
-    const copy = getComputedStyle(document.querySelector(".marquee__list--copy")).display;
+    const copy = document.querySelectorAll(".marquee__list--copy").length === 0 ? "none" : "present";
     const list = document.querySelector(".marquee__list");
     return { anim: cs.animationName, copy, btn: getComputedStyle(document.querySelector("[data-marquee-toggle]")).display, wrap: getComputedStyle(list).flexWrap, items: [...list.querySelectorAll("li")].every((li) => li.getBoundingClientRect().right <= innerWidth), overflow: document.documentElement.scrollWidth <= innerWidth };
   });
   note("reduced motion: static, wrapped, readable list", rm.anim === "none" && rm.copy === "none" && rm.btn === "none" && rm.wrap === "wrap" && rm.items && rm.overflow, JSON.stringify(rm));
+  // static banner: every publication is a normal, keyboard-reachable link in reduced-motion mode
+  const sb = await rp.page.evaluate(() => { const l = [...document.querySelectorAll(".marquee--banner a.pub__link")]; return { n: l.length, tabbable: l.filter((x) => x.tabIndex === 0).length, animating: getComputedStyle(document.querySelector(".marquee--banner [data-marquee-track]")).animationName }; });
+  note("reduced motion: publication banner is static and its links are normal tab stops", sb.n === 8 && sb.tabbable === sb.n && sb.animating === "none", JSON.stringify(sb));
   await rp.page.close(); await rctx.close();
 
   const nctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
@@ -173,6 +176,36 @@ for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, tru
   const njState = await np.$eval("[data-marquee-track]", (t) => getComputedStyle(t).animationName);
   note("no-JS: marquee does not animate (no uncontrollable motion)", njState === "none", njState);
   await np.close(); await nctx.close();
+}
+
+// ---- 4b. "As featured in" ticker: independence, direction, seamless fill at any width, tab order -------------------
+for (const w of [390, 1440, 2560]) {
+  const ctx = await browser.newContext({ viewport: { width: w, height: 900 }, reducedMotion: "no-preference" });
+  const { page } = await openPage(ctx, BASE + "/");
+  const b = page.locator(".marquee--banner");
+  await b.scrollIntoViewIfNeeded(); await page.waitForTimeout(500);
+  const m = await page.evaluate(() => {
+    const r = document.querySelector(".marquee--banner"), t = r.querySelector("[data-marquee-track]"), cs = getComputedStyle(t);
+    const lists = [...r.querySelectorAll(".marquee__list")], first = lists[0].getBoundingClientRect().width;
+    return { anim: cs.animationName, dir: cs.animationDirection, running: cs.animationPlayState, lists: lists.length, first, trackW: t.getBoundingClientRect().width, vw: r.clientWidth, shift: parseFloat(t.style.getPropertyValue("--marquee-shift")), dur: parseFloat(t.style.getPropertyValue("--marquee-duration")), clones: lists.slice(1).every((l) => l.getAttribute("aria-hidden") === "true" && [...l.querySelectorAll("a")].every((a) => a.tabIndex === -1)), tab: [...lists[0].querySelectorAll("a")].filter((a) => a.tabIndex === 0).length, items: lists[0].querySelectorAll("li").length, named: lists[0].querySelectorAll("li").length };
+  });
+  note(`banner ticker animates in reverse @${w}`, m.anim === "marquee" && m.dir === "reverse" && m.running === "running", JSON.stringify(m));
+  note(`banner track is wider than the screen plus one loop, so it never shows a gap @${w}`, m.trackW >= m.vw + m.first - 1 && Math.abs(m.shift - m.first) < 1, `${m.trackW} vs ${m.vw}+${m.first}`);
+  note(`banner clones are hidden from assistive tech and are not tab stops; originals skipped while moving @${w}`, m.clones && m.tab === 0, JSON.stringify({ clones: m.clones, tab: m.tab }));
+  note(`banner speed is calm (loop takes 20 s or more) @${w}`, m.dur >= 20, String(m.dur));
+  if (w === 1440) {
+    // independence from the television band
+    await page.click(".marquee--banner [data-marquee-toggle]"); await page.mouse.move(5, 5); await page.waitForTimeout(150);
+    const both = await page.evaluate(() => [...document.querySelectorAll("[data-marquee]")].map((r) => ({ n: r.getAttribute("data-marquee-name"), p: r.getAttribute("data-state"), off: r.hasAttribute("data-offscreen"), l: r.querySelector("[data-marquee-label]").textContent })));
+    const tv = both.find((x) => /television/.test(x.n)), pb = both.find((x) => /publication/.test(x.n));
+    note("pausing the banner leaves the television band's own state untouched; off-screen bands idle by themselves", pb.p === "paused" && pb.l === "Resume" && tv.p === "running" && tv.l === "Pause" && tv.off === true, JSON.stringify(both));
+    note("each pause button names what it controls", (await page.getAttribute(".marquee--banner [data-marquee-toggle]", "aria-label")) === "Resume scrolling publication names" && (await page.getAttribute(".marquee:not(.marquee--banner) [data-marquee-toggle]", "aria-label")) === "Pause scrolling television credits");
+    // mouse still works on the moving links
+    await page.click(".marquee--banner [data-marquee-toggle]");
+    const href = await page.getAttribute(".marquee--banner a.pub__link >> nth=0", "href");
+    note("banner links keep their destination for mouse and touch", /^\/media\/#press-/.test(href || ""), String(href));
+  }
+  await page.close(); await ctx.close();
 }
 
 // ---- 5. keyboard: skip link + visible focus ----------------------------------------------------------------
@@ -323,9 +356,9 @@ for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, tru
     note("arrow keys move between pages of the same publication", /2 of \d+/.test(await page.textContent(".lightbox__cap")) && /OK!/.test(await page.textContent(".lightbox__cap")));
     await page.keyboard.press("Escape");
     const hv = await openPage(ctx, BASE + "/");
-    const roll = await hv.page.evaluate(() => ({ n: document.querySelectorAll(".roll__item").length, linked: document.querySelectorAll(".roll__link").length, logos: document.querySelectorAll('.roll [role="img"]').length }));
+    const roll = await hv.page.evaluate(() => { const l = document.querySelector(".marquee--banner .marquee__list"); return { n: l.querySelectorAll(".pub").length, linked: l.querySelectorAll("a.pub__link").length, logos: l.querySelectorAll('[role="img"]').length }; });
     note("As featured in banner: the 8 major titles, all linked, at least one white logo", roll.n === 8 && roll.linked === roll.n && roll.logos >= 1, JSON.stringify(roll));
-    const target = await hv.page.getAttribute('.roll__link[href="/media/#press-variety"]', "href");
+    const target = await hv.page.getAttribute('.marquee--banner .marquee__list:first-of-type a.pub__link[href="/media/#press-variety"]', "href");
     note("Featured in links go to the matching archive section", target === "/media/#press-variety" && (await page.locator("#press-variety").count()) === 1);
     await hv.page.close(); await page.close(); await ctx.close();
   }

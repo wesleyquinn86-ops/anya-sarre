@@ -79,9 +79,13 @@ The four KTLA clips are **broadcaster footage whose rights are unconfirmed**, an
 
 The press-page scans (105 magazine and web page images) and the two real photographs (KTLA Morning News, TEDx) are handled the same way: `assets/private/` and `public/img/still-*` are gitignored and ship only in the private zip; production needs `STILLS_CLEARED=1` (photos) / `PRESS_CLEARED=1` (press scans). Process scans with `node scripts/press.mjs`.
 
+## Tickers (auto-scrolling bands)
+
+The television band and the "As featured in" banner share one component: `ticker()` in `src/templates/components.mjs`, enhanced by `src/js/main.js`. Each ticker is independent (own pause state and screen-reader name). The script measures one list, clones it to fill any width (checked at 390, 1440 and 2560px) and loops by exactly one list width, so there is no visible join. The banner is slower and runs the opposite way. To add a ticker, call `ticker({ id, title, name, listLabel, itemsHtml, direction, speed })`.
+
 ## Accessibility and motion
 
-Skip link, landmarks, one `h1` per page, visible focus, 44px+ targets, reduced-motion support, and no motion without JavaScript. The television marquee has a visible Pause/Resume control, pauses on hover and keyboard focus, has a static readable list for reduced motion, and its duplicate loop copy is `aria-hidden` with no focusable content.
+Skip link, landmarks, one `h1` per page, visible focus, 44px+ targets, reduced-motion support, and no motion without JavaScript. Every ticker has a visible Pause/Resume control that names what it controls, pauses on hover and keyboard focus, idles when off-screen, falls back to a static wrapped list for reduced motion and without JavaScript, and its cloned loop copies are `aria-hidden` with no tab stops. Links inside a moving ticker are skipped by Tab while it moves (a moving target cannot be tabbed to) and remain clickable; a static link to the same place is always offered, and in reduced-motion mode they are normal tab stops.
 
 ## Further reading
 

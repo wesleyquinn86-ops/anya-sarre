@@ -17,6 +17,6 @@ Official masthead artwork could not be sourced from the build environment (publi
 | Los Angeles Confidential | needed | `pub-los-angeles-confidential.svg` |
 | Inside Weddings | needed | `pub-inside-weddings.svg` |
 
-`private-deliverables/Anya-Sarre-Publication-Logos-Needed.zip` holds, for each of the 7 needed titles, the clearest archive scan showing its masthead (reference only, **not** logo files) plus a README with the naming and size spec.
+The banner now scrolls slowly as a ticker, so logos are shown about 34 px tall with generous spacing; simple, high-contrast marks work best. `private-deliverables/Anya-Sarre-Publication-Logos-Needed.zip` holds, for each of the 7 needed titles, the clearest archive scan showing its masthead (reference only, **not** logo files) plus a README with the naming and size spec.
 
 The Wall Street Journal was searched for and **not found**, so it is not listed. Any logo shown is used on the site owner's instruction; the publishers' rights are theirs.

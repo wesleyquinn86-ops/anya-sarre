@@ -131,25 +131,32 @@ export function logoMark(logo, { named = true } = {}) {
   return `<span class="tv__logo" ${a11y} style="--logo:url(/${esc(logo.file)});--logo-h:${logo.displayHeight}px;--logo-ar:${logo.width}/${logo.height}"></span>`;
 }
 
-export function tvMarquee() {
-  // Official show marks from Anya's Watch Anya page, as single-colour masks. The looping copy is aria-hidden and unnamed.
-  const item = (c, asCopy) =>
-    `<li class="tv">${logoMark(c.logo, { named: !asCopy })}</li>`;
-  const withLogo = data.tv.credits.filter((c) => c.logo); // a typeset stand-in would be the wrong typeface, so credits without an official mark stay out of the marquee
-  const list = withLogo.map((c) => item(c, false)).join("");
-  const copy = withLogo.map((c) => item(c, true)).join("");
-  return `<section class="marquee" aria-labelledby="tv-title" data-marquee>
+/**
+ * Reusable auto-scrolling ticker. Server-rendered as a static, wrapped list (what no-JS and reduced-motion visitors get);
+ * src/js/main.js enhances it: measures one list, clones it to fill any screen width, and loops it seamlessly.
+ *  - name: what the pause button controls, read by assistive tech ("television credits")
+ *  - direction: "left" (default) or "right"; speed: pixels per second
+ */
+export function ticker({ id, title, name, listLabel, itemsHtml, direction = "left", speed = 60, cls = "", headExtra = "", foot = "" }) {
+  return `<section class="marquee ${cls}" aria-labelledby="${id}-title" data-marquee data-marquee-name="${esc(name)}" data-direction="${direction}" data-speed="${speed}">
   <div class="marquee__head">
-    <h2 id="tv-title" class="marquee__title">Seen on television</h2>
-    <button class="marquee__toggle" type="button" data-marquee-toggle hidden aria-label="Pause scrolling television credits"><span class="marquee__icon" aria-hidden="true"></span><span data-marquee-label>Pause</span></button>
+    <h2 id="${id}-title" class="marquee__title">${title}</h2>
+    <button class="marquee__toggle" type="button" data-marquee-toggle hidden aria-label="Pause scrolling ${esc(name)}"><span class="marquee__icon" aria-hidden="true"></span><span data-marquee-label>Pause</span></button>
+    ${headExtra}
   </div>
   <div class="marquee__viewport">
     <div class="marquee__track" data-marquee-track>
-      <ul class="marquee__list" aria-label="Television credits">${list}</ul>
-      <ul class="marquee__list marquee__list--copy" aria-hidden="true">${copy}</ul>
+      <ul class="marquee__list" aria-label="${esc(listLabel)}">${itemsHtml}</ul>
     </div>
   </div>
+  ${foot}
 </section>`;
+}
+
+export function tvMarquee() {
+  // Official show marks from Anya's Watch Anya page, as single-colour masks. Credits without a mark stay out (a typeset stand-in would be the wrong typeface).
+  const items = data.tv.credits.filter((c) => c.logo).map((c) => `<li class="tv">${logoMark(c.logo)}</li>`).join("");
+  return ticker({ id: "tv", title: "Seen on television", name: "television credits", listLabel: "Television credits", itemsHtml: items, speed: 70 });
 }
 
 /* ---------- press / publications ---------- */
@@ -243,21 +250,29 @@ const OFFSITE = {
   "beverly-hills-courier": { name: "Beverly Hills Courier", url: "https://beverlyhillscourier.com/2024/11/12/the-stylists-shaping-beverly-hills" },
   "local-life": { name: "LOCAL Life", url: "https://www.locallifesc.com/qa-celebrity-connection-anya-sarre/" },
 };
-export function featuredRoll() {
+function publicationItems() {
   const byslug = Object.fromEntries(data.pressArchive.outlets.map((o) => [o.slug, o]));
   const archive = hasPressArchive();
-  const items = FEATURED.map((slug) => {
+  return FEATURED.map((slug) => {
     const o = byslug[slug] || OFFSITE[slug];
     if (!o) return "";
     const logoFile = `img/logos/pub-${slug}.svg`;
     const hasLogo = existsSync(path.join(root, "public", logoFile));
-    const label = hasLogo ? logoMark({ file: logoFile, alt: o.name, ...svgDims(logoFile), displayHeight: 32 }) : `<span class="roll__name">${esc(o.name)}</span>`;
+    const label = hasLogo ? logoMark({ file: logoFile, alt: o.name, ...svgDims(logoFile), displayHeight: 34 }) : `<span class="pub__name">${esc(o.name)}</span>`;
     const href = OFFSITE[slug]?.url || (archive && byslug[slug] ? `/media/#press-${slug}` : "");
     const ext = OFFSITE[slug] ? ` rel="noopener noreferrer" target="_blank"` : "";
     const sr = OFFSITE[slug] ? `<span class="sr-only"> (opens in a new tab)</span>` : "";
-    return `<li class="roll__item">${href ? `<a class="roll__link" href="${esc(href)}"${ext}>${label}${hasLogo ? "" : ""}${sr}</a>` : label}</li>`;
+    return `<li class="pub">${href ? `<a class="pub__link" href="${esc(href)}"${ext}>${label}${sr}</a>` : label}</li>`;
+  }).join("");
+}
+
+/** "As featured in": slim, calm, auto-scrolling banner of the major titles only (the full list lives in the press archive). */
+export function featuredBanner() {
+  const more = hasPressArchive() ? `<a class="marquee__more" href="/media/#press-archive">Browse the full press archive ${arrow}</a>` : "";
+  return ticker({
+    id: "featured", title: "As featured in", name: "publication names", listLabel: "Major publications that have featured Anya",
+    itemsHtml: publicationItems(), direction: "right", speed: 42, cls: "marquee--banner", headExtra: more,
   });
-  return `<ul class="roll" aria-label="Major publications that have featured Anya">${items.join("")}</ul>`;
 }
 
 /* ---------- press archive: scans of Anya's press pages, grouped by publication, with a lightbox ---------- */

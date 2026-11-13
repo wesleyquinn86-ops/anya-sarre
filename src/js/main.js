@@ -29,46 +29,66 @@
     wide.addEventListener ? wide.addEventListener("change", onWide) : wide.addListener(onWide);
   }
 
-  /* ---------- Television marquee ---------- */
-  var marquee = document.querySelector("[data-marquee]");
-  if (marquee) {
-    var track = marquee.querySelector("[data-marquee-track]");
-    var btn = marquee.querySelector("[data-marquee-toggle]");
-    var label = marquee.querySelector("[data-marquee-label]");
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  /* ---------- Tickers (auto-scrolling bands). Each one is independent; markup comes from ticker() in components.mjs ---------- */
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var narrow = window.matchMedia("(max-width: 40em)");
+
+  function initTicker(root) {
+    var track = root.querySelector("[data-marquee-track]");
+    var source = track && track.querySelector(".marquee__list");
+    var btn = root.querySelector("[data-marquee-toggle]");
+    var label = root.querySelector("[data-marquee-label]");
+    if (!source) return;
+    var name = root.getAttribute("data-marquee-name") || "items";
+    var baseSpeed = Number(root.getAttribute("data-speed")) || 60; // pixels per second
     var state = { user: false, hover: false, focus: false, force: false };
 
-    var effectivePaused = function () {
-      return state.user || ((state.hover || state.focus) && !state.force);
-    };
+    var effectivePaused = function () { return state.user || ((state.hover || state.focus) && !state.force); };
     var render = function () {
-      marquee.setAttribute("data-state", effectivePaused() ? "paused" : "running");
+      root.setAttribute("data-state", effectivePaused() ? "paused" : "running");
       if (btn) {
         // The control reflects the visitor's own choice; hover/focus pausing is temporary and unlabelled.
         label.textContent = state.user ? "Resume" : "Pause";
-        btn.setAttribute("aria-label", state.user ? "Resume scrolling television credits" : "Pause scrolling television credits");
+        btn.setAttribute("aria-label", (state.user ? "Resume" : "Pause") + " scrolling " + name);
         btn.classList.toggle("is-paused", state.user);
       }
     };
-    var setSpeed = function () {
-      // ~70 px/second regardless of list length
-      var first = track.querySelector(".marquee__list");
-      if (!first) return;
-      var seconds = Math.max(24, Math.round(first.getBoundingClientRect().width / 70));
-      track.style.setProperty("--marquee-duration", seconds + "s");
-    };
-    var enable = function () {
-      marquee.classList.toggle("is-animated", !reduce.matches);
-      if (btn) btn.hidden = reduce.matches;
-      setSpeed();
+    var links = function () { return [].slice.call(source.querySelectorAll("a")); };
+
+    // Build: measure one list, then clone it enough times that the track is always wider than the screen. The loop
+    // distance is exactly one list width, so the join is invisible at any viewport size.
+    var build = function () {
+      [].slice.call(track.querySelectorAll("[data-clone]")).forEach(function (n) { n.remove(); });
+      var animate = !reduce.matches;
+      root.classList.toggle("is-animated", animate);
+      if (btn) btn.hidden = !animate;
+      // While moving, links are not keyboard stops (a moving target can't be tabbed to). Mouse and touch still work,
+      // and the page offers a static link to the same destination. Static and reduced-motion modes keep normal tab stops.
+      links().forEach(function (a) { if (animate) a.setAttribute("tabindex", "-1"); else a.removeAttribute("tabindex"); });
+      if (!animate) { track.style.removeProperty("--marquee-duration"); track.style.removeProperty("--marquee-shift"); render(); return; }
+      var listW = source.getBoundingClientRect().width;
+      if (!listW) return;
+      var copies = Math.max(1, Math.ceil(root.clientWidth / listW));
+      for (var i = 0; i < copies; i++) {
+        var c = source.cloneNode(true);
+        c.setAttribute("data-clone", "");
+        c.classList.add("marquee__list--copy");
+        c.setAttribute("aria-hidden", "true");        // read once: the copies are invisible to assistive tech
+        c.removeAttribute("aria-label");
+        [].slice.call(c.querySelectorAll("[role]")).forEach(function (n) { n.removeAttribute("role"); n.removeAttribute("aria-label"); });
+        [].slice.call(c.querySelectorAll("a")).forEach(function (a) { a.setAttribute("tabindex", "-1"); }); // no duplicate keyboard stops
+        track.appendChild(c);
+      }
+      var speed = baseSpeed * (narrow.matches ? 0.8 : 1);
+      track.style.setProperty("--marquee-shift", listW + "px");
+      track.style.setProperty("--marquee-duration", Math.max(12, listW / speed).toFixed(1) + "s");
       render();
     };
-    marquee.addEventListener("pointerenter", function (e) { if (e.pointerType !== "touch") { state.hover = true; render(); } });
-    marquee.addEventListener("pointerleave", function () { state.hover = false; state.force = false; render(); });
-    marquee.addEventListener("focusin", function (e) {
-      if (e.target.matches && e.target.matches(":focus-visible")) { state.focus = true; render(); }
-    });
-    marquee.addEventListener("focusout", function () { state.focus = false; state.force = false; render(); });
+
+    root.addEventListener("pointerenter", function (e) { if (e.pointerType !== "touch") { state.hover = true; render(); } });
+    root.addEventListener("pointerleave", function () { state.hover = false; state.force = false; render(); });
+    root.addEventListener("focusin", function (e) { if (e.target.matches && e.target.matches(":focus-visible")) { state.focus = true; render(); } });
+    root.addEventListener("focusout", function () { state.focus = false; state.force = false; render(); });
     if (btn) {
       btn.addEventListener("click", function () {
         if (state.user) { state.user = false; state.force = true; } // resume even while hovered/focused
@@ -76,10 +96,21 @@
         render();
       });
     }
-    window.addEventListener("resize", setSpeed);
-    reduce.addEventListener ? reduce.addEventListener("change", enable) : reduce.addListener(enable);
-    enable();
+    // Save work while nobody can see it.
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) root.removeAttribute("data-offscreen"); else root.setAttribute("data-offscreen", ""); });
+      }, { rootMargin: "200px 0px" }).observe(root);
+    }
+    var again = function () { build(); };
+    var timer;
+    window.addEventListener("resize", function () { clearTimeout(timer); timer = setTimeout(again, 150); });
+    (reduce.addEventListener ? reduce.addEventListener.bind(reduce, "change", again) : reduce.addListener.bind(reduce, again))();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(again); // type metrics change the list width
+    window.addEventListener("load", again);
+    build();
   }
+  [].slice.call(document.querySelectorAll("[data-marquee]")).forEach(initTicker);
 
   /* ---------- Click-to-load video: nothing loads or plays until the visitor asks ---------- */
   document.querySelectorAll("[data-video-src]").forEach(function (link) {

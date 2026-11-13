@@ -154,11 +154,13 @@ a:hover > .arrow, .text-link:hover .arrow { transform: translateX(3px); }
 .marquee__track { display: block; width: auto; }
 .marquee__list { display: flex; flex-wrap: wrap; align-items: center; gap: 1.1rem 0; padding-inline: var(--gutter); }
 .marquee__list--copy { display: none; }
+/* Enhanced: JS measures one list (--marquee-shift, px), clones it to fill the screen and loops it seamlessly. */
 .marquee.is-animated .marquee__track { display: flex; width: max-content; animation: marquee var(--marquee-duration, 60s) linear infinite; will-change: transform; }
+.marquee.is-animated[data-direction="right"] .marquee__track { animation-direction: reverse; }
 .marquee.is-animated .marquee__list { flex-wrap: nowrap; flex: none; padding-inline: 0; }
 .marquee.is-animated .marquee__list--copy { display: flex; }
-.marquee[data-state="paused"] .marquee__track { animation-play-state: paused; }
-@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee[data-state="paused"] .marquee__track, .marquee[data-offscreen] .marquee__track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(calc(var(--marquee-shift, 50%) * -1)); } }
 .tv { display: inline-flex; align-items: center; gap: .7rem; white-space: nowrap; line-height: 1.1; }
 .tv::after { content: "✦"; content: "✦" / ""; font: 400 .9rem/1 var(--sans); margin-inline: clamp(1.25rem, 3vw, 2.5rem); align-self: center; }
 .marquee:not(.is-animated) .tv:last-child::after { display: none; }
@@ -626,14 +628,6 @@ a:hover > .arrow, .text-link:hover .arrow { transform: translateX(3px); }
 
 .enquiry .form .field__hint { color: var(--muted); margin-top: .3rem; }
 
-/* ---------- Featured in: publication titles ---------- */
-.roll { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid rgba(255,249,246,.3); margin-top: .5rem; }
-.roll__item { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; min-height: 6rem; padding: 1.1rem clamp(1rem, 2.4vw, 2rem); border-bottom: 1px solid rgba(255,249,246,.3); border-right: 1px solid rgba(255,249,246,.18); }
-.roll__link { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; color: inherit; text-decoration: none; transition: color .2s, transform .2s; }
-.roll__link:hover { color: var(--pink); transform: translateY(-2px); }
-.roll__name { font-family: var(--display); font-weight: 600; font-size: clamp(1.25rem, 2vw, 1.7rem); line-height: 1.05; letter-spacing: -.01em; white-space: nowrap; font-variation-settings: "opsz" 48; }
-.featured .btn-row { margin-top: 2rem; }
-
 /* ---------- Press archive ---------- */
 .archive { background: var(--paper); padding-block: var(--section); border-block: 1px solid rgba(43,23,40,.08); }
 .archive__index ul { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
@@ -677,24 +671,23 @@ a:hover > .arrow, .text-link:hover .arrow { transform: translateX(3px); }
 .outlet__count { margin-top: .35rem; }
 .scan__site { display: block; font: 700 .72rem/1.3 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--rose); }
 .scan { scroll-margin-top: 1rem; }
-.roll::after { content: ""; flex: 100 1 0; }
 .outlet__body, .scans { min-width: 0; }
 .outlet__head { min-width: 0; }
 
-/* ---------- As featured in: slim banner of major titles ---------- */
-.featured-banner { background: var(--ink); color: var(--cream); padding-block: clamp(1.5rem, 3vw, 2.25rem); --focus: var(--pink-soft); }
-.featured-banner__inner { display: grid; grid-template-columns: auto 1fr; gap: 1rem clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
-.featured-banner__label { font: 700 .78rem/1.3 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--pink); white-space: nowrap; }
-.featured-banner .roll { border: 0; margin: 0; flex-wrap: nowrap; justify-content: space-between; gap: .75rem 1.5rem; }
-.featured-banner .roll::after { display: none; }
-.featured-banner .roll__item { flex: 0 1 auto; min-height: 0; padding: 0; border: 0; }
-.featured-banner .roll__link { width: auto; }
-.featured-banner .roll__name { font-size: clamp(1.05rem, 1.6vw, 1.45rem); }
-.featured-banner__more { margin-top: 1rem; text-align: right; font-size: .88rem; }
-.featured-banner > .featured-banner__more { max-width: calc(var(--max) + 2 * var(--gutter)); margin-inline: auto; }
-.featured-banner__more a { color: var(--cream); display: inline-flex; align-items: center; gap: .4rem; }
-@media (max-width: 80em) {
-  .featured-banner__inner { grid-template-columns: 1fr; }
-  .featured-banner .roll { flex-wrap: wrap; justify-content: flex-start; gap: .9rem 1.75rem; }
-  .featured-banner__more { text-align: left; }
-}
+/* ---------- As featured in: calm auto-scrolling banner (a ticker, like the TV band but slower and the other way) ---------- */
+.marquee--banner { background: var(--ink); border-block: 0; --focus: var(--pink-soft); --pub-gap: clamp(2.25rem, 6vw, 5.5rem); }
+.marquee--banner .marquee__head { padding-block: clamp(1.25rem, 2.4vw, 1.75rem) 0; gap: .5rem 1.25rem; }
+.marquee--banner .marquee__title { color: var(--pink); }
+.marquee--banner .marquee__more { margin-left: auto; font-size: .88rem; color: var(--cream); display: inline-flex; align-items: center; gap: .4rem; }
+.marquee--banner .marquee__viewport { padding-block: clamp(1.1rem, 2.4vw, 1.8rem) clamp(1.4rem, 3vw, 2.2rem); }
+.marquee--banner.is-animated .marquee__viewport { -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+.marquee--banner .marquee__list { gap: 1.25rem 0; }
+.pub { display: inline-flex; align-items: center; white-space: nowrap; }
+.pub::after { content: "✦"; content: "✦" / ""; margin-inline: var(--pub-gap); font: 400 .8rem/1 var(--sans); color: var(--pink); }
+.marquee--banner:not(.is-animated) .pub:last-child::after { display: none; }
+.marquee--banner:not(.is-animated) .marquee__list { gap: 1.25rem 0; }
+.pub__link { display: inline-flex; align-items: center; color: inherit; text-decoration: none; transition: color .2s, transform .2s; }
+.pub__link:hover { color: var(--pink); transform: translateY(-2px); }
+.pub__name { font-family: var(--display); font-weight: 600; font-size: clamp(1.45rem, 2.6vw, 2.2rem); line-height: 1.05; letter-spacing: -.01em; font-variation-settings: "opsz" 48; }
+@media (max-width: 40em) { .marquee--banner .marquee__more { margin-left: 0; flex-basis: 100%; } }
+@media (prefers-reduced-motion: reduce) { .marquee--banner .marquee__viewport { -webkit-mask-image: none; mask-image: none; } }
