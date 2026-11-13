@@ -5,12 +5,12 @@ const m = data.images;
 const set = (slot, ext) => m[slot].widths.map((w) => `/img/${slot}-${w}.${ext} ${w}w`).join(", ");
 
 const heroPicture = `<picture class="hero__picture">
-      <source media="(max-width: 767px)" type="image/avif" srcset="${set("hero-01-mobile", "avif")}" sizes="100vw">
-      <source media="(max-width: 767px)" type="image/webp" srcset="${set("hero-01-mobile", "webp")}" sizes="100vw">
-      <source type="image/avif" srcset="${set("hero-01-desktop", "avif")}" sizes="100vw">
-      <source type="image/webp" srcset="${set("hero-01-desktop", "webp")}" sizes="100vw">
-      <img class="hero__photo" src="/img/hero-01-desktop-1774.webp" width="1774" height="887" fetchpriority="high"
-           alt="Black-and-white concept portrait of Anya with a makeup artist and hair stylist behind her.">
+      <source media="(max-width: 767px)" type="image/avif" srcset="${set("hero-home-mobile", "avif")}" sizes="100vw">
+      <source media="(max-width: 767px)" type="image/webp" srcset="${set("hero-home-mobile", "webp")}" sizes="100vw">
+      <source type="image/avif" srcset="${set("hero-home-desktop", "avif")}" sizes="100vw">
+      <source type="image/webp" srcset="${set("hero-home-desktop", "webp")}" sizes="100vw">
+      <img class="hero__photo" src="/img/hero-home-desktop-1942.webp" width="1942" height="809" fetchpriority="high"
+           alt="Black-and-white concept portrait of Anya on a white studio background, holding an iced drink while a team styles her hair and makeup.">
     </picture>`;
 
 const press = data.press.entries.filter((e) => e.display);
@@ -91,7 +91,7 @@ ${tvMarquee()}
     </div>
     <div class="work__grid">
       <article class="work__tile work__tile--big">
-        ${photo({ img: "01-desktop", ratio: "4 / 3", pos: "74% 36%", scale: 1.5, alt: "", sizes: "(min-width: 900px) 50vw, 100vw", cls: "work__photo" })}
+        ${photo({ img: "home-desktop", ratio: "4 / 3", pos: "72% 40%", scale: 1.7, alt: "", sizes: "(min-width: 900px) 50vw, 100vw", cls: "work__photo" })}
         <div class="work__body">
           <p class="work__cat">Red-carpet styling</p>
           <h3 class="work__title">Award-season work</h3>

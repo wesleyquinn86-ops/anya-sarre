@@ -24,7 +24,7 @@ npm run verify       # browser checks (needs Playwright, see below)
 | **Direction 01, Sculpted Masthead** wordmark (primary, compact, stacked SVG) | Header, footer, hero lettering, favicon, social image |
 | Palette: plum, ivory, rose, blush, dusty pink, lilac, peach | Colour tokens in `src/css/styles.css`; pink leads, plum gives weight |
 | Bricolage Grotesque 600 + DM Sans (self-hosted, OFL) | Headings and body |
-| Ten hero options (desktop 2:1 + mobile 4:5) | Home hero = option 01; other options head the inner pages (see `docs/ASSETS.md`) |
+| Hero options (desktop 2:1 + mobile 4:5) | Inner pages use options 02, 03, 04, 05, 08, 09, 10; the **home hero is concept 2** from the earlier hero set, chosen as the classiest (see `docs/ASSETS.md`) |
 | Crop and focal-point guidance, alt text | Hero placement and per-page crops, checked at every breakpoint |
 
 All pack imagery is **AI-assisted** (reconstructions with invented scenes; not documentary photographs) and needs Anya's approval before publication. See [`docs/ASSETS.md`](docs/ASSETS.md).

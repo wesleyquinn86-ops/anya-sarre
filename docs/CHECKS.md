@@ -17,9 +17,11 @@ Run on 13 November 2026 against the final preview build, **re-run after the site
 
 **Production gates (manual commands, outputs inspected):** a production build without `SITE_URL`, or without `FORM_ENDPOINT`/`CONTACT_EMAIL`, exits non-zero. A configured build emits canonical + absolute Open Graph URLs, `index, follow`, `sitemap.xml`, an allowing `robots.txt`, JSON-LD `url`, and contains no preview chrome or unconfirmed services. `npm run check` on it then correctly fails on remaining “to confirm” wording.
 
+**Contrast on the chosen home hero (measured on the photograph):** plum lettering against the pixels behind the desktop wordmark and tagline is **15.5:1 at the worst 1%** (median 15.7:1). On mobile the wordmark sits on the ivory page above the photo (plum on ivory 16.0:1).
+
 ## Visual inspection (screenshots reviewed)
 
-* **1440px**: all six pages, full length.
+* **1440px**: all six pages, full length. The chosen home hero was inspected at 1440 and 390, including the mobile crop at native resolution.
 * **390px**: all six pages, full length (the credentials table was clipped; now stacks).
 * **1024, 1200px and 768px**: home hero and header (the nav wrapped at 1024; breakpoint raised).
 * Re-inspected after each CSS/SEO change set; the social image and favicon were viewed directly.

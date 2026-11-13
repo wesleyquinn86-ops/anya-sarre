@@ -1,26 +1,4 @@
 {
-  "hero-01-desktop": {
-    "width": 1774,
-    "height": 887,
-    "widths": [
-      480,
-      720,
-      960,
-      1280,
-      1600,
-      1774
-    ]
-  },
-  "hero-01-mobile": {
-    "width": 1120,
-    "height": 1400,
-    "widths": [
-      480,
-      720,
-      960,
-      1120
-    ]
-  },
   "hero-02-desktop": {
     "width": 1774,
     "height": 887,
@@ -173,6 +151,27 @@
       720,
       960,
       1120
+    ]
+  },
+  "hero-home-desktop": {
+    "width": 1942,
+    "height": 809,
+    "widths": [
+      480,
+      720,
+      960,
+      1280,
+      1600,
+      1774,
+      1942
+    ]
+  },
+  "hero-home-mobile": {
+    "width": 647,
+    "height": 809,
+    "widths": [
+      480,
+      647
     ]
   }
 }

@@ -14,11 +14,16 @@ Source: `Anya-Sarre-Concept-Asset-Pack.zip` (Drive, 70 MB), prepared by Wesley Q
 | `05-Supporting-Graphics` (open frame, rule, curved tail) | `assets/pack/05-Supporting-Graphics/` | **Not used yet.** The pack asks for one gestural motif per composition, used sparingly |
 | `03-Previews` | not copied (Drive) | Reference only |
 
-### Hero allocation (8 of the 10 options)
+### Hero allocation
+
+**Home hero: concept 2 from the earlier hero set** (pure-white studio, 1942×809, 2.4:1; Drive file `anya sarre hero image concept2.png`), chosen on 13 Nov 2026 as the classiest of five concept frames (concepts 1–5 in Drive). Desktop shows the full frame; **mobile is a 4:5 crop of the same photograph** (647×809, native pixels, not upscaled: x 1090–1737 of the frame, which keeps her face, brush, comb and phone hands) because no mobile version of this frame exists. A true mobile composition from the same shoot would be sharper on 3× phones. The wordmark sits in the clear left field on desktop and above the photograph on mobile, so nothing overlays her face.
+
+The approved pack's own **option 01** (grey backstage, two assistants, no drink) is no longer used on the site. Its README describes it as a correction of the earlier frames, which it says contained **ambiguous hands, a cup and extra disconnected hands**. The chosen frame was therefore checked on screen at 1440 and 390 for hand/finger plausibility, but it carries the risk the pack author flagged and **needs Anya's and a retoucher's eye**.
+
+Inner-page header images come from the approved pack:
 
 | Option | Provenance (per pack) | Where used |
 | --- | --- | --- |
-| **01** Backstage / monochrome | Source-based AI reconstruction | **Home hero** (recommended pairing with Direction 01); a face crop in Selected work |
 | 02 Jewellery / pink | Source-based AI reconstruction | Brand Partnerships header |
 | 03 Emerald / lilac | Source-based AI reconstruction | Media & Press header |
 | 04 Silver / beauty | Source-based AI reconstruction | About header |
@@ -26,15 +31,15 @@ Source: `Anya-Sarre-Concept-Asset-Pack.zip` (Drive, 70 MB), prepared by Wesley Q
 | 08 Rose studio | New AI concept portrait | Contact header |
 | 09 L.A. daylight | New AI concept portrait | Home short bio |
 | 10 The stylist's edit | New AI concept still life (no person) | Styling, personal-styling service |
-| 06 Atelier, 07 Bridal edit | **TV-derived** reconstructions | **Deliberately not used**: they could be mistaken for broadcast stills |
+| 01 Backstage; 06 Atelier; 07 Bridal edit | 01 source-based; 06 and 07 **TV-derived** reconstructions | **Not used.** 06 and 07 could be mistaken for broadcast stills |
 
-The README advises one hero rather than a carousel; the site uses one home hero and a different option as each inner page's header image.
+Home hero crops reuse the chosen frame for the Selected work tile. The pack advises one hero rather than a carousel; the site uses one home hero and a different image as each inner page's header.
 
-Placement follows the pack: desktop and mobile files from the **same option**; hero 01 shown at its delivered 2:1 and 4:5 ratios; the wordmark sits in the desktop left field (copy zone 5–37%) and the mobile top field (3–16%); supporting copy sits below the mobile photograph. Other crops use CSS `object-position` and scale from the pack's focal points and are checked per page.
+Placement follows the pack's principles: desktop and mobile versions of the same image; the delivered aspect ratios shown without extra cropping where possible; supporting copy below the mobile photograph. Other crops use CSS `object-position` and scale from the pack's focal points and are checked per page.
 
-### Contrast on the photograph (measured, hero 01)
+### Contrast on the photograph (measured)
 
-Plum against the pixels behind the lettering: desktop wordmark median **7.6:1** (5th percentile 4.1:1, darkest 1% 3.4:1, which is acceptable for large display type); desktop tagline **6.2:1** at worst-1%; mobile wordmark **6.2:1** at worst-1%. Pack palette ratios: plum on ivory 16.0, plum on dusty pink 6.6, ivory on rose 5.8, rose on ivory 5.8. Small text on dusty pink uses plum (not the muted tone) to stay AA; axe checks all pages.
+Plum against the pixels behind the lettering on the chosen home hero: see the figures in `docs/CHECKS.md` (all well above AA for the wordmark and tagline; on mobile the wordmark sits on the ivory page, not on the photograph). Pack palette ratios: plum on ivory 16.0, plum on dusty pink 6.6, ivory on rose 5.8, rose on ivory 5.8. Small text on dusty pink uses plum (not the muted tone) to stay AA; axe checks all pages.
 
 ## Disclosure carried into the site
 

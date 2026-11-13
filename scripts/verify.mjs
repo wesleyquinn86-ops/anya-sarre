@@ -103,14 +103,14 @@ for (const [w, mobile] of [[1440, false], [1024, false], [768, false], [767, tru
   const ctx = await browser.newContext({ viewport: { width: w, height: 900 } });
   const { page } = await openPage(ctx, BASE + "/");
   const m = await page.evaluate(() => {
-    const img = document.querySelector(".hero__photo"), stage = document.querySelector(".hero__stage"), h1 = document.querySelector(".hero__name");
+    const img = document.querySelector(".hero__photo"), stage = document.querySelector(".hero__stage"), h1 = [...document.querySelectorAll(".hero__mark")].find((e) => e.getBoundingClientRect().width > 0); // the visible logo, not its padded heading box
     const s = stage.getBoundingClientRect(), r = h1.getBoundingClientRect(), i = img.getBoundingClientRect();
-    return { src: img.currentSrc, ratio: i.width / i.height, l: (r.left - s.left) / s.width, rt: (r.right - s.left) / s.width, t: (r.top - s.top) / s.height, b: (r.bottom - s.top) / s.height, pos: getComputedStyle(img).objectPosition };
+    return { src: img.currentSrc, ratio: i.width / i.height, above: r.bottom <= i.top + 1, l: (r.left - s.left) / s.width, rt: (r.right - s.left) / s.width, t: (r.top - s.top) / s.height, b: (r.bottom - s.top) / s.height, pos: getComputedStyle(img).objectPosition };
   });
-  note(`hero 01 uses ${mobile ? "mobile" : "desktop"} master @${w}`, mobile ? /hero-01-mobile/.test(m.src) : /hero-01-desktop/.test(m.src), m.src);
-  note(`hero ratio ${mobile ? "4:5" : "2:1"} @${w}`, mobile ? Math.abs(m.ratio - 0.8) < 0.02 : Math.abs(m.ratio - 2) < 0.02, String(m.ratio));
-  if (mobile) note(`wordmark in top field (3–16%), inside 7–93% @${w}`, m.l >= 0.065 && m.rt <= 0.935 && m.t >= 0.025 && m.b <= 0.17, JSON.stringify(m));
-  else note(`wordmark box inside left field (copy zone 5–37%; box includes ~6% glyph padding) @${w}`, m.l >= 0.045 && m.rt <= 0.395 && m.t >= 0.2 && m.b <= 0.8, JSON.stringify(m));
+  note(`home hero uses ${mobile ? "mobile" : "desktop"} master @${w}`, mobile ? /hero-home-mobile/.test(m.src) : /hero-home-desktop/.test(m.src), m.src);
+  note(`hero ratio ${mobile ? "4:5" : "2.4:1"} @${w}`, mobile ? Math.abs(m.ratio - 0.8) < 0.02 : Math.abs(m.ratio - 2.4) < 0.03, String(m.ratio));
+  if (mobile) note(`mobile: compact wordmark sits above the photo, nothing overlays the face @${w}`, m.above && m.l >= 0.02 && m.rt <= 0.98, JSON.stringify(m));
+  else note(`wordmark inside the clear left field (<35% of width, clear of the stylist and face) @${w}`, m.l >= 0.04 && m.rt <= 0.31 && m.t >= 0.15 && m.b <= 0.85, JSON.stringify(m));
   await page.close(); await ctx.close();
 }
 
