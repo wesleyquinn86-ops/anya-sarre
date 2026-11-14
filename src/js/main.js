@@ -148,8 +148,6 @@
       } else {
         var nb = pill.querySelector("[data-note-open]"); if (nb) nb.hidden = true;
       }
-      var asked = new URLSearchParams(window.location.search).get("hero") || store.get("anya-hero");
-      if (asked === "1" || asked === "2") setHero(asked, false);
     }
 
     // Parallax: the three layers move at different paces as the page scrolls; a soft pointer drift sits on top.
@@ -162,6 +160,7 @@
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     function layout() { if (stage) m.h = stage.getBoundingClientRect().height || 1; }
     function paint() {
+      if (!m) return;
       m.raf = 0;
       if (!L || reduceMotion.matches || hero.getAttribute("data-hero") !== "2") return;
       var p = clamp((window.pageYOffset || document.documentElement.scrollTop) / m.h, 0, 1.25); // 0 at the top: the composition rests exactly as supplied
@@ -189,6 +188,11 @@
       // fetch option 2's layers quietly once the page is idle, so switching is instant
       var warm = function () { [].slice.call(stage.querySelectorAll("img")).forEach(function (i) { i.loading = "eager"; }); };
       if ("requestIdleCallback" in window) window.addEventListener("load", function () { requestIdleCallback(warm); }); else window.addEventListener("load", function () { setTimeout(warm, 1200); });
+    }
+    // Apply a saved or requested choice last, once the parallax state exists (a reload on Option 2 must still move).
+    if (pill) {
+      var asked = new URLSearchParams(window.location.search).get("hero") || store.get("anya-hero");
+      if (asked === "1" || asked === "2") setHero(asked, false);
     }
   }
 

@@ -266,6 +266,9 @@ for (const [w, h] of [[1440, 900], [390, 844]]) {
     note(`hero: Option 2 passes axe @${w}`, res.violations.length === 0, res.violations.map((v) => `${v.id}: ${v.nodes.slice(0, 2).map((n) => n.target.join(" ")).join("; ")}`).join(" || "));
     await page.reload({ waitUntil: "networkidle" });
     note(`hero: the choice is remembered on reload @${w}`, (await page.locator('.hero[data-hero="2"]').count()) === 1);
+    await page.evaluate(() => scrollTo(0, 400)); await page.waitForTimeout(500);
+    const moved = await page.evaluate(() => [...document.querySelectorAll("[data-px]")].map((e) => e.style.transform));
+    note(`hero parallax: a remembered Option 2 still moves after reload (regression) @${w}`, moved.every((t) => t !== "") && moved.every((t) => /translate3d/.test(t)), JSON.stringify(moved));
     await page.close(); await ctx.close();
   }
   const rctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: "reduce" });
